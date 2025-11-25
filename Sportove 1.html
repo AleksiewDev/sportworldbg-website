@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportWorld BG - Светът на Спорта</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS Configuration -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ef4444; 
+            border-radius: 4px;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Modal Transition */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 300ms, transform 300ms;
+        }
+        .modal-exit {
+            opacity: 1;
+        }
+        .modal-exit-active {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 300ms, transform 300ms;
+        }
+
+        /* Sports Icons Active State */
+        .nav-item.active {
+            color: #ef4444;
+            border-bottom: 2px solid #ef4444;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-gray-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="renderHome()">
+                    <i class="fas fa-bolt text-red-500 text-2xl mr-2"></i>
+                    <span class="text-2xl font-bold brand-font tracking-wider">SPORT<span class="text-red-500">WORLD</span> BG</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 overflow-x-auto scrollbar-hide py-2">
+                    <button onclick="filterSport('football')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Футбол</button>
+                    <button onclick="filterSport('basketball')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Баскетбол</button>
+                    <button onclick="filterSport('tennis')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Тенис</button>
+                    <button onclick="filterSport('f1')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">F1</button>
+                    <button onclick="filterSport('motogp')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">MotoGP</button>
+                    <button onclick="filterSport('boxing')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Бокс/MMA</button>
+                    <button onclick="filterSport('wrc')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">WRC</button>
+                    <button onclick="filterSport('other')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Други</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-gray-800 pb-4">
+            <div class="flex flex-col space-y-2 px-4 pt-2">
+                <button onclick="filterSport('football')" class="text-left py-2 border-b border-gray-700">Футбол</button>
+                <button onclick="filterSport('basketball')" class="text-left py-2 border-b border-gray-700">Баскетбол</button>
+                <button onclick="filterSport('tennis')" class="text-left py-2 border-b border-gray-700">Тенис</button>
+                <button onclick="filterSport('f1')" class="text-left py-2 border-b border-gray-700">Формула 1</button>
+                <button onclick="filterSport('motogp')" class="text-left py-2 border-b border-gray-700">MotoGP</button>
+                <button onclick="filterSport('boxing')" class="text-left py-2 border-b border-gray-700">Бокс & MMA</button>
+                <button onclick="filterSport('wrc')" class="text-left py-2 border-b border-gray-700">WRC</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main id="app-content" class="min-h-screen pb-10">
+        <!-- Dynamic Content Injected Here via JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-10 mt-10 border-t-4 border-red-500">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 brand-font">За Нас</h3>
+                <p class="text-sm text-gray-400">SportWorld BG е вашият източник номер 1 за актуални спортни новини, резултати на живо и анализи от света на спорта през 2025 година.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 brand-font">Бързи Връзки</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" onclick="filterSport('football')" class="hover:text-red-500">Футбол</a></li>
+                    <li><a href="#" onclick="filterSport('f1')" class="hover:text-red-500">Формула 1</a></li>
+                    <li><a href="#" onclick="filterSport('tennis')" class="hover:text-red-500">Тенис</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4 brand-font">Контакти</h3>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="text-2xl hover:text-red-500"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-sm text-gray-600">
+            &copy; 2025 SportWorld BG. Всички права запазени.
+        </div>
+    </footer>
+
+    <!-- Modal (Read More) -->
+    <div id="news-modal" class="fixed inset-0 z-[100] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-2xl leading-6 font-bold text-gray-900 mb-4 brand-font" id="modal-title">News Title</h3>
+                            <img id="modal-image" src="" alt="News Image" class="w-full h-64 object-cover rounded-md mb-4">
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 mb-2 font-semibold" id="modal-date">Date</p>
+                                <div class="text-gray-700 text-lg leading-relaxed space-y-4" id="modal-content">
+                                    <!-- Content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Затвори
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA STORE (NOVEMBER 2025 ACTUAL/PROJECTED DATA) ---
+        
+        const sportsData = {
+            football: {
+                title: "Футбол",
+                news: [
+
+                {
+  id: 2,
+  title: "Славия надви Ботев Враца с гол на Соле",
+  image: "https://m4.netinfo.bg/media/images/51222/51222312/960-600-botev-vraca-slaviia.jpg",
+  date: "24 Ноември 2025",
+  summary: "Славия победи Ботев Враца с 1-0 в efbet Лига.",
+  fullText: "Исак Соле донесе победата на Славия с гол в 81-ата минута. Тимът се изкачи в средата на класирането, а Ботев Враца остава в зоната на изпадащите."
+},
+{
+  id: 3,
+  title: "Манчестър Юнайтед и Евертън направиха зрелище",
+  image: "https://static.standard.co.uk/2025/11/24/21/58/MbeumoManUtd24112025.jpeg?trim=0,0,332,0&quality=75&auto=webp&width=1000",
+  date: "24 Ноември 2025",
+  summary: "Евертън изненада Юнайтед с ранно попадение, но мачът завърши драматично.",
+  fullText: "Киърнан Дюсбъри-Хол откри за Евертън, но Юнайтед отговори с три гола след почивката. Крайният резултат бе 3-1 за домакините, които се върнаха в топ 4 на Висшата лига."
+},
+{
+  id: 4,
+  title: "Лайпциг отново втори след успех над Вердер",
+  image: "https://www.getfootballnewsgermany.com/assets/rb-leipzig-v-sv-werder-bremen-bundesliga-12-scaled.jpg",
+  date: "23 Ноември 2025",
+  summary: "RB Лайпциг победи Вердер Бремен с 2-0 и се върна на второ място.",
+  fullText: "Ассан Уедраого и Ксавер Шлагер реализираха попадения за Лайпциг. Тимът изпревари Байерн и се утвърди като основен конкурент на лидера Байер Леверкузен."
+},
+{
+  id: 5,
+  title: "Милан спечели дербито с Интер",
+  image: "https://i2.res.24o.it/images2010/S24/Documenti/2025/11/24/Immagini/Ritagli/2025-11-23T213325Z_1163568692_UP1ELBN1NVN5Z_RTRMADP_5_SOCCER-ITALY-INT-MIL-U84270715238IkQ-1440x752@IlSole24Ore-Web.JPG?r=1080x566",
+  date: "24 Ноември 2025",
+  summary: "Милан победи Интер в дербито на Милано с контраатаки и стабилна защита.",
+  fullText: "Росонерите използваха тактическа дисциплина и отлична вратарска игра, за да надделеят над градския съперник. Интер остава близо до върха, но пропусна шанс да оглави класирането."
+},
+{
+  id: 6,
+  title: "Лил обърна Париж ФК с головете на Жиру",
+  image: "https://media.gettyimages.com/id/2247669913/photo/losc-lille-v-paris-fc-ligue-1-mcdonalds-2025-2026.jpg?s=1024x1024&w=gi&k=20&c=haq3SeHhnJrIIgCWHdGoC-Doq0YLcaYsgW-O2JRmNds=",
+  date: "23 Ноември 2025",
+  summary: "Лил победи Париж ФК с 4-2 и се изкачи на четвърто място.",
+  fullText: "Оливие Жиру сложи край на головата си суша с два попадения. Лил показа характер и обърна мача след изоставане, а клубът вече гледа към местата за Европа."
+},
+
+
+                    {
+    id: 1,
+    title: "Арсенал разгроми Тотнъм с хеттрик на Езе",
+    image: "https://www.aljazeera.com/wp-content/uploads/2025/11/reuters_692350a9-1763922089.jpg?w=770&resize=770%2C517&quality=80",
+    date: "24 Ноември 2025",
+    summary: "Арсенал победи Тотнъм с 4-1 и дръпна с шест точки на върха.",
+    fullText: "Еберечи Езе отбеляза хеттрик при впечатляваща победа на Арсенал над Тотнъм в дербито на Северен Лондон. Артилеристите вече имат шест точки аванс на върха във Висшата лига, а Микел Артета похвали характера на отбора. Тотнъм започна стабилно, но рухна след три бързи гола около почивката."
+                    },
+                {
+    id: 2,
+    title: "Левски с гръмка победа над Монтана",
+    image: "https://m4.netinfo.bg/media/images/51221/51221812/960-600-montana-levski.jpg",
+    date: "24 Ноември 2025",
+    summary: "„Сините“ показаха офанзивна мощ и спечелиха с 5:1 като гости.",
+    fullText: "Левски постигна категорична победа срещу Монтана с 5:1 на стадион „Огоста“. Наставникът Хулио Веласкес похвали реакцията на отбора и заяви, че манталитетът на играчите се променя към шампионски. Силното представяне на нападението и стабилната защита оставиха домакините без шанс."
+},
+                    {
+                        id: 3,
+                        title: "Арсенал удържа върха във Висшата лига след драма на Емиратс",
+                        image: "https://www.socios.com/wp-content/uploads/2024/07/Arsenal-FC-Premier-League-Full-Schedule-2024_2025_.jpg",
+                        date: "21 Ноември 2025",
+                        summary: "Артилеристите продължават доминацията си през сезон 2025/26 с ключова победа.",
+                        fullText: "Арсенал запази първото си място във Висшата лига след напрегната победа с 2-1. Букайо Сака отбеляза победния гол в 88-ата минута, оставяйки Манчестър Сити на втора позиция. Мениджърът Микел Артета заяви след мача: 'Този отбор показва шампионски дух, който не сме виждали от години'. Следващото предизвикателство е гостуване на Ливърпул."
+                    },
+                    {
+                        id: 4,
+                        title: "Челси срещу Барселона: Титаничен сблъсък в Шампионска лига",
+                        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_9Ys-eRMyFDz1Xf2UnVOd-C-0fLnsLdfVZg&s",
+                        date: "20 Ноември 2025",
+                        summary: "Предстоящият мач на 25 ноември се очертава като дербито на сезона.",
+                        fullText: "Стамфорд Бридж се готви за един от най-големите сблъсъци в груповата фаза на Шампионска лига за 2025 година. Челси приема възродената Барселона на Ламин Ямал. И двата отбора са във върхова форма, като испанците водят в Ла Лига, а лондончани са в топ 4 на Англия."
+                    },
+                    {
+    id: 5,
+    title: "Челси надделя над Бърнли: Лондончани настъпват Арсенал",
+    image: "https://www.telegraph.co.uk/content/dam/football/2025/11/22/TELEMMGLPICT000450058864_17638215801460_trans_NvBQzQNjv4BqoN5SF2PqdVKLM2sipNMN2knq8R4P-8TNunJa0NdSnlE.jpeg?imwidth=640",
+    date: "22 Ноември 2025",
+    summary: "Сините победиха с 2:0 и се доближиха до върха във Висшата лига.",
+    fullText: "Челси демонстрира класа и постигна категорична победа с 2:0 над Бърнли в съботния кръг на Висшата лига. Тимът на Маурисио Почетино се доближи до Арсенал в битката за челните позиции. Лондончани показаха стабилна защита и ефективна атака, което ги поставя сред фаворитите за топ 4."
+},
+{
+    id: 6,
+    title: "Барселона се завърна на „Камп Ноу“",
+    image: "https://i.guim.co.uk/img/media/5984f3b6186a32e751acb1982952da57ce7f2fa3/455_0_4128_3302/master/4128.jpg?width=465&dpr=1&s=none&crop=none",
+    date: "22 Ноември 2025",
+    summary: "Каталунците отново играят на легендарния си стадион.",
+    fullText: "909 дни по-късно Барселона се завърна на „Камп Ноу“. Атмосферата бе празнична, а феновете изпълниха трибуните за първия мач след реконструкцията. Тимът на Ламин Ямал и младите звезди показа силна форма и даде заявка за нови успехи."
+},
+{
+    id: 7,
+    title: "Нюкасъл шокира Манчестър Сити",
+    image: "https://static.independent.co.uk/2025/11/22/19/44/SEI275336006.jpeg",
+    date: "22 Ноември 2025",
+    summary: "„Свраките“ победиха шампиона с 2:1 на „Сейнт Джеймсис Парк“.",
+    fullText: "Нюкасъл постигна сензационна победа над Манчестър Сити с 2:1. Тимът показа борбеност и тактическа дисциплина, като успя да спре атаките на шампиона. Победата дава нова надежда на феновете за място в Европа."
+},
+{
+    id: 8,
+    title: "Ливърпул шокиран от Нотингам Форест",
+    image: "https://platform.liverpooloffside.sbnation.com/wp-content/uploads/sites/99/2025/11/gettyimages-2247936398.jpg?quality=90&strip=all&crop=0%2C0.0049677098857401%2C100%2C99.990064580229&w=2400",
+    date: "22 Ноември 2025",
+    summary: "„Червените“ загубиха с 0:3 на „Анфийлд“.",
+    fullText: "Ливърпул претърпя тежко поражение у дома, след като Нотингам Форест постигна впечатляваща победа с 3:0. Гостите показаха агресивна игра и ефективност в атака, докато Ливърпул не успя да намери ритъм и допусна сериозни грешки в защита. Загубата поставя под въпрос амбициите на „червените“ за титлата този сезон."
+},
+
+
+                    { 
+  id: 9, 
+  title: "България завърши квалификациите с победа над Грузия", 
+  image: "https://www.bgnes.com/static/images/news/2025/11/19/14849/1280X720-13884.webp", 
+  date: "18 Ноември 2025", 
+  summary: "Националите постигнаха първи успех в кампанията за Мондиал 2026.", 
+  fullText: "България победи Грузия с 2:1 на стадион 'Васил Левски' в последния си мач от световните квалификации. Головете за 'лъвовете' отбелязаха Георги Русев и Димитър Илиев. Въпреки победата, тимът завърши на последно място в групата, но успехът донесе оптимизъм за бъдещето." 
+},
+{ 
+  id: 10, 
+  title: "Арсенал срещу Байерн: Голямото дерби на Шампионска лига", 
+  image: "https://s.yimg.com/ny/api/res/1.2/eA4JRGL3VdlaDBv3slkniA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNztjZj13ZWJw/https://media.zenfs.com/en/evening_standard_239/e61f63b51df8a0209e6a053ba41e6af4", 
+  date: "26 Ноември 2025", 
+  summary: "Два от най-силните отбори в Европа се срещат в Лондон.", 
+  fullText: "Арсенал приема Байерн Мюнхен на 'Емирейтс' в мач от петия кръг на груповата фаза на Шампионска лига. Лондончани са без допуснат гол в турнира досега, докато Байерн идва след впечатляваща победа над ПСЖ. Хари Кейн е в топ форма и ще бъде основната заплаха за защитата на Арсенал." 
+},
+{ 
+  id: 11, 
+  title: "Манчестър Сити срещу Байер Леверкузен: Сблъсък на Етихад", 
+  image: "https://www.mancity.com/meta/media/hg0ivt0q/man-city-v-bayer-04-leverkusen.jpg", 
+  date: "25 Ноември 2025", 
+  summary: "Гуардиола и Хааланд срещу германския съперник.", 
+  fullText: "Манчестър Сити посреща Байер Леверкузен в ключов мач от груповата фаза на Шампионска лига. 'Гражданите' са в отлична форма след победа над Борусия Дортмунд с 4:1, а Ерлинг Хааланд и Фил Фоудън отново ще водят атаката. Леверкузен пристига с нов треньор и надежда да се реваншира след тежката загуба от ПСЖ." 
+}
+
+
+
+                ],
+                standings: {
+                    "Първа лига": [
+{ pos: 1, team: "Левски София", p: 16, pts: 38 },
+{ pos: 2, team: "ЦСКА 1948 София", p: 16, pts: 30 },
+{ pos: 3, team: "Локомотив Пловдив", p: 16, pts: 28 },
+{ pos: 4, team: "Лудогорец Разград", p: 15, pts: 27 },
+{ pos: 5, team: "Черно море", p: 16, pts: 27 },
+{ pos: 6, team: "ЦСКА София", p: 16, pts: 25 },
+{ pos: 7, team: "Славия София", p: 16, pts: 21 },
+{ pos: 8, team: "Ботев Враца", p: 16, pts: 21 },
+{ pos: 9, team: "Локомотив София", p: 16, pts: 19 },
+{ pos: 10, team: "Арда Кърджали", p: 16, pts: 19 },
+{ pos: 11, team: "Спартак Варна", p: 16, pts: 17 },
+{ pos: 12, team: "Ботев Пловдив", p: 16, pts: 17 },
+{ pos: 13, team: "Берое Стара Загора", p: 15, pts: 15 },
+{ pos: 14, team: "Септември София", p: 16, pts: 14 },
+{ pos: 15, team: "Монтана", p: 16, pts: 13 },
+{ pos: 16, team: "Добруджа Добрич", p: 16, pts: 11 }
+                   ],
+                    "Premier League": [
+{ pos: 1, team: "Арсенал", p: 12, pts: 29 },
+{ pos: 2, team: "Челси", p: 12, pts: 23 },
+{ pos: 3, team: "Манчестър Сити", p: 12, pts: 22 },
+{ pos: 4, team: "Астън Вила", p: 12, pts: 21 },
+{ pos: 5, team: "Кристъл Палас", p: 12, pts: 20 },
+{ pos: 6, team: "Брайтън", p: 12, pts: 19 },
+{ pos: 7, team: "Съндърланд", p: 12, pts: 19 },
+{ pos: 8, team: "Борнемут", p: 12, pts: 19 },
+{ pos: 9, team: "Тотнъм", p: 12, pts: 18 },
+{ pos: 10, team: "Манчестър Юнайтед", p: 12, pts: 18 },
+{ pos: 13, team: "Евертън", p: 11, pts: 18 },
+{ pos: 11, team: "Ливърпул", p: 12, pts: 18 },
+{ pos: 12, team: "Брентфорд", p: 12, pts: 16 },
+{ pos: 14, team: "Нюкасъл", p: 12, pts: 15 },
+{ pos: 15, team: "Фулъм", p: 12, pts: 14 },
+{ pos: 16, team: "Нотингам Форест", p: 12, pts: 12 },
+{ pos: 17, team: "Уест Хям", p: 12, pts: 11 },
+{ pos: 18, team: "Лийдс", p: 12, pts: 11 },
+{ pos: 19, team: "Бърнли", p: 12, pts: 10 },
+{ pos: 20, team: "Уулвс", p: 12, pts: 2 }
+
+
+                    ],
+                    "La Liga": [
+{ pos: 1, team: "Реал Мадрид", p: 13, pts: 32 },
+{ pos: 2, team: "Барселона", p: 13, pts: 31 },
+{ pos: 3, team: "Виляреал", p: 13, pts: 29 },
+{ pos: 4, team: "Атлетико Мадрид", p: 13, pts: 28 },
+{ pos: 5, team: "Бетис", p: 13, pts: 21 },
+{ pos: 6, team: "Еспаньол", p: 13, pts: 21 },
+{ pos: 7, team: "Хетафе", p: 13, pts: 17 },
+{ pos: 8, team: "Атлетик Билбао", p: 12, pts: 17 },
+{ pos: 9, team: "Реал Сосиедад", p: 13, pts: 16 },
+{ pos: 10, team: "Елче", p: 13, pts: 16 },
+{ pos: 11, team: "Севиля", p: 13, pts: 16 },
+{ pos: 12, team: "Селта Виго", p: 13, pts: 16 },
+{ pos: 13, team: "Райо Валекано", p: 13, pts: 16 },
+{ pos: 14, team: "Алавес", p: 13, pts: 15 },
+{ pos: 15, team: "Валенсия", p: 13, pts: 13 },
+{ pos: 16, team: "Майорка", p: 13, pts: 12 },
+{ pos: 17, team: "Осасуна", p: 13, pts: 11 },,
+{ pos: 18, team: "Жирона", p: 13, pts: 10 },
+{ pos: 19, team: "Леванте", p: 13, pts: 9 },
+{ pos: 20, team: "Реал Овиедо", p: 13, pts: 8 }
+
+
+
+                    ],
+                    "Serie A": [
+{ pos: 1, team: "Рома", p: 12, pts: 27 },
+{ pos: 2, team: "Милан", p: 12, pts: 25 },
+{ pos: 3, team: "Наполи", p: 12, pts: 25 },
+{ pos: 4, team: "Интер", p: 12, pts: 24 },
+{ pos: 5, team: "Болоня", p: 12, pts: 24 },
+{ pos: 6, team: "Комо", p: 12, pts: 21 },
+{ pos: 7, team: "Ювентус", p: 12, pts: 20 },
+{ pos: 8, team: "Лацио", p: 12, pts: 18 },
+{ pos: 9, team: "Сасуоло", p: 12, pts: 17 },
+{ pos: 10, team: "Удинезе", p: 12, pts: 15 },
+{ pos: 11, team: "Кремонезе", p: 12, pts: 14 },
+{ pos: 12, team: "Торино", p: 12, pts: 14 },
+{ pos: 13, team: "Аталанта", p: 12, pts: 13 },
+{ pos: 14, team: "Каляри", p: 12, pts: 11 },
+{ pos: 15, team: "Парма", p: 12, pts: 11 },
+{ pos: 16, team: "Пиза", p: 11, pts: 10 },
+{ pos: 17, team: "Лече", p: 12, pts: 10 },
+{ pos: 18, team: "Дженоа", p: 12, pts: 8 },
+{ pos: 19, team: "Фиорентина", p: 12, pts: 6 },
+{ pos: 20, team: "Верона", p: 12, pts: 6 }
+
+
+
+                    ],
+                    "Bundesliga": [
+{ pos: 1, team: "Байерн Мюнхен", p: 11, pts: 31 },
+{ pos: 2, team: "РБ Лайпциг", p: 11, pts: 25 },
+{ pos: 3, team: "Байер Леверкузен", p: 11, pts: 23 },
+{ pos: 4, team: "Борусия Дортмунд", p: 11, pts: 22 },
+{ pos: 5, team: "Щутгарт", p: 11, pts: 22 },
+{ pos: 6, team: "Айнтрахт Франкфурт", p: 11, pts: 20 },
+{ pos: 7, team: "Хофенхайм", p: 11, pts: 20 },
+{ pos: 8, team: "Унион Берлин", p: 11, pts: 15 },
+{ pos: 9, team: "Вердер Бремен", p: 11, pts: 15 },
+{ pos: 10, team: "ФК Кьолн", p: 11, pts: 14 },
+{ pos: 11, team: "Фрайбург", p: 11, pts: 13 },
+{ pos: 12, team: "Борусия Мьонхенгладбах", p: 11, pts: 12 },,
+{ pos: 13, team: "Аугсбург", p: 11, pts: 10 },
+{ pos: 14, team: "Хамбургер СВ", p: 11, pts: 9 },
+{ pos: 15, team: "Волфсбург", p: 11, pts: 8 },
+{ pos: 16, team: "Санкт Паули", p: 11, pts: 7 },
+{ pos: 17, team: "Майнц 05", p: 11, pts: 6 },
+{ pos: 18, team: "Хайденхайм", p: 11, pts: 5 }
+
+
+                    ],
+                    "Ligue 1": [
+
+{ pos: 1, team: "Пари Сен Жермен", p: 13, pts: 30 },
+{ pos: 2, team: "Олимпик Марсилия", p: 13, pts: 28 },
+{ pos: 3, team: "Ланс", p: 13, pts: 28 },
+{ pos: 4, team: "Лил", p: 13, pts: 23 },
+{ pos: 5, team: "Страсбург", p: 13, pts: 22 },
+{ pos: 6, team: "Рен", p: 13, pts: 21 },
+{ pos: 7, team: "Олимпик Лион", p: 13, pts: 21 },
+{ pos: 8, team: "Монако", p: 13, pts: 20 },
+{ pos: 9, team: "Ница", p: 13, pts: 17 },
+{ pos: 10, team: "Тулуза", p: 32, pts: 16 },
+{ pos: 11, team: "Анже", p: 13, pts: 16 },
+{ pos: 12, team: "Париж ФК", p: 13, pts: 14 },
+{ pos: 13, team: "Льо Авър", p: 13, pts: 14 },
+{ pos: 14, team: "Брест", p: 13, pts: 13 },
+{ pos: 15, team: "Нант", p: 12, pts: 11 },
+{ pos: 16, team: "Лориен", p: 13, pts: 11 },
+{ pos: 17, team: "Метц", p: 12, pts: 11 },,,
+{ pos: 18, team: "Оксер", p: 13, pts: 8 }
+
+
+
+                    ]
+                    
+                }
+            },
+            f1: {
+                title: "Формула 1",
+                news: [
+                    {
+    id: 15,
+    title: "Скандалът с Макларън разтърси шампионата",
+    image: "https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/fom-website/2025/Las%20Vegas/Double%20split%20(23).webp",
+    date: "25 Ноември 2025",
+    summary: "Двойната дисквалификация на Норис и Пиастри постави под въпрос стратегията на Макларън.",
+    fullText: "След Лас Вегас Гран При, Макларън бе ударен от тежък удар – и двамата пилоти, Ландо Норис и Оскар Пиастри, бяха дисквалифицирани заради техническо нарушение. Това решение на FIA предизвика бурни реакции в падока. Норис, който водеше шампионата с 24 точки преднина, изрази разочарование и нарече грешката 'критична'. Пиастри пък заяви, че титлата вече е 'извън неговия контрол'. Междувременно Верстапен и Ръсел виждат нов шанс да обърнат битката за короната."
+},
+
+
+
+                    {
+                        id: 12,
+                        title: "Леклер блести в първата тренировк",
+                        image: "https://media.formula1.com/image/upload/c_lfill,w_2048/q_auto/v1740000000/fom-website/2025/Las%20Vegas/GENERAL%20CROP%20-%202025-11-21T013400.862.webp",
+                        date: "21 Ноември 2025",
+                        summary: "Ферари започна уикенда силно, а Льоклер оглави класирането в FP1",
+                        fullText: "Шарл Лeклер записа най-бързата обиколка в първата свободна тренировка на Лас Вегас ГП с време 1:34.802. Зад него останаха Алекс Албон (Уилямс) и Юки Цунода (Ред Бул). Макларън пилотите Ландо Норис и Оскар Пиастри не успяха да се доближат до челото, като студената и прашна настилка затрудни всички. Въпреки това, Ферари демонстрира конкурентно темпо, което може да се окаже ключово в битката за титлата."
+                    },
+                    {
+                        id: 13,
+                        title: "Норис отговаря с най-добро време във FP2",
+                        image: "https://d2n9h2wits23hf.cloudfront.net/image/v1/static/6057949432001/f3a9adaf-f11d-44c1-95d1-55aa02c7598e/8cba1699-6617-4e7f-aeed-455fa850d048/864x486/match/image.jpg",
+                        date: "21 Ноември 2025",
+                        summary: "След труден старт, Норис показа шампионско темпо във втората тренировка.",
+                        fullText: "Във втората свободна тренировка Ландо Норис бе най-бърз с време 1:33.602, само на 0.029 секунди пред Кими Антонели (Мерцедес). Льоклер завърши трети, но с технически проблеми в последните минути. Сесията бе прекъсвана два пъти заради проблеми с дренажни капаци, което ограничи симулациите за квалификация. Въпреки това, Норис демонстрира стабилност и контрол, затвърждавайки позицията си като фаворит за титлата."
+                    },
+                    {
+    id: 14,
+    title: "Норис взима полпозишън в Лас Вегас",
+    image: "https://cdn-5.motorsport.com/images/mgl/6zoJQLk0/s800/lando-norris-mclaren.jpg",
+    date: "22 Ноември 2025",
+    summary: "Ландо Норис показа класа в дъждовната квалификация на Лас Вегас.",
+    fullText: "В драматична квалификация на улиците на Лас Вегас, Ландо Норис (Макларън) спечели полпозишън при мокри условия. Британецът демонстрира контрол и увереност, оставяйки Оскар Пиастри на второ място. Макс Верстапен завърши трети, но предупреди, че в състезанието ще атакува агресивно. Това е ключов момент в битката за титлата, където Норис води с минимална преднина."
+},
+{
+    id: 15,
+    Title: "Верстапен триумфира в Лас Вегас",
+    image: "https://media.formula1.com/image/upload/t_16by9North/c_lfill,w_3392/q_auto/v1740000000/trackside-images/2025/F1_Grand_Prix_of_Las_Vegas/2248024592.webp",
+    Date: "23 Ноември 2025",
+    Summary: "Макс Верстапен спечели драматичното състезание в Лас Вегас и върна интригата за титлата ",
+    FullText: " В зрелищна надпревара по улиците на Лас Вегас, Макс Верстапен (Ред Бул) изпревари Ландо Норис още в първите обиколки и контролира темпото до финала. Това бе неговата шеста победа за сезона и втора в Лас Вегас, с която четирикратният шампион отново се включи в битката за титлата. Норис завърши втори, но по-късно бе дисквалифициран заради техническо нарушение, а Оскар Пиастри също загуби точки. Така класирането се преобърна и Верстапен се доближи опасно до върха."
+},
+{
+     id: 16,
+    Title: "Дисквалификацията на Норис и Пиастри разтърси шампионата",
+    image: "https://speedcafe.b-cdn.net/wp-content/uploads/2025/11/XPB_1387055_HiRes.jpg",
+    Date: "23 Ноември 2025",
+    Summary: "Макс Верстапен спечели драматичното състезание в Лас Вегас и върна интригата за титлата ",
+    FullText: " В зрелищна надпревара по улиците на Лас Вегас, Макс Верстапен (Ред Бул) изпревари Ландо Норис още в първите обиколки и контролира темпото до финала. "
+}
+
+
+                ],
+                standings: {
+                    "Пилоти 2025": [
+{ pos: 1, name: "Ландо Норис (McLaren)", pts: 390 },
+{ pos: 2, name: "Оскар Пиастри (McLaren)", pts: 366 },
+{ pos: 3, name: "Макс Верстапен (Red Bull)", pts: 366 },
+{ pos: 4, name: "Джордж Ръсел (Mercedes)", pts: 294 },
+{ pos: 5, name: "Шарл Льоклер (Ferrari)", pts: 226 },
+{ pos: 6, name: "Люис Хамилтън (Ferrari)", pts: 152 },
+{ pos: 7, name: "Кими Антонели (Mercedes)", pts: 137 },
+{ pos: 8, name: "Алекс Албон (Williams)", pts: 73 },
+{ pos: 9, name: "Исак Хаджар (Racing Bulls)", pts: 51 },
+{ pos: 10, name: "Нико Хюлкенберг (Sauber)", pts: 49 },
+{ pos: 11, name: "Карлос Сайнц (Williams)", pts: 48 },
+{ pos: 12, name: "Оливър Беърман (Haas)", pts: 41 },
+{ pos: 13, name: "Фернандо Алонсо (Aston Martin)", pts: 40 },
+{ pos: 14, name: "Лиам Лоусън (Racing Bulls)", pts: 36 },
+{ pos: 15, name: "Естебан Окон (Haas)", pts: 32 },
+{ pos: 16, name: "Ланс Строл (Aston Martin)", pts: 32 },
+{ pos: 17, name: "Юки Цунода (Red Bull)", pts: 28 },
+{ pos: 18, name: "Пиер Гасли (Alpine)", pts: 22 },
+{ pos: 19, name: "Габриел Борто лето (Sauber)", pts: 19 },
+{ pos: 20, name: "Франко Колапинто (Alpine)", pts: 0 },
+{ pos: 21, name: "Джак Дуън (Alpine)", pts: 0 }
+
+                    ],
+                    "Конструктори 2025": [
+{ pos: 1, team: "McLaren", pts: 756 },
+{ pos: 2, team: "Mercedes", pts: 431 },
+{ pos: 3, team: "Red Bull", pts: 391 },
+{ pos: 4, team: "Ferrari", pts: 378 },
+{ pos: 5, team: "Williams", pts: 121 },
+{ pos: 6, team: "Racing Bulls", pts: 90 },
+{ pos: 7, team: "Haas", pts: 73 },
+{ pos: 8, team: "Aston Martin", pts: 72 },
+{ pos: 9, team: "Sauber", pts: 68 },
+{ pos: 10, team: "Alpine", pts: 22 }
+
+                    ]
+                }
+            },
+            basketball: {
+                title: "Баскетбол",
+                news: [
+                    {
+  id: 18,
+  title: "Пистънс с рекордна серия – 13 поредни победи",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSslOd54y051UaERrEJoflKBm2Xrqd0SaxrmA&s",
+  date: "24 Ноември 2025",
+  summary: "Детройт победи Индиана Пейсърс със 122-117 и изравни клубния рекорд.",
+  fullText: "Кейд Кънингам отново бе в центъра на вниманието – 27 точки и 11 асистенции, с което Детройт Пистънс постигнаха 13-та поредна победа. Така те изравниха рекорда на франчайза от сезоните 1989/90 и 2003/04. В същата вечер Торонто Раптърс записаха осмата си поредна победа, а Хюстън Рокетс надделяха над Финикс Сънс със 114-92 благодарение на 28 точки от Амен Томпсън."
+},
+{
+  id: 19,
+  title: "Тайлър Херо се завърна и донесе победа на Маями",
+  image: "https://basketballforever.com/wp-content/uploads/2019/11/Herro-article_FB.jpg",
+  date: "25 Ноември 2025",
+  summary: "Херо отбеляза 24 точки при 106-102 срещу Далас Маверикс.",
+  fullText: "След операция на глезена Тайлър Херо направи своя сезонен дебют и бе ключов за петата поредна победа на Маями Хийт. Освен него, Кел’ел Уеър добави 20 точки и 18 борби. За Далас П.Дж. Вашингтон завърши с 27 точки, но това не бе достатъчно. Маями вече изглежда като сериозен претендент в Изтока."
+},
+{
+  id: 20,
+  title: "Битката за Ел Ей – Лейкърс срещу Клипърс в NBA Cup",
+  image: "https://cdn.nba.com/manage/2025/02/lebron-james-driving-vs-kawhi-scaled-e1738757543643.jpg",
+  date: "25 Ноември 2025",
+  summary: "Лейкърс и Клипърс се срещат в решаващ мач от група B.",
+  fullText: "Лейкърс започнаха сезона със 12-4, въпреки че ЛеБрон Джеймс дебютира едва на 18 ноември. Клипърс са слаби в редовния сезон (5-12), но имат две победи в NBA Cup и делят първото място в групата с Лейкърс. Двубоят в Crypto.com Arena тази вечер е с огромно значение за класирането в турнира."
+},
+
+
+                    {
+                        id: 17,
+                        title: "Детройт Пистънс - изненадата на сезон 25/26 в NBA",
+                        image: "https://cdn.nba.com/teams/uploads/sites/1610612765/2023/12/GettyImages-1866280335.jpg",
+                        date: "21 Ноември 2025",
+                        summary: "Пистънс водят Източната конференция с баланс 13-2.",
+                        fullText: "Никой не очакваше това! Детройт Пистънс са лидери на Изток с невероятна игра в защита и отборна химия. Кейд Кънингам играе на ниво MVP. В същото време на Запад Оклахома Сити Тъндър са почти безгрешни с 15 победи и само 1 загуба."
+                        
+                    },
+                    {
+  id: 18,
+  title: "ЛеБрон Джеймс се завърна с трипъл-дабъл",
+  image: "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2187282175.jpg?c=original&q=w_860,c_fill",
+  date: "19 Ноември 2025",
+  summary: "40-годишният ЛеБрон записа 11 точки и 12 асистенции срещу Юта.",
+  fullText: "След контузия в началото на сезона, ЛеБрон Джеймс се завърна в игра за Лос Анджелис Лейкърс. В мача срещу Юта той показа, че възрастта не е пречка – 11 точки, 12 асистенции и лидерство на терена. Джеймс заяви, че може да играе за всеки отбор в света и да прави всичко на игрището."
+},
+{
+  id: 19,
+  title: "Никола Йокич с трети пореден трипъл-дабъл",
+  image: "https://www.wnewsj.com/wp-content/uploads/2019/05/web1_122782329-3774dab14e134f49a7bb37d5b3d51199.jpg",
+  date: "20 Ноември 2025",
+  summary: "Йокич изведе Денвър Нъгетс до победа над Пеликанс.",
+  fullText: "Сръбският център Никола Йокич продължава да пише история в НБА. Той записа трети пореден трипъл-дабъл и бе ключов за победата на Денвър Нъгетс като гост над Ню Орлиънс Пеликанс. Йокич е сред фаворитите за MVP и показва постоянство, което рядко се вижда в лигата."
+},
+{
+  "id": 20,
+  "title": "Никола Йокич под въпрос срещу Хюстън",
+  "image": "https://images2.minutemediacdn.com/image/upload/c_crop,x_0,y_0,w_5306,h_2984/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/ImagnImages/mmsport/inside_the_nuggets/01k5hv46e8zzvbkhzn17.jpg",
+  "date": "21 Ноември 2025",
+  "summary": "Йокич е вероятен за участие в мача от NBA Cup срещу Рокетс.",
+  "fullText": "Звездата на Денвър Нъгетс Никола Йокич е включен като 'probable' в injury report за двубоя срещу Хюстън Рокетс. Сърбинът се бори с болки в лакътя, но остава ключов за силния старт на Нъгетс (11-3). Хюстън е в серия от пет поредни победи и очаква оспорван сблъсък."
+},
+{
+  "id": 13,
+  "title": "Кливланд срещу Индиана без Халибъртън",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUmAHNQ0k81z9nKPS4rFuAHmpqn7DZaKXG9A&s",
+  "date": "21 Ноември 2025",
+  "summary": "Пейсърс остават без звездата си Тайлър Халибъртън за целия сезон.",
+  "fullText": "Индиана Пейсърс ще гостуват на Кливланд Кавалиърс без своя лидер Тайлър Халибъртън, който скъса ахилес в седмия мач на финалите. Отборът ще разчита на Паскал Сиакам, докато Кавс са фаворити с Донован Мичъл начело. Двубоят е част от редовния сезон и ще се играе в Rocket Arena."
+},
+{
+  "id": 14,
+  "title": "Оклахома Сити продължава защитата на титлата",
+  "image": "https://ichef.bbci.co.uk/ace/standard/2560/cpsprodpb/63bb/live/3ded47c0-b09d-11f0-a866-df0ece153fc7.jpgg",
+  "date": "21 Ноември 2025",
+  "summary": "Шампионите от Thunder започнаха участието си в груповата фаза на NBA Cup.",
+  "fullText": "Оклахома Сити Тъндър, актуалните шампиони на НБА, изиграха първия си мач в груповата фаза на NBA Cup срещу Юта Джаз. Турнирът навлиза в решителна седмица, като до 28 ноември ще бъдат определени всички участници в елиминациите. Сред най-очакваните сблъсъци е този между Минесота Тимбъруулвс и Финикс Сънс – двата непобедени отбора."
+},
+{
+  "id": 15,
+  "title": "Маверикс обмислят трейд за Антъни Дейвис",
+  "image": "https://athlonsports.com/.image/w_3840,q_auto:good,c_limit/MjY6MDAwMDAwMDAwODA5ODc0/usatsi_27401940.jpg",
+  "date": "19 Ноември 2025",
+  "summary": "Далас може да се раздели с Дейвис преди крайния срок за сделки.",
+  "fullText": "След напрежението около трейда на Лука Дончич към Лейкърс, Далас Маверикс проучват пазара за Антъни Дейвис. Звездният център лекува контузия в прасеца и ще отсъства поне още седмица. Ръководството на Маверикс търси варианти за сделка преди крайния срок на 5 февруари."
+},
+{
+  "id": 16,
+  "title": "Виктор Уембаняма пропуска няколко седмици",
+  "image": "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2024-12/241228-victor-wembanyama-wm-1245p-1e4431.jpg",
+  "date": "18 Ноември 2025",
+  "summary": "Френският талант на Спърс лекува контузия.",
+  "fullText": "Сан Антонио Спърс ще бъдат без Виктор Уембаняма за поне три седмици. Младата звезда получи травма в коляното и ще се подложи на възстановителна програма. Това е сериозен удар за Спърс, които разчитат на него като основен играч в ротацията."
+},
+{
+  "id": 17,
+  "title": "Фантастичен Джеймс Хардън с рекорд за Клипърс",
+  "image": "https://cdn.nba.com/teams/uploads/sites/1610612746/2025/10/thumbnail_reel_harden_261026_POR.jpg",
+  "date": "23 Ноември 2025",
+  "summary": "Хардън вкара 55 точки срещу Шарлът.",
+  "fullText": "Джеймс Хардън отбеляза рекордните 55 точки за Лос Анджелис Клипърс при победата над Шарлът Хорнетс със 131:116. Той реализира 10 тройки и прекъсна серията от три поредни загуби на Клипърс. Хардън имаше 35 точки още през първото полувреме, което е най-високият резултат за полувреме в НБА този сезон."
+}
+
+
+
+
+
+
+                ],
+                standings: {
+                    "NBA Изток": [
+{ pos: 1, team: "Детройт Пистънс", win: 15, loss: 2 },
+{ pos: 2, team: "Торонто Раптърс", win: 13, loss: 5 },
+{ pos: 3, team: "Маями Хийт", win: 12, loss: 6 },
+{ pos: 4, team: "Кливланд Кавалиърс", win: 12, loss: 7 },
+{ pos: 5, team: "Ню Йорк Никс", win: 10, loss: 6 },
+{ pos: 6, team: "Атланта Хоукс", win: 11, loss: 7 },
+{ pos: 7, team: "Филаделфия 76ърс", win: 9, loss: 7 },
+{ pos: 8, team: "Орландо Меджик", win: 10, loss: 8 },
+{ pos: 9, team: "Чикаго Булс", win: 9, loss: 8 },
+{ pos: 10, team: "Бостън Селтикс", win: 9, loss: 8 },
+{ pos: 11, team: "Милуоки Бъкс", win: 8, loss: 10 },
+{ pos: 12, team: "Шарлът Хорнетс", win: 4, loss: 13 },
+{ pos: 13, team: "Бруклин Нетс", win: 3, loss: 14 },
+{ pos: 14, team: "Индиана Пейсърс", win: 2, loss: 15 },
+{ pos: 15, team: "Вашингтон Уизардс", win: 1, loss: 15 }
+
+
+                    ],
+                    "NBA Запад": [
+[
+  { pos: 1, team: "Оклахома Сити Тъндър", win: 17, loss: 1 },
+  { pos: 2, team: "Денвър Нъгетс", win: 13, loss: 4 },
+  { pos: 3, team: "Лос Анджелис Лейкърс", win: 12, loss: 4 },
+  { pos: 4, team: "Хюстън Рокетс", win: 11, loss: 4 },
+  { pos: 5, team: "Сан Антонио Спърс", win: 11, loss: 5 },
+  { pos: 6, team: "Финикс Сънс", win: 11, loss: 7 },
+  { pos: 7, team: "Минесота Тимбъруулвс", win: 10, loss: 7 },
+  { pos: 8, team: "Голдън Стейт Уориърс", win: 10, loss: 9 },
+  { pos: 9, team: "Портланд Трейл Блейзърс", win: 8, loss: 10 },
+  { pos: 10, team: "Мемфис Гризлис", win: 6, loss: 12 },
+  { pos: 11, team: "Юта Джаз", win: 5, loss: 12 },
+  { pos: 12, team: "Лос Анджелис Клипърс", win: 5, loss: 12 },
+  { pos: 13, team: "Сакраменто Кингс", win: 5, loss: 13 },
+  { pos: 14, team: "Далас Маверикс", win: 5, loss: 14 },
+  { pos: 15,  team: "Ню Орлиънс Пеликанс", win: 3, loss: 15 },
+]
+
+
+
+                    ]
+                }
+            },
+            tennis: {
+                title: "Тенис",
+                news: [
+                    {
+  "id": 23,
+  "title": "Рафаел Надал подкрепи Испания след загубата във финала за Купа Дейвис",
+  "image": "https://static.independent.co.uk/2024/11/19/19/newFile-1.jpg",
+  "date": "24 Ноември 2025",
+  "summary": "22-кратният шампион от Големия шлем застана зад националите.",
+  "fullText": "Рафаел Надал изрази подкрепа към испанския национален отбор след поражението във финала за Купа Дейвис 2025. Легендата на тениса заяви, че е горд от усилията на съотборниците си и вярва, че Испания ще се върне още по-силна."
+},
+{
+  "id": 27,
+  "title": "Италия победи Испания във финала на Купа Дейвис",
+  "image": "https://www.atptour.com/-/media/images/news/2025/11/23/20/14/cobolli-dc-2025-final-sun.jpg",
+  "date": "25 Ноември 2025",
+  "summary": "Скуадра адзура триумфира с историческа победа.",
+  "fullText": "Италия спечели финала на Купа Дейвис 2025, след като надделя над Испания в драматичен сблъсък. Италианците показаха характер и борбеност, за да донесат трофея у дома. Това е едно от най-значимите постижения на италианския тенис през последните години."
+},
+
+
+                    {
+                        id: 18,
+                        title: "Карлос Алкарас завършва 2025 като номер 1",
+                        image: "https://www.atptour.com/-/media/images/news/2025/11/16/14/46/alcaraz-no-1-year-end-2025-release.jpg",
+                        date: "18 Ноември 2025",
+                        summary: "Испанецът спечели битката със Синер за върха на ATP.",
+                        fullText: "След победата на US Open и силното представяне на финалите в Торино, Карлос Алкарас официално е номер 1 в света за края на 2025 година. Яник Синер остава втори, въпреки двете си титли от Големия шлем (Australian Open и Уимбълдън)."
+                    },
+                      {
+    "id": 19,
+    "title": "Испания стигна полуфиналите за Купа „Дейвис“",
+    "image": "https://www.puntodebreak.com/sites/default/files/styles/epsa_detail_thumbail/public/2025-11/analisis-espa%C3%B1a-alemania-copa-davis-2025.jpg?h=1bcf9a78&itok=wDlt1izB",
+    "date": "20 Ноември 2025",
+    "summary": "Испанският тим си осигури място сред най-добрите четири в света.",
+    "fullText": "Отборът на Испания победи Франция и се класира за полуфиналите на Купа „Дейвис“. Карлос Алкарас не участва заради травма, но тимът показа дълбочина и характер."
+  },
+  {
+  "id": 20,
+  "title": "Яник Синер триумфира на Финалите на ATP",
+  "image": "https://www.sportico.com/wp-content/uploads/2024/11/GettyImages-2185272541-e1731871575399.jpg?w=1280&h=720&crop=1",
+  "date": "17 Ноември 2025",
+  "summary": "Италианецът завърши сезона с най-голямата титла в кариерата си.",
+  "fullText": "Яник Синер спечели Финалния турнир на ATP за 2025 година, побеждавайки Феликс Оже-Алиасим. Това бе кулминацията на сезона, в който Синер се утвърди като един от водещите играчи в света."
+},
+{
+  "id": 21,
+  "title": "Григор Димитров завърши сезона в топ 50",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB4EU6DKVGal32uqf0kN7DMLkfLAlLUelPLQ&s",
+  "date": "17 Ноември 2025",
+  "summary": "Българският ас приключи годината на 44-то място в ATP.",
+  "fullText": "Григор Димитров завърши сезон 2025 сред най-добрите 50 тенисисти в света. Въпреки трудностите през годината, той показа постоянство и ще започне новия сезон с увереност."
+},
+{
+  "id": 22,
+  "title": "Григор Димитров номиниран за 'Спортсмен на годината'",
+  "image": "https://static.bnr.bg/gallery/cr/de4c4ffe43b2c91ba0ca27501b52708e.jpeg",
+  "date": "23 Ноември 2025",
+  "summary": "Българинът влиза в битка с Алкарас за престижен приз.",
+  "fullText": "Григор Димитров бе официално номиниран за наградата 'Спортсмен на годината' на ATP. Той ще се конкурира с Карлос Алкарас, който завърши сезона като №1 в света. Номинацията е признание за постоянството и класата на Димитров през 2025 година."
+}
+
+
+                ],
+                standings: {
+                    "ATP Ранклиста (Ноември 2025)": [
+  { pos: 1, name: "Карлос Алкарас (ESP)", pts: 12050 },
+  { pos: 2, name: "Яник Синер (ITA)", pts: 11500 },
+  { pos: 3, name: "Александър Зверев (GER)", pts: 5160 },
+  { pos: 4, name: "Новак Джокович (SRB)", pts: 4830 },
+  { pos: 5, name: "Феликс Оже-Алиасим (CAN)", pts: 4245 },
+  { pos: 6, name: "Тейлър Фриц (USA)", pts: 4135 },
+  { pos: 7, name: "Алекс де Минаур (AUS)", pts: 4135 },
+  { pos: 8, name: "Лоренцо Музети (ITA)", pts: 4040 },
+  { pos: 9, name: "Бен Шелтън (USA)", pts: 3970 },
+  { pos: 10, name: "Джак Дрейпър (GBR)", pts: 2990 },
+  { pos: 11, name: "Александър Бублик (KAZ)", pts: 2870 },
+  { pos: 12, name: "Каспер Рууд (NOR)", pts: 2835 },
+  { pos: 13, name: "Даниил Медведев (RUS)", pts: 2760 },
+  { pos: 14, name: "Алехандро Давидович Фокина (ESP)", pts: 2635 },
+  { pos: 15, name: "Холгер Рунe (DEN)", pts: 2590 },
+  { pos: 16, name: "Андрей Рубльов (RUS)", pts: 2520 },
+  { pos: 17, name: "Йири Лехечка (CZE)", pts: 2325 },
+  { pos: 18, name: "Карен Хачанов (RUS)", pts: 2320 },
+  { pos: 19, name: "Якоб Меншик (CZE)", pts: 2180 },
+  { pos: 20, name: "Томи Пол (USA)", pts: 2100 },
+  { pos: 21, name: "Франциско Серундоло (ARG)", pts: 2085 },
+  { pos: 22, name: "Флавио Коболи (ITA)", pts: 2025 },
+  { pos: 23, name: "Денис Шаповалов (CAN)", pts: 1675 },  // според TNT Sports :contentReference[oaicite:1]{index=1}  
+  { pos: 24, name: "Жоао Фонсека (POR)", pts: 1635 },
+  { pos: 25, name: "Талон Грикспор (NED)", pts: 1615 },
+  { pos: 26, name: "Луис Дардери (ITA)", pts: 1609 },
+  { pos: 27, name: "Камерън Нори (GBR)", pts: 1573 },
+  { pos: 28, name: "Лиърнър Тиен (USA)", pts: 1550 },
+  { pos: 29, name: "Арно Риндеркнех (FRA)", pts: 1540 },
+  { pos: 30, name: "Франс Тяфо (USA)", pts: 1510 },
+                    ]
+                }
+            },
+            motogp: {
+                title: "MotoGP",
+                news: [
+                    {
+                        id: 20,
+                        title: "Марк Маркес е световен шампион за 2025!",
+                        image: "https://image.pollinations.ai/prompt/marc%20marquez%20ducati%20motogp%20champion%202025?width=800&height=400&nologo=true",
+                        date: "17 Ноември 2025",
+                        summary: "Седма титла в кралския клас за испанеца с Дукати.",
+                        fullText: "Възраждането е пълно! Марк Маркес доминира сезона с заводското Дукати и събра 545 точки, оставяйки брат си Алекс Маркес на второ място. Това е исторически момент за MotoGP."
+                    },
+                    {
+                    id: 21,
+title: "Награждаването във Валенсия закри сезон 2025!",
+image: "https://resources.motogp.pulselive.com/photo-resources/2025/11/16/db5db1d6-335e-49b1-9db2-c8ee2f54d32e/arti-culo.jpg?width=1440&height=810",
+date: "18 Ноември 2025",
+summary: "Марк Маркес и шампионите от всички класове отпразнуваха края на рекордния сезон.",
+fullText: "Пистата „Рикардо Тормо“ във Валенсия бе арена на грандиозното награждаване, което официално закри сезон 2025. Марк Маркес (Ducati Lenovo) получи признание за своето историческо завръщане и седма титла в MotoGP. Сред отличените бяха Диого Морейра – първият бразилски шампион в Moto2, и Хосе Антонио Руеда – шампион в Moto3. Сезонът завърши с рекордните 22 кръга и препълнени трибуни, а церемонията бе белязана от празнична атмосфера и символичното издигане на „Кулата на шампионите“."
+                    },
+                    {
+                    id: 22,
+title: "Марко Безеки с триумф в Португалия!",
+image: "https://c.ndtvimg.com/2025-11/in27e0lg_marco-bezzecchi_625x300_17_November_25.jpg?im=FeatureCrop,algorithm=dnn,width=545,height=307",
+date: "10 Ноември 2025",
+summary: "Италианецът затвърди позицията си в топ 3 на шампионата.",
+fullText: "Марко Безеки от Aprilia Racing доминира Гран При на Португалия, като стартира от първа позиция и не остави шанс на конкурентите. Победата му укрепи третото място в генералното класиране и доказа силата на Aprilia в края на сезона. Състезанието бе ключово преди финалния кръг във Валенсия."
+                    }
+                ],
+                standings: {
+                    "Генерално Класиране 2025": [
+{ pos: 1, name: "Марк Маркес (Ducati Team)", pts: 545 },
+{ pos: 2, name: "Алекс Маркес (BK8 Gresini Racing MotoGP)", pts: 467 },
+{ pos: 3, name: "Марко Безеки (Aprilia Racing)", pts: 353 },
+{ pos: 4, name: "Педро Акоста (Red Bull KTM Factory Racing)", pts: 307 },
+{ pos: 5, name: "Франческо Баняия (Ducati Team)", pts: 288 },
+{ pos: 6, name: "Фабио Ди Джанантоньо (Pertamina Enduro VR46 Racing Team)", pts: 262 },
+{ pos: 7, name: "Франко Морбидели (Pertamina Enduro VR46 Racing Team)", pts: 231 },
+{ pos: 8, name: "Фермин Алдегер (BK8 Gresini Racing MotoGP)", pts: 214 },
+{ pos: 9, name: "Фабио Куартараро (Monster Energy Yamaha MotoGP Team)", pts: 201 },
+{ pos: 10, name: "Раул Фернандес (Trackhouse Racing MotoGP)", pts: 172 },
+{ pos: 11, name: "Брад Биндер (Red Bull KTM Factory Racing)", pts: 155 },
+{ pos: 12, name: "Жоан Зарко (CASTROL Honda LCR)", pts: 148 },
+{ pos: 13, name: "Лука Марини (Honda HRC)", pts: 142 },
+{ pos: 14, name: "Енеа Бастианини (Red Bull KTM Tech3)", pts: 112 },
+{ pos: 15, name: "Жоан Мир (Honda HRC)", pts: 96 },
+{ pos: 16, name: "Ай Огура (Trackhouse Racing MotoGP)", pts: 89 },
+{ pos: 17, name: "Джак Милър (Prima Pramac Yamaha MotoGP)", pts: 79 },
+{ pos: 18, name: "Маверик Винялес (Red Bull KTM Tech3)", pts: 72 },
+{ pos: 19, name: "Алекс Ринс (Monster Energy Yamaha MotoGP Team)", pts: 68 },
+{ pos: 20, name: "Мигел Оливейра (Prima Pramac Yamaha MotoGP)", pts: 43 },
+{ pos: 21, name: "Хорхе Мартин (Aprilia Racing)", pts: 34 },
+{ pos: 22, name: "Пол Еспаргаро (Red Bull KTM Tech3)", pts: 29 },
+{ pos: 23, name: "Таказаки Накагами (Honda HRC)", pts: 10 },
+{ pos: 24, name: "Лоренцо Савадори (Aprilia Racing)", pts: 8 },
+{ pos: 25, name: "Аугусто Фернандес (Monster Energy Yamaha MotoGP Team)", pts: 8 },
+{ pos: 26, name: "Сомкият Чантра (IDEMITSU Honda LCR)", pts: 7 },
+{ pos: 27, name: "Николо Булега (Ducati Team)", pts: 2 },
+{ pos: 28, name: "Алеиш Еспаргаро (Honda HRC)", pts: 0 },
+{ pos: 29, name: "Микеле Пиро (Ducati Team)", pts: 0 }
+
+                    ]
+                }
+            },
+            boxing: {
+                title: "Бокс и MMA",
+                news: [
+                    {
+  id: 31,
+  title: "Гейбъл Стивсън с 24-секунден нокаут",
+  image: "https://mmajunkie.usatoday.com/gcdn/authoring/authoring-images/2025/09/24/SMMA/86335996007-gable-steveson-lfa-debut.jpg?width=1200&disable=upscale&format=pjpg&auto=webp",
+  date: "24 Ноември 2025",
+  summary: "Олимпийският шампион записа втора поредна победа в ММА.",
+  fullText: "На APFC 21 в Албукърки, Гейбъл Стивсън нокаутира Кевин Хайн само за 24 секунди. Това бе втори пореден първораундов успех за бившия олимпийски шампион по борба, който вече е 2-0 в професионалната си ММА кариера. Стивсън заяви, че следи внимателно UFC и е готов за голямата сцена."
+},
+{
+  id: 33,
+  title: "Дейвид Бенавидес пречупи Антъни Ярд",
+  image: "https://ichef.bbci.co.uk/ace/standard/928/cpsprodpb/4c11/live/ad4e95f0-c566-11f0-ac47-e3b40c46275e.jpgg",
+  date: "24 Ноември 2025",
+  summary: "Американецът защити титлата си в полутежка категория.",
+  fullText: "На галавечерта 'Night of the Champions' в Рияд, Дейвид Бенавидес доминира над Антъни Ярд и запази титлата си на WBC в полутежка категория. В същата вечер Джеси Родригес впечатли с победа над Фернандо Мартинес, а Девин Хейни стана шампион в трета различна категория."
+},
+
+
+                    {
+                        id: 23,
+                        title: "Ислам Махачев е двоен шампион на UFC",
+                        image: "https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/f52c/live/09dfab70-c534-11f0-9839-6584ec7afe70.jpg",
+                        date: "16 Ноември 2025",
+                        summary: "Дагестанецът завоюва титлата в полусредна категория в Ню Йорк.",
+                        fullText: "На UFC 322 в Медисън Скуеър Гардън, Ислам Махачев победи Джак Дела Мадалена и стана шампион в две категории едновременно. Междувременно в тежка категория Том Аспинал продължава да доминира."
+                    },
+                    {
+                        id: 24,
+                        title: "Усик оваканти пояса на WBO",
+                        image: "https://e0.365dm.com/18/12/768x432/skysports-oleksandr-usyk-boxing_4507666.jpg?20181203124530",
+                        date: "18 Ноември 2025",
+                        summary: "Фабио Уордли е новият шампион на WBO в тежка категория.",
+                        fullText: "Олександър Усик реши да се откаже от един от поясите си, давайки път на новото поколение. Британецът Фабио Уордли бе промотиран в пълен шампион."
+                    },
+                    {
+  "id": 25,
+  "title": "Конър Бенн унищожи Крис Юбанк-младши",
+  "image": "https://imgresizer.tntsports.io/unsafe/1200x0/filters:format(jpeg)/origin-imgresizer.tntsports.io/2025/11/15/image-c902bed7-8389-4220-8442-21c8f632231c-85-2560-1440.jpeg",
+  "date": "15 Ноември 2025",
+  "summary": "Бенн постигна първа победа за фамилията срещу Юбанк в 35-годишното съперничество.",
+  "fullText": "Конър Бенн доминира над Крис Юбанк-младши в реванша на стадион Тотнъм, печелейки с единодушно решение. Бенн свали съперника два пъти в последния рунд и сложи край на дългогодишната фамилна вражда, като даде първа победа на фамилията Бен срещу Юбанк в историята на съперничеството."
+},
+{
+  "id": 26,
+  "title": "UFC дебютира в Катар: Царукян срещу Хукър",
+  "image": "https://bet-bg.com/wp-content/uploads/2025/10/bet365-ufc-1024x683-800x660.png",
+  "date": "22 Ноември 2025",
+  "summary": "Арман Царукян и Дан Хукър се изправят в ключов двубой в лека категория.",
+  "fullText": "UFC направи исторически дебют в Катар с галавечер в Ал Райян. В главния двубой Арман Царукян се изправя срещу Дан Хукър в битка, която може да определи следващия претендент за титлата в лека категория. Събитието включва и сблъсък между Белал Мухамад и Иън Мачадо Гари в полусредна категория."
+}
+
+
+                ],
+                standings: {
+                    "UFC Шампиони (Мъже)": [
+                        { pos: "Heavyweight", name: "Том Аспинал" },
+                        { pos: "Light Heavyweight", name: "Алекс Перейра" },
+                        { pos: "Middleweight", name: "Хамзат Чимаев" },
+                        { pos: "Welterweight", name: "Ислам Махачев" },
+                        { pos: "Lightweight", name: "Илия Топурия" }
+                    ],
+                    "Бокс Heavyweight": [
+                        { pos: "WBC/WBA/IBF", name: "Олександър Усик" },
+                        { pos: "WBO", name: "Фабио Уордли" }
+                    ]
+                }
+            },
+            wrc: {
+                title: "WRC",
+                news: [
+                    {
+                        id: 27,
+                        title: "Драма преди финала в Саудитска Арабия",
+                        image: "https://formularapida.net/wp-content/uploads/2021/10/FBGl9w6UcA4Z6eA-scaled.jpg",
+                        date: "20 Ноември 2025",
+                        summary: "Еванс, Ожие и Рованпера в битка за титлата.",
+                        fullText: "Елфин Еванс води с 272 точки, но Себастиан Ожие (269) диша във врата му. Предстоящото Рали Саудитска Арабия ще реши всичко в един от най-оспорваните сезони на WRC."
+                    },
+                    {
+  id: 41,
+  title: "Саудитска Арабия приема финала на WRC",
+  image: "https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2025/2/6/vqm9e1xmp6xffklpubaw/munster-gregoire-louka-louis-m-sport-ford-rally-car-lamia-greece-2024",
+  date: "24 Ноември 2025",
+  summary: "Исторически дебют на Световния рали шампионат в Близкия изток.",
+  fullText: "За първи път в историята Световният рали шампионат пристига в Саудитска Арабия. Финалът на сезон 2025 ще се проведе в Джеда от 26 до 29 ноември. Очакват се 82 екипажа от 25 националности, които ще се състезават по планински трасета, пустинни дюни и крайбрежни отсечки на Червено море."
+},
+{
+  id: 43,
+  title: "Еванс може да стане първият британски шампион от 24 години",
+  image: "https://cdn-8.motorsport.com/images/amp/0RrQv5Z0/s1000/elfyn-evans-toyota-gazoo-racin-2.jpg",
+  date: "25 Ноември 2025",
+  summary: "Уелсецът е на прага на историческо постижение.",
+  fullText: "Елфин Еванс води шампионата и ако удържи преднината си в Саудитска Арабия, ще стане едва третият британец с титла в WRC след Колин Макрей (1995) и Ричард Бърнс (2001). Победа би върнала рали спорта в центъра на вниманието във Великобритания."
+},
+
+
+                    {
+  id: 28,
+  title: "Ожие триумфира в Япония, битката за титлата остава отворена",
+  image: "https://cdn-5.motorsport.com/images/amp/2y7Ao4p6/s1000/sebastien-ogier-vincent-landai.jpg",
+  date: "9 Ноември 2025",
+  summary: "Себастиан Ожие печели в Япония, Еванс и Рованпера остават в играта.",
+  fullText: "Себастиан Ожие спечели Рали Япония, като изведе Toyota до пълен подиум. Елфин Еванс завърши втори и запази лидерството си в шампионата, но преднината му пред Ожие е минимална. Кале Рованпера допълни топ 3 и остава в битката за титлата. Сезон 2025 е един от най-оспорваните в историята на WRC, а финалът в Саудитска Арабия ще реши кой ще бъде новият световен шампион."
+}
+
+
+                ],
+                standings: {
+                    "WRC 2025 Класиране": [
+{ pos: 1, name: "Елфин Еванс (Toyota)", pts: 272 },
+{ pos: 2, name: "Себастиен Ожие (Toyota)", pts: 269 },
+{ pos: 3, name: "Кале Рованпера (Toyota)", pts: 248 },
+{ pos: 4, name: "От Танак (Hyundai)", pts: 213 },
+{ pos: 5, name: "Тиери Ньовил (Hyundai)", pts: 166 },
+{ pos: 6, name: "Такамото Катсута (Toyota)", pts: 111 },
+{ pos: 7, name: "Адриен Формо (Hyundai)", pts: 96 },
+{ pos: 8, name: "Сами Паяри (Toyota WRT2)", pts: 94 },
+{ pos: 9, name: "Оливър Солберг (Toyota/Printsport)", pts: 70 },
+{ pos: 10, name: "Грегор Мюнстер (M-Sport Ford)", pts: 36 },
+{ pos: 11, name: "Джош Макърлийн (M-Sport Ford)", pts: 26 },
+{ pos: 12, name: "Мартин Шешкс (M-Sport Ford)", pts: 16 },
+{ pos: 13, name: "Йоан Росел (PH Sport)", pts: 16 },
+{ pos: 14, name: "Гъс Грийнсмит", pts: 14 },
+{ pos: 15, name: "Николай Грязин", pts: 12 },
+{ pos: 16, name: "Алехандро Качон (Toyota España)", pts: 7 },
+{ pos: 17, name: "Жан Соланс (PH Sport)", pts: 7 },
+{ pos: 18, name: "Жорди Сердеридис (M-Sport Ford)", pts: 4 },
+{ pos: 19, name: "Факундо Залдивар", pts: 2 }
+
+                    ]
+                }
+            },
+             swimming: {
+                title: "Плуване",
+                news: [
+                    {
+                        id: 16,
+                        title: "Световните рекорди падат в края на 2025",
+                        image: "https://bntnews.bg/f/news/b/1319/7a5e71118766cf0e96416f686728a2aa.jpg",
+                        date: "15 Ноември 2025",
+                        summary: "Леон Маршан продължава да пише история.",
+                        fullText: "Френската сензация Леон Маршан подобри собствения си рекорд на 400м съчетано по време на Световната купа. Плуването навлиза в нова златна ера."
+                    }
+                ],
+                standings: null
+            },
+            other: {
+                title: "Други Спортове",
+                news: [
+                    {
+    id: 19,
+    title: "NHL – Възходи, падения и завръщания",
+    image: "https://bolavip.com/en/nhl/nhl-news-senators-coach-travis-green-provides-crucial-update-on-captain-brady-tkachuks-recovery-timeline",
+    date: "25 Ноември 2025",
+    summary: "Сенатърс чакат завръщането на капитана си, докато Рейнджърс търсят нова серия от победи.",
+    fullText: "Оттава Сенатърс получиха добри новини – капитанът Брейди Ткачък се възстановява по-бързо от очакваното и може да се върне още тази седмица. Ню Йорк Рейнджърс прекъснаха серия от четири поредни загуби с победа над Сейнт Луис, като Винсент Трочек и Алексис Лафрениер бяха ключови фигури. В Бостън, защитникът Чарли МакАвой преживява тежка лична седмица, докато Монреал празнува дебюта на Флориан Жекай редом до брат си Арбър. Междувременно младият вратар Джеспер Уолстед от Минесота продължава впечатляваща серия със своя трети „шът-аут“ за сезона."
+},
+
+                    {
+    id: 18,
+    title: "NFL – Сезонът навлиза в решаваща фаза",
+    image: "https://toronto.citynews.ca/wp-content/blogs.dir/sites/10/2025/05/29/CP174606643-1024x683.jpg",
+    date: "25 Ноември 2025",
+    summary: "Драматични мачове и ключови контузии бележат седмица 13 в NFL.",
+    fullText: "Тампа Бей получи добри новини за Бейкър Мейфийлд – травмата му е лека и той може да се върне скоро. В същото време Деня на благодарността донесе зрелищни сблъсъци: Каубоите шокираха Канзас Сити, а Пакърс изненадаха Лайънс. В дивизията AFC North, Рейвънс и Бенгалс се готвят за решаващ двубой, като Джо Бъро и Джамар Чейс се завръщат в състава на Синсинати. Въпреки позитивните сигнали, Тенеси Тайтънс остават на дъното на класацията с едва една победа."
+},
+
+
+                     {
+                        id: 17,
+                        title: "MLB Сезонът приключи",
+                        image: "https://medias.lequipe.fr/img-photo-jpg/vlad-guerrero-a-droite-la-star-de-toronto-vient-de-reussir-un-homerun-shohei-ohtani-a-gauche-qui-eta/1500000002302415/13:105,1842:1325-1200-800-75/f7c5f.jpg",
+                        date: "05 Ноември 2025",
+                        summary: "Равносметка за бейзболния сезон 2025.",
+                        fullText: "След драматични Световни серии, сезонът в МЛБ приключи. Време е за анализи и трансфери."
+                    },
+                    {
+                        id: 13,
+                        title: "NFL: Канзас Сити Чийфс са непобедими",
+                        image: "https://e0.365dm.com/21/12/2048x1152/skysports-kansas-city-chiefs_5618562.jpg?20211217175036",
+                        date: "21 Ноември 2025",
+                        summary: "Патрик Махоумс води отбора към нов Super Bowl.",
+                        fullText: "Сезонът в NFL е в разгара си, а Чийфс изглеждат по-силни от всякога. Битката за плейофите се ожесточава."
+                    }
+                ],
+                standings: null
+            }
+
+        };
+
+        // --- RENDERING LOGIC ---
+
+        function renderHome() {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            let content = `
+                <div class="relative bg-gray-900 h-96 overflow-hidden">
+                    <img src="https://image.pollinations.ai/prompt/sports%20stadium%20lights%20atmosphere?width=1200&height=600&nologo=true" class="w-full h-full object-cover opacity-50" alt="Hero">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 fade-in">
+                        <h1 class="text-4xl md:text-6xl text-white font-bold mb-4 drop-shadow-lg uppercase">Спортът на Живо</h1>
+                        <p class="text-xl text-gray-300 mb-8 max-w-2xl">Всички новини, резултати и класирания от света на спорта за 2025 година на едно място.</p>
+                        <button onclick="filterSport('football')" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition transform hover:scale-105 shadow-lg">
+                            Виж Новините
+                        </button>
+                    </div>
+                </div>
+
+                <div class="container mx-auto px-4 py-12">
+                    <div class="flex items-center mb-8">
+                        <div class="w-1 h-8 bg-red-600 mr-3"></div>
+                        <h2 class="text-3xl font-bold text-gray-800 uppercase brand-font">Топ Заглавия Днес</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${getAllNews().slice(0, 6).map(article => createNewsCard(article)).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById('app-content').innerHTML = content;
+            window.scrollTo(0, 0);
+        }
+
+        function getAllNews() {
+            let all = [];
+            Object.values(sportsData).forEach(sport => {
+                all = [...all, ...sport.news];
+            });
+            // Shuffle slightly for variety or sort by date (simple mock sort here)
+            return all.sort(() => Math.random() - 0.5);
+        }
+
+        function filterSport(sportKey) {
+            // Update Nav
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const activeBtn = document.querySelector(`button[onclick="filterSport('${sportKey}')"]`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            const data = sportsData[sportKey];
+            if (!data) return;
+
+            let standingsHTML = '';
+            if (data.standings) {
+                standingsHTML = `
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-8 slide-in-right">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-list-ol text-red-500 text-2xl mr-3"></i>
+                            <h3 class="text-2xl font-bold text-gray-800 brand-font">Класиране 2025</h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            ${Object.entries(data.standings).map(([leagueName, rows]) => `
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                    <h4 class="font-bold text-lg text-gray-700 mb-3 border-b pb-2 border-red-200">${leagueName}</h4>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm text-left">
+                                            <thead class="text-xs text-gray-500 uppercase bg-gray-100">
+                                                <tr>
+                                                    <th class="px-2 py-2">Поз</th>
+                                                    <th class="px-2 py-2">Име</th>
+                                                    ${rows[0].p ? '<th class="px-2 py-2">М</th>' : ''}
+                                                    ${rows[0].win ? '<th class="px-2 py-2">П</th>' : ''}
+                                                    ${rows[0].loss ? '<th class="px-2 py-2">З</th>' : ''}
+                                                    ${rows[0].pts !== undefined ? '<th class="px-2 py-2 font-bold">Т</th>' : ''}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${rows.map((row, index) => `
+                                                    <tr class="border-b hover:bg-white transition">
+                                                        <td class="px-2 py-3 font-medium ${index === 0 ? 'text-yellow-600' : 'text-gray-600'}">${row.pos}</td>
+                                                        <td class="px-2 py-3 font-bold text-gray-800">${row.team || row.name}</td>
+                                                        ${row.p ? `<td class="px-2 py-3 text-gray-600">${row.p}</td>` : ''}
+                                                        ${row.win !== undefined ? `<td class="px-2 py-3 text-green-600">${row.win}</td>` : ''}
+                                                        ${row.loss !== undefined ? `<td class="px-2 py-3 text-red-600">${row.loss}</td>` : ''}
+                                                        ${row.pts !== undefined ? `<td class="px-2 py-3 font-bold text-gray-900">${row.pts}</td>` : ''}
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let content = `
+                <div class="bg-gray-800 text-white py-12 mb-8">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl font-bold uppercase tracking-wide fade-in">${data.title}</h1>
+                        <p class="text-gray-400 mt-2">Последни новини и резултати за сезон 2025</p>
+                    </div>
+                </div>
+
+                <div class="container mx-auto px-4 fade-in">
+                    ${standingsHTML}
+                    
+                    <div class="mb-8">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-newspaper text-red-500 text-2xl mr-3"></i>
+                            <h3 class="text-2xl font-bold text-gray-800 brand-font">Новини</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${data.news.map(article => createNewsCard(article)).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('app-content').innerHTML = content;
+            window.scrollTo(0, 0);
+        }
+
+        function createNewsCard(article) {
+            // Escape single quotes for the onclick handler
+            const safeTitle = article.title.replace(/'/g, "&apos;");
+            const safeDate = article.date.replace(/'/g, "&apos;");
+            const safeText = article.fullText.replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+            const safeImg = article.image;
+
+            return `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover flex flex-col h-full border-t-4 border-transparent hover:border-red-500">
+                    <div class="h-48 overflow-hidden relative group">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">НОВО</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="text-xs text-gray-500 mb-2 flex items-center">
+                            <i class="far fa-calendar-alt mr-1"></i> ${article.date}
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3 leading-tight">${article.title}</h4>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">${article.summary}</p>
+                        <button 
+                            onclick="openModal('${safeTitle}', '${safeDate}', '${safeImg}', '${safeText}')"
+                            class="mt-auto w-full bg-gray-100 text-gray-800 py-2 rounded font-semibold hover:bg-gray-200 transition flex justify-center items-center group">
+                            Прочети Още <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- MODAL LOGIC ---
+
+        function openModal(title, date, image, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-date').innerText = date;
+            document.getElementById('modal-image').src = image;
+            document.getElementById('modal-content').innerText = text;
+            
+            const modal = document.getElementById('news-modal');
+            modal.classList.remove('hidden');
+            modal.querySelector('div[class*="transform"]').classList.add('modal-enter');
+            setTimeout(() => {
+                modal.querySelector('div[class*="transform"]').classList.remove('modal-enter');
+                modal.querySelector('div[class*="transform"]').classList.add('modal-enter-active');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('news-modal');
+            modal.querySelector('div[class*="transform"]').classList.remove('modal-enter-active');
+            modal.querySelector('div[class*="transform"]').classList.add('modal-exit-active');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.querySelector('div[class*="transform"]').classList.remove('modal-exit-active');
+            }, 300);
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Initial Render
+        renderHome();
+
+    </script>
+</body>
+</html>
