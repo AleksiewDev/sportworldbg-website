@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportWorld BG - Светът на Спорта</title> 
+    <title>SportWorld BG - Светът на Спорта</title>
     
     <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -106,7 +106,6 @@
                     <button onclick="filterSport('f1')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">F1</button>
                     <button onclick="filterSport('motogp')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">MotoGP</button>
                     <button onclick="filterSport('boxing')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Бокс/MMA</button>
-                    <button onclick="filterSport('wrc')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">WRC</button>
                     <button onclick="filterSport('other')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Други</button>
                 </div>
 
@@ -122,14 +121,14 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden lg:hidden bg-gray-800 pb-4">
             <div class="flex flex-col space-y-2 px-4 pt-2">
-                    <button onclick="filterSport('football')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Футбол</button>
-                    <button onclick="filterSport('basketball')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Баскетбол</button>
-                    <button onclick="filterSport('tennis')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Тенис</button>
-                    <button onclick="filterSport('f1')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">F1</button>
-                    <button onclick="filterSport('motogp')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">MotoGP</button>
-                    <button onclick="filterSport('boxing')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Бокс/MMA</button>
-                    <button onclick="filterSport('wrc')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">WRC</button>
-                    <button onclick="filterSport('other')" class="nav-item hover:text-red-400 transition font-medium whitespace-nowrap">Други</button> 
+                <button onclick="filterSport('football')" class="text-left py-2 border-b border-gray-700">Футбол</button>
+                <button onclick="filterSport('basketball')" class="text-left py-2 border-b border-gray-700">Баскетбол</button>
+                <button onclick="filterSport('tennis')" class="text-left py-2 border-b border-gray-700">Тенис</button>
+                <button onclick="filterSport('f1')" class="text-left py-2 border-b border-gray-700">Формула 1</button>
+                <button onclick="filterSport('motogp')" class="text-left py-2 border-b border-gray-700">MotoGP</button>
+                <button onclick="filterSport('boxing')" class="text-left py-2 border-b border-gray-700">Бокс & MMA</button>
+                <button onclick="filterSport('wrc')" class="text-left py-2 border-b border-gray-700">WRC</button>
+                <button onclick="filterSport('swimming')" class="text-left py-2 border-b border-gray-700">Плуване</button>
             </div>
         </div>
     </nav>
@@ -157,7 +156,8 @@
             <div>
                 <h3 class="text-xl font-bold text-white mb-4 brand-font">Контакти</h3>
                 <div class="flex space-x-4 mt-4">
-                    <a href="#" class="text-2xl hover:text-red-500"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61583966417649" class="text-2xl hover:text-red-500"><i class="fab fa-facebook"></i></a>
+
                 </div>
             </div>
         </div>
@@ -204,8 +204,7 @@
                 title: "Футбол",
                 news: [
                     {
-                        
-  id: 6,
+                    id: 6,
   title: "Фиорентина срещу АЕК Атина – гръцка изненада",
   image: "https://icdn.football-italia.net/wp-content/uploads/2025/11/Mijat-Gacinovic-goal-Fiorentina-AEK.jpg",
   date: "27 Ноември 2025",
@@ -536,11 +535,10 @@
   fullText: "Манчестър Сити посреща Байер Леверкузен в ключов мач от груповата фаза на Шампионска лига. 'Гражданите' са в отлична форма след победа над Борусия Дортмунд с 4:1, а Ерлинг Хааланд и Фил Фоудън отново ще водят атаката. Леверкузен пристига с нов треньор и надежда да се реваншира след тежката загуба от ПСЖ." 
 }
 
-
-
                 ],
                 standings: {
-                    "Шампионска Лига":[
+
+ "Шампионска Лига":[
                         { pos: 1, team: "Арсенал", p: 5, pts: 15 },
                         { pos: 2, team: "ПСЖ", p: 5, pts: 12 },
                         { pos: 3, team: "Байерн Мюнхен", p: 5, pts: 12 },
@@ -794,12 +792,14 @@
 
                     ]
                     
+                    
                 }
+                
             },
             f1: {
                 title: "Формула 1",
                 news: [
-                    {
+                                        {
   id: 18,
   title: "ФИА обмисля нови технически проверки",
   image: "https://www.fia.com/sites/default/files/styles/imageslider/public/news/main_image/fia_flag_56.jpg?itok=kpEy3ixJ",
@@ -868,8 +868,6 @@
     Summary: "Макс Верстапен спечели драматичното състезание в Лас Вегас и върна интригата за титлата ",
     FullText: " В зрелищна надпревара по улиците на Лас Вегас, Макс Верстапен (Ред Бул) изпревари Ландо Норис още в първите обиколки и контролира темпото до финала. "
 }
-
-
                 ],
                 standings: {
                     "Пилоти 2025": [
@@ -894,7 +892,6 @@
 { pos: 19, name: "Габриел Борто лето (Sauber)", pts: 19 },
 { pos: 20, name: "Франко Колапинто (Alpine)", pts: 0 },
 { pos: 21, name: "Джак Дуън (Alpine)", pts: 0 }
-
                     ],
                     "Конструктори 2025": [
 { pos: 1, team: "McLaren", pts: 756 },
@@ -914,7 +911,7 @@
             basketball: {
                 title: "Баскетбол",
                 news: [
-                    {
+                                        {
   id: 22,
   title: "Раптърс с нова победа – проблем за Изтока",
   image: "https://platform.raptorshq.com/wp-content/uploads/sites/130/2025/11/imagn-27667264.jpg?quality=90&strip=all&crop=0%2C0.0067015145422928%2C100%2C99.986596970915&w=2400",
@@ -1051,11 +1048,6 @@
   "fullText": "Джеймс Хардън отбеляза рекордните 55 точки за Лос Анджелис Клипърс при победата над Шарлът Хорнетс със 131:116. Той реализира 10 тройки и прекъсна серията от три поредни загуби на Клипърс. Хардън имаше 35 точки още през първото полувреме, което е най-високият резултат за полувреме в НБА този сезон."
 }
 
-
-
-
-
-
                 ],
                 standings: {
                     "NBA Изток": [
@@ -1074,8 +1066,6 @@
 { pos: 14, team: "Бруклин Нетс", win: 3, loss: 14 },
 { pos: 15, team: "Индиана Пейсърс", win: 2, loss: 15 },
 { pos: 16, team: "Вашингтон Уизардс", win: 2, loss: 16 }
-
-
                     ],
                     "NBA Запад": [
   { pos: 1, team: "Оклахома Сити Тъндър", win: 18, loss: 1 },
@@ -1093,17 +1083,13 @@
   { pos: 13, team: "Сакраменто Кингс", win: 5, loss: 14 },
   { pos: 14, team: "Далас Маверикс", win: 5, loss: 14 },
   { pos: 15,  team: "Ню Орлиънс Пеликанс", win: 3, loss: 16 },
-]
-
-
-
                     ]
                 }
             },
             tennis: {
                 title: "Тенис",
                 news: [
-                    {
+                                        {
   "id": 23,
   "title": "Рафаел Надал подкрепи Испания след загубата във финала за Купа Дейвис",
   "image": "https://static.independent.co.uk/2024/11/19/19/newFile-1.jpg",
@@ -1161,8 +1147,6 @@
   "summary": "Българинът влиза в битка с Алкарас за престижен приз.",
   "fullText": "Григор Димитров бе официално номиниран за наградата 'Спортсмен на годината' на ATP. Той ще се конкурира с Карлос Алкарас, който завърши сезона като №1 в света. Номинацията е признание за постоянството и класата на Димитров през 2025 година."
 }
-
-
                 ],
                 standings: {
                     "ATP Ранклиста (Ноември 2025)": [
@@ -1202,7 +1186,7 @@
             motogp: {
                 title: "MotoGP",
                 news: [
-                    {
+                                        {
                         id: 20,
                         title: "Марк Маркес е световен шампион за 2025!",
                         image: "https://image.pollinations.ai/prompt/marc%20marquez%20ducati%20motogp%20champion%202025?width=800&height=400&nologo=true",
@@ -1229,7 +1213,7 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
                 ],
                 standings: {
                     "Генерално Класиране 2025": [
-{ pos: 1, name: "Марк Маркес (Ducati Team)", pts: 545 },
+                        { pos: 1, name: "Марк Маркес (Ducati Team)", pts: 545 },
 { pos: 2, name: "Алекс Маркес (BK8 Gresini Racing MotoGP)", pts: 467 },
 { pos: 3, name: "Марко Безеки (Aprilia Racing)", pts: 353 },
 { pos: 4, name: "Педро Акоста (Red Bull KTM Factory Racing)", pts: 307 },
@@ -1265,8 +1249,7 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
             boxing: {
                 title: "Бокс и MMA",
                 news: [
-                    
-                    {
+                                        {
   id: 31,
   title: "Гейбъл Стивсън с 24-секунден нокаут",
   image: "https://mmajunkie.usatoday.com/gcdn/authoring/authoring-images/2025/09/24/SMMA/86335996007-gable-steveson-lfa-debut.jpg?width=1200&disable=upscale&format=pjpg&auto=webp",
@@ -1316,8 +1299,6 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
   "summary": "Арман Царукян и Дан Хукър се изправят в ключов двубой в лека категория.",
   "fullText": "UFC направи исторически дебют в Катар с галавечер в Ал Райян. В главния двубой Арман Царукян се изправя срещу Дан Хукър в битка, която може да определи следващия претендент за титлата в лека категория. Събитието включва и сблъсък между Белал Мухамад и Иън Мачадо Гари в полусредна категория."
 }
-
-
                 ],
                 standings: {
                     "UFC Шампиони (Мъже)": [
@@ -1335,6 +1316,27 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
             },
             wrc: {
                 title: "WRC",
+                news: [
+                    {
+                        id: 10,
+                        title: "Драма преди финала в Саудитска Арабия",
+                        image: "https://image.pollinations.ai/prompt/wrc%20rally%20car%20desert%20jump?width=800&height=400&nologo=true",
+                        date: "20 Ноември 2025",
+                        summary: "Еванс, Ожие и Рованпера в битка за титлата.",
+                        fullText: "Елфин Еванс води с 272 точки, но Себастиан Ожие (269) диша във врата му. Предстоящото Рали Саудитска Арабия ще реши всичко в един от най-оспорваните сезони на WRC."
+                    }
+                ],
+                standings: {
+                    "WRC 2025 Класиране": [
+                        { pos: 1, name: "Елфин Еванс (Toyota)", pts: 272 },
+                        { pos: 2, name: "Себастиен Ожие (Toyota)", pts: 269 },
+                        { pos: 3, name: "Кале Рованпера (Toyota)", pts: 248 },
+                        { pos: 4, name: "От Танак (Hyundai)", pts: 213 }
+                    ]
+                }
+            },
+             swimming: {
+                title: "Плуване",
                 news: [
                     {
     id: 30,
@@ -1405,12 +1407,9 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
   summary: "Себастиан Ожие печели в Япония, Еванс и Рованпера остават в играта.",
   fullText: "Себастиан Ожие спечели Рали Япония, като изведе Toyota до пълен подиум. Елфин Еванс завърши втори и запази лидерството си в шампионата, но преднината му пред Ожие е минимална. Кале Рованпера допълни топ 3 и остава в битката за титлата. Сезон 2025 е един от най-оспорваните в историята на WRC, а финалът в Саудитска Арабия ще реши кой ще бъде новият световен шампион."
 }
-
-
                 ],
-                standings: {
-                    "WRC 2025 Класиране": [
-{ pos: 1, name: "Елфин Еванс (Toyota)", pts: 272 },
+                standings: [
+                    { pos: 1, name: "Елфин Еванс (Toyota)", pts: 272 },
 { pos: 2, name: "Себастиен Ожие (Toyota)", pts: 269 },
 { pos: 3, name: "Кале Рованпера (Toyota)", pts: 248 },
 { pos: 4, name: "От Танак (Hyundai)", pts: 213 },
@@ -1430,22 +1429,8 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
 { pos: 18, name: "Жорди Сердеридис (M-Sport Ford)", pts: 4 },
 { pos: 19, name: "Факундо Залдивар", pts: 2 }
 
-                    ]
-                }
-            },
-             swimming: {
-                title: "Плуване",
-                news: [
-                    {
-                        id: 16,
-                        title: "Световните рекорди падат в края на 2025",
-                        image: "https://bntnews.bg/f/news/b/1319/7a5e71118766cf0e96416f686728a2aa.jpg",
-                        date: "15 Ноември 2025",
-                        summary: "Леон Маршан продължава да пише история.",
-                        fullText: "Френската сензация Леон Маршан подобри собствения си рекорд на 400м съчетано по време на Световната купа. Плуването навлиза в нова златна ера."
-                    }
-                ],
-                standings: null
+                ]
+                
             },
             other: {
                 title: "Други Спортове",
@@ -1685,7 +1670,6 @@ fullText: "Марко Безеки от Aprilia Racing доминира Гран
     </script>
 </body>
 </html>
-
 
 
 
