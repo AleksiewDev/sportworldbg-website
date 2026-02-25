@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTSWORLD BG | Global Hub</title>
+    <title>SPORTSWORLD BG | High Performance</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,13 +13,12 @@
             --bg-light: #edf2f4;
             --white: #ffffff;
             --card-shadow: 0 10px 30px rgba(43, 45, 66, 0.12);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { background-color: var(--bg-light); color: var(--secondary); overflow-x: hidden; line-height: 1.6; }
 
-        /* HEADER & NAVIGATION */
+        /* HEADER */
         header {
             background: var(--secondary);
             padding: 15px 5%;
@@ -47,6 +46,7 @@
         }
         .btn-lang.active { background: var(--primary); border-color: var(--primary); }
 
+        /* NAVIGATION */
         nav {
             background: var(--white);
             padding: 0 5%;
@@ -75,9 +75,9 @@
         }
         .nav-item:hover::after, .nav-item.active::after { width: 100%; }
 
-        /* HERO SECTION */
+        /* HERO - ONLY ON MAIN PAGE */
         #heroSection {
-            height: 60vh;
+            height: 50vh;
             background: linear-gradient(rgba(43, 45, 66, 0.6), rgba(43, 45, 66, 0.6)), 
                         url('https://i.pinimg.com/736x/2f/0b/02/2f0b02f06cfce0e5fffb42e11bf79f7e.jpg');
             background-size: cover;
@@ -88,15 +88,12 @@
             text-align: center;
             color: var(--white);
         }
-        #heroSection h1 { font-family: 'Oswald', sans-serif; font-size: 4rem; text-transform: uppercase; }
+        #heroSection h1 { font-family: 'Oswald', sans-serif; font-size: 4rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* CONTENT */
+        /* CONTENT GRID */
         .container { max-width: 1300px; margin: 0 auto; padding: 40px 5%; }
         
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 25px;
             border-left: 6px solid var(--primary);
             padding-left: 15px;
@@ -109,25 +106,11 @@
             text-transform: uppercase;
         }
 
-        .action-btns { display: flex; gap: 15px; align-items: center; }
-
-        .btn-copy {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-copy:hover { background: var(--secondary); }
-
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .card {
@@ -135,23 +118,27 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            transition: var(--transition);
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
         }
         .card:hover { transform: translateY(-10px); }
         .card-img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 20px; }
-        .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; height: 3.2em; overflow: hidden; }
         
         .btn-read {
             background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 10px 20px;
+            padding: 12px;
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
-            width: 100%;
+            margin-top: auto;
+            transition: 0.3s;
         }
+        .btn-read:hover { background: var(--secondary); }
 
         /* MODAL */
         .modal-overlay {
@@ -164,26 +151,17 @@
         }
         .modal-content {
             background: var(--white);
-            max-width: 800px; width: 95%; max-height: 90vh;
+            max-width: 800px; width: 95%; max-height: 85vh;
             border-radius: 20px; overflow-y: auto; position: relative;
         }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; cursor: pointer; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; cursor: pointer; color: var(--secondary); z-index: 10; }
         .modal-img { width: 100%; height: 400px; object-fit: cover; }
         .modal-body { padding: 30px; }
-
-        /* TOAST NOTIFICATION */
-        #toast {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--secondary); color: white; padding: 10px 25px;
-            border-radius: 50px; display: none; z-index: 3000; font-weight: 700;
-        }
 
         footer { background: var(--secondary); color: var(--white); padding: 40px; text-align: center; }
     </style>
 </head>
 <body>
-
-    <div id="toast">Link Copied!</div>
 
     <header>
         <div class="logo-area" onclick="location.hash = 'home'">
@@ -208,21 +186,12 @@
         </div>
     </div>
 
-   
-    <footer class="bg-[#1e293b] py-12 border-t-4 border-red-600">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold brand-font mb-2">©2026 SportWorld BG.</h3>
-            <p class="text-slate-400 mb-6" data-i18n="footer_text"> Всички права запазени. &copy; 2026SportWorld BG</p>
-            <div class="flex justify-center space-x-6 text-2xl">
-                <a href="https://www.facebook.com/profile.php?id=61583966417649" class="hover:text-red-500"><i class="fab fa-facebook"></i></a>
-                 <p style="color: #888;">Свържете се с нас: ffans7329@gmail.com</p>
-            </div>
-        </div>
-    </footer>
+    <footer><p><strong>SPORTSWORLD BG</strong> &copy; 2026</p></footer>
 
     <script>
         const sportsDB = {
-                   football: {
+            
+                 football: {
                 title: { bg: "Футбол", en: "Football", es: "Fútbol", it: "Calcio", pt: "Futebol", de: "Fußball", ru: "Футбол" },
                 news: [
                   {
@@ -24646,18 +24615,11 @@ nhl: {
 
         };
 
-        const languages = ['bg', 'en', 'es', 'it', 'pt', 'de', 'ru'];
-        const ui = {
-            home: { bg: "Начало", en: "Home" },
-            copy: { bg: "Копирай линк", en: "Copy Link" },
-            copied: { bg: "Линкът е копиран!", en: "Link Copied!" }
-        };
-
+        const languages = ['bg', 'en', 'ru', 'de', 'es', 'it'];
         let currentLang = 'bg';
 
         function init() {
             renderLangBar();
-            // Handle initial load and back/forward buttons
             window.addEventListener('hashchange', renderPage);
             renderPage();
         }
@@ -24671,80 +24633,87 @@ nhl: {
         function setLang(l) { currentLang = l; renderLangBar(); renderPage(); }
 
         function renderPage() {
-            const hash = window.location.hash.replace('#', '') || 'home';
+            const hashParts = window.location.hash.replace('#', '').split('/');
+            const category = hashParts[0] || 'home';
+            const position = hashParts[1]; // This is now the INDEX (0, 1, 2...)
+
             const container = document.getElementById('mainContent');
             const hero = document.getElementById('heroSection');
             
-            // Update Nav
-            document.getElementById('mainNav').innerHTML = `<div class="nav-item ${hash === 'home' ? 'active' : ''}" onclick="location.hash='home'">${ui.home[currentLang]}</div>` + 
-                Object.keys(sportsDB).map(key => `<div class="nav-item ${hash === key ? 'active' : ''}" onclick="location.hash='${key}'">${sportsDB[key].title[currentLang] || sportsDB[key].title.en}</div>`).join('');
+            // Render Navigation
+            document.getElementById('mainNav').innerHTML = `<div class="nav-item ${category === 'home' ? 'active' : ''}" onclick="location.hash='home'">${currentLang === 'bg' ? 'Начало' : 'Home'}</div>` + 
+                Object.keys(sportsDB).map(key => `<div class="nav-item ${category === key ? 'active' : ''}" onclick="location.hash='${key}'">${sportsDB[key].title[currentLang] || sportsDB[key].title.en}</div>`).join('');
 
             container.innerHTML = '';
             
-            if (hash === 'home') {
+            if (category === 'home') {
                 hero.style.display = 'flex';
                 Object.keys(sportsDB).forEach(key => renderSection(container, key, true));
-            } else {
+            } else if (sportsDB[category]) {
                 hero.style.display = 'none';
-                renderSection(container, hash, false);
+                renderSection(container, category, false);
+            }
+
+            // MODAL LOGIC: Open based on Position Index
+            if (position !== undefined && sportsDB[category]) {
+                const articleIndex = parseInt(position);
+                openModal(category, articleIndex);
+            } else {
+                closeModal();
             }
         }
 
         function renderSection(container, key, isPreview) {
             const sport = sportsDB[key];
-            if (!sport) return;
+            const newsItems = isPreview ? sport.news.slice(0, 3) : sport.news;
+            if (isPreview && newsItems.length === 0) return;
 
             const section = document.createElement('div');
-            const newsItems = isPreview ? sport.news.slice(0, 3) : sport.news;
-
             section.innerHTML = `
                 <div class="section-header">
                     <h2 class="section-title">${sport.title[currentLang] || sport.title.en}</h2>
-                    <div class="action-btns">
-                        <button class="btn-copy" onclick="copyLink('${key}')">${ui.copy[currentLang] || ui.copy.en}</button>
-                    </div>
                 </div>
                 <div class="news-grid">
-                    ${newsItems.length ? newsItems.map(item => `
+                    ${newsItems.map((item, index) => `
                         <div class="card">
                             <img src="${item.img}" class="card-img">
                             <div class="card-body">
                                 <h3 class="card-title">${item.title[currentLang] || item.title.en}</h3>
-                                <button class="btn-read" onclick="openModal('${key}', ${item.id})">Read</button>
+                                <button class="btn-read" onclick="location.hash='${key}/${index}'">${currentLang === 'bg' ? 'Прочети повече' : 'Read More'}</button>
                             </div>
                         </div>
-                    `).join('') : '<p style="opacity:0.5">No news yet.</p>'}
+                    `).join('')}
                 </div>
             `;
             container.appendChild(section);
         }
 
-        function copyLink(key) {
-            const url = window.location.origin + window.location.pathname + '#' + key;
-            navigator.clipboard.writeText(url).then(() => {
-                const toast = document.getElementById('toast');
-                toast.innerText = ui.copied[currentLang] || ui.copied.en;
-                toast.style.display = 'block';
-                setTimeout(() => toast.style.display = 'none', 2000);
-            });
-        }
+        function openModal(catKey, index) {
+            const item = sportsDB[catKey].news[index];
+            if (!item) return;
 
-        function openModal(key, id) {
-            const item = sportsDB[key].news.find(n => n.id === id);
             document.getElementById('modalData').innerHTML = `
                 <img src="${item.img}" class="modal-img">
                 <div class="modal-body">
-                    <h2>${item.title[currentLang] || item.title.en}</h2>
-                    <p>${item.text[currentLang] || item.text.en}</p>
+                    <h2 style="font-family: Oswald; font-size: 2.2rem; color: var(--secondary);">${item.title[currentLang] || item.title.en}</h2>
+                    <p style="margin-top:20px; color: #444; font-size: 1.1rem; line-height: 1.8;">${item.text[currentLang] || item.text.en}</p>
                 </div>`;
             document.getElementById('modalOverlay').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            const overlay = document.getElementById('modalOverlay');
+            if (overlay.style.display === 'flex') {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                // Reset URL hash to category only
+                const currentCat = window.location.hash.split('/')[0];
+                history.replaceState(null, null, currentCat || '#home');
+            }
         }
+
+        window.onclick = (e) => { if (e.target.id === 'modalOverlay') closeModal(); }
 
         init();
     </script>
