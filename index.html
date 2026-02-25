@@ -1,195 +1,218 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTSWORLD BG - Светът на спорта</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <title>SPORTSWORLD BG | Global Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #dc2626; /* Crimson Red */
-            --bg-dark: #0f172a; /* Deep Navy (No Black) */
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --accent: #38bdf8;
+            --primary: #d90429;
+            --secondary: #2b2d42;
+            --accent: #8d99ae;
+            --bg-light: #edf2f4;
+            --white: #ffffff;
+            --card-shadow: 0 10px 30px rgba(43, 45, 66, 0.12);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--secondary); overflow-x: hidden; line-height: 1.6; }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background: var(--secondary);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+        .logo-name { color: var(--white); font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; }
+
+        .lang-bar { display: flex; gap: 5px; }
+        .btn-lang {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--accent);
+            color: var(--white);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        .btn-lang.active { background: var(--primary); border-color: var(--primary); }
+
+        nav {
+            background: var(--white);
+            padding: 0 5%;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            border-bottom: 3px solid var(--primary);
+            scrollbar-width: none;
+        }
+        nav::-webkit-scrollbar { display: none; }
+
+        .nav-item {
+            padding: 15px 5px;
+            color: var(--secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-item.active { color: var(--primary); }
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 3px; background: var(--primary); transition: 0.3s;
+        }
+        .nav-item:hover::after, .nav-item.active::after { width: 100%; }
+
+        /* HERO SECTION */
+        #heroSection {
+            height: 60vh;
+            background: linear-gradient(rgba(43, 45, 66, 0.6), rgba(43, 45, 66, 0.6)), 
+                        url('https://i.pinimg.com/736x/2f/0b/02/2f0b02f06cfce0e5fffb42e11bf79f7e.jpg');
+            background-size: cover;
+            background-position: center;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        #heroSection h1 { font-family: 'Oswald', sans-serif; font-size: 4rem; text-transform: uppercase; }
+
+        /* CONTENT */
+        .container { max-width: 1300px; margin: 0 auto; padding: 40px 5%; }
         
-  
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #0f172a;
-            color: var(--text-main);
-            margin: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--primary);
+            padding-left: 15px;
         }
-        gjhghjghjg
 
-        h1, h2, h3, .brand-font {
+        .section-title {
             font-family: 'Oswald', sans-serif;
-            text-transform: uppercase; 
+            font-size: 2rem;
+            color: var(--secondary);
+            text-transform: uppercase;
         }
 
-        /* Анимации */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .action-btns { display: flex; gap: 15px; align-items: center; }
+
+        .btn-copy {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-copy:hover { background: var(--secondary); }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
 
-        .animate-fade-in {
-            animation: fadeInUp 0.6s ease-out forwards;
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; }
+        .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; }
+        
+        .btn-read {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
         }
 
-        .hover-scale {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-scale:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
-        }
-
-        /* Кастъм скролбар */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-        /* Скриване на секции */
-        .page-section { display: none; }
-        .page-section.active { display: block; }
-
-        /* Стил на езиковите бутони */
-        .lang-btn {
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-        .lang-btn.active {
-            background-color: var(--primary);
-            border-color: white;
-        }
-
-        /* Модал за статии */
-        #article-modal {
-            background: rgba(15, 23, 42, 0.95);
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(43, 45, 66, 0.95);
             backdrop-filter: blur(10px);
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: var(--white);
+            max-width: 800px; width: 95%; max-height: 90vh;
+            border-radius: 20px; overflow-y: auto; position: relative;
+        }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; cursor: pointer; }
+        .modal-img { width: 100%; height: 400px; object-fit: cover; }
+        .modal-body { padding: 30px; }
+
+        /* TOAST NOTIFICATION */
+        #toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--secondary); color: white; padding: 10px 25px;
+            border-radius: 50px; display: none; z-index: 3000; font-weight: 700;
         }
 
-        .gradient-overlay {
-            background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,0) 100%);
-        }
-
-        /* Таблици класиране */
-        .standings-table th { background-color: #334155; }
-        .standings-table tr:nth-child(even) { background-color: #1e293b; }
-        .standings-table tr:hover { background-color: #475569; transition: 0.2s; }
+        footer { background: var(--secondary); color: var(--white); padding: 40px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <nav class="sticky top-0 z-50 bg-[#1e293b] border-b border-red-600/30 shadow-2xl">
-        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
-                <img src="https://i.pinimg.com/736x/b9/ae/36/b9ae36c82f06136486201bbe2f9f0de8.jpg" alt="Logo" class="h-12 w-12 rounded-full border-2 border-red-600">
-                <span class="text-2xl font-bold tracking-tighter brand-font">SPORTSWORLD <span class="text-red-600">BG</span></span>
-            </div>
+    <div id="toast">Link Copied!</div>
 
-            <div class="flex space-x-2 my-2 md:my-0" id="lang-switcher">
-              <p>Избери език:</p>
-                <button onclick="changeLang('bg')" class="lang-btn active px-2 py-1 rounded text-xs bg-slate-700" data-lang="bg">BG</button>
-                <button onclick="changeLang('en')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="en">EN</button>
-                <button onclick="changeLang('es')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="es">ES</button>
-                <button onclick="changeLang('it')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="it">IT</button>
-                <button onclick="changeLang('pt')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="pt">PT</button>
-                <button onclick="changeLang('de')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="de">DE</button>
-                <button onclick="changeLang('ru')" class="lang-btn px-2 py-1 rounded text-xs bg-slate-700" data-lang="ru">RU</button>
-            </div>
+    <header>
+        <div class="logo-area" onclick="location.hash = 'home'">
+            <img src="https://i.pinimg.com/736x/b9/ae/36/b9ae36c82f06136486201bbe2f9f0de8.jpg" alt="Logo" class="logo-img">
+            <span class="logo-name">SPORTSWORLD BG</span>
         </div>
+        <div class="lang-bar" id="langBar"></div>
+    </header>
 
-        <div class="bg-[#0f172a] overflow-x-auto border-t border-slate-700">
-            <div class="container mx-auto px-4 flex space-x-6 py-3 whitespace-nowrap scrollbar-hide">
-                <a href="#football" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_football">Футбол</a>
-                <a href="#basketball" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_basketball">Баскетбол</a>
-                <a href="#tennis" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_tennis">Тенис</a>
-                <a href="#f1" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_f1">F1</a>
-                <a href="#motogp" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_motogp">MotoGP</a>
-                <a href="#olympics"  class="hover:text-cyan-400 transition-colors font-semibold uppercase text-sm text-cyan-300"data-i18n="nav_olympics">Милано-Кортина 2026</a>
-                <a href="#combat" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_combat">Бокс/MMA</a>
-                <a href="#weightlifting" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_weightlifting">Вдигане на тежести</a>
-                <a href="#wrc" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_wrc">WRC</a>
-                <a href="#nascar" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_nascar">Nascar</a>
-                <a href="#indycar" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_indycar">Indycar</a>
-                <a href="#nfl" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_nfl">NFL</a>
-                <a href="#nhl" class="hover:text-red-500 transition-colors font-semibold uppercase text-sm" data-i18n="nav_nhl">NHL</a>
-            </div>
-        </div>
-    </nav>
+    <nav id="mainNav"></nav>
 
-    <main id="main-content">
-        
-        <section id="home" class="page-section active">
-            <div class="relative h-[500px] flex items-center justify-center overflow-hidden">
-                <img src="https://i.pinimg.com/736x/2f/0b/02/2f0b02f06cfce0e5fffb42e11bf79f7e.jpg" alt="Hero" class="absolute w-full h-full object-cover opacity-60">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent"></div>
-                <div class="relative z-10 text-center px-4 animate-fade-in">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl" data-i18n="hero_title">Светът на спорта в реално време</h1>
-                    <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8" data-i18n="hero_subtitle">Новини и анализи от най-големите първенства на 7 езика.</p>
-                    <button onclick="window.location.hash='#football'" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-full font-bold transition transform hover:scale-110 shadow-lg" data-i18n="btn_explore">Виж още</button>
-                </div>
-            </div>
+    <section id="heroSection">
+        <h1>SPORTSWORLD BG</h1>
+    </section>
 
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-3xl font-bold mb-8 border-l-4 border-red-600 pl-4" data-i18n="latest_news">Последни новини</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="news-grid">
-                    </div>
-            </div>
-        </section>
+    <main class="container" id="mainContent"></main>
 
-        <section id="sport-page" class="page-section container mx-auto px-4 py-12">
-            <div id="sport-header" class="mb-12">
-                <h1 id="sport-title" class="text-5xl font-bold text-red-600 mb-4"></h1>
-                <p id="sport-desc" class="text-xl text-slate-400"></p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-2 space-y-8" id="sport-news"></div>
-                
-                <div class="lg:col-span-1">
-                    <div class="bg-[#1e293b] p-6 rounded-xl border border-red-600/20 shadow-xl">
-                        <h3 class="text-2xl font-bold mb-6 text-white border-b border-red-600/30 pb-2" data-i18n="standings_title">Класиране</h3>
-                        <div id="standings-content" class="overflow-x-auto">
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="article-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-[#1e293b] w-full max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col animate-fade-in border border-slate-700">
-            <div class="relative h-64 md:h-80 overflow-hidden">
-                <img id="modal-img" src="" alt="Art" class="w-full h-full object-cover">
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition shadow-lg">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-[#1e293b] to-transparent w-full">
-                    <h2 id="modal-title" class="text-3xl font-bold text-white"></h2>
-                </div>
-            </div>
-            <div class="p-8 overflow-y-auto custom-scroll">
-                <div id="modal-content" class="text-lg leading-relaxed text-slate-300 space-y-4"></div>
-            </div>
-            <div class="p-4 bg-[#0f172a] border-t border-slate-700 text-right">
-                <button onclick="closeModal()" class="px-6 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition" data-i18n="btn_close">Затвори</button>
-            </div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalData"></div>
         </div>
     </div>
 
+   
     <footer class="bg-[#1e293b] py-12 border-t-4 border-red-600">
         <div class="container mx-auto px-4 text-center">
-            <img src="https://i.pinimg.com/736x/b9/ae/36/b9ae36c82f06136486201bbe2f9f0de8.jpg" alt="Logo" class="h-16 mx-auto mb-4 rounded-full border-2 border-red-600">
             <h3 class="text-2xl font-bold brand-font mb-2">©2026 SportWorld BG.</h3>
-            <p class="text-slate-400 mb-6" data-i18n="footer_text"> Всички права запазени. &copy; 2025SportWorld BG</p>
+            <p class="text-slate-400 mb-6" data-i18n="footer_text"> Всички права запазени. &copy; 2026SportWorld BG</p>
             <div class="flex justify-center space-x-6 text-2xl">
                 <a href="https://www.facebook.com/profile.php?id=61583966417649" class="hover:text-red-500"><i class="fab fa-facebook"></i></a>
                  <p style="color: #888;">Свържете се с нас: ffans7329@gmail.com</p>
@@ -198,62 +221,8 @@
     </footer>
 
     <script>
-        // --- ДАННИ ЗА ПРЕВОД ---
-        const translations = {
-            bg: {
-                nav_football: "Футбол", nav_basketball: "Баскетбол", nav_tennis: "Тенис", nav_f1: "F1", nav_motogp: "MotoGP",  nav_olympics:"Милано-Кортина 2026",
-                nav_combat: "Бокс/MMA", nav_weightlifting: "Тежести", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "Светът на спорта", hero_subtitle: "Новини и класирания в реално време.",
-                btn_explore: "Виж още", latest_news: "Последни новини",  btn_read: "Прочети повече",
-                btn_close: "Затвори", footer_text: "Всички права запазени © 2025", loading: "Зареждане..."
-            },
-            en: {
-                nav_football: "Football", nav_basketball: "Basketball", nav_tennis: "Tennis", nav_f1: "F1", nav_motogp: "MotoGP", nav_olympics:"Milan-Cortina 2026",
-                nav_combat: "Boxing/MMA", nav_weightlifting: "Weightlifting", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "The World of Sports", hero_subtitle: "Real-time news and standings.",
-                btn_explore: "Explore More", latest_news: "Latest News", btn_read: "Read More",
-                btn_close: "Close", footer_text: "All rights reserved © 2025", loading: "Loading..."
-            },
-            es: {
-                nav_football: "Fútbol", nav_basketball: "Baloncesto", nav_tennis: "Tenis", nav_f1: "F1", nav_motogp: "MotoGP", nav_olympics:"Milán-Cortina 2026",
-                nav_combat: "Boxeo/MMA", nav_weightlifting: "Halterofilia", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "El Mundo del Deporte", hero_subtitle: "Noticias y clasificaciones en tiempo real.",
-                btn_explore: "Ver más", latest_news: "Últimas noticias",  btn_read: "Leer más",
-                btn_close: "Cerrar", footer_text: "Todos los derechos reservados © 2025", loading: "Cargando..."
-            },
-            it: {
-                nav_football: "Calcio", nav_basketball: "Basket", nav_tennis: "Tennis", nav_f1: "F1", nav_motogp: "MotoGP", nav_olympics:"Milano-Cortina 2026",
-                nav_combat: "Boxe/MMA", nav_weightlifting: "Sollevamento pesi", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "Il Mondo dello Sport", hero_subtitle: "Notizie e classifiche in tempo reale.",
-                btn_explore: "Scopri di più", latest_news: "Ultime notizie",  btn_read: "Leggi tutto",
-                btn_close: "Chiudi", footer_text: "Tutti i diritti riservati © 2025", loading: "Caricamento..."
-            },
-            pt: {
-                nav_football: "Futebol", nav_basketball: "Basquetebol", nav_tennis: "Ténis", nav_f1: "F1", nav_motogp: "MotoGP", nav_olympics:"Milão-Cortina 2026",
-                nav_combat: "Boxe/MMA", nav_weightlifting: "Halterofilismo", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "O Mundo do Desporto", hero_subtitle: "Notícias e classificações em tempo real.",
-                btn_explore: "Ver mais", latest_news: "Últimas notícias",  btn_read: "Ler mais",
-                btn_close: "Fechar", footer_text: "Todos os direitos reservados © 2025", loading: "Carregando..."
-            },
-            de: {
-                nav_football: "Fußball", nav_basketball: "Basketball", nav_tennis: "Tennis", nav_f1: "F1", nav_motogp: "MotoGP", nav_olympics:"Milão-Cortina 2026",
-                nav_combat: "Boxen/MMA", nav_weightlifting: "Gewichtheben", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "Die Welt des Sports", hero_subtitle: "Echtzeit-News und Tabellen.",
-                btn_explore: "Mehr erfahren", latest_news: "Aktuelle Nachrichten",  btn_read: "Mehr lesen",
-                btn_close: "Schließen", footer_text: "Alle Rechte vorbehalten © 2025", loading: "Laden..."
-            },
-            ru: {
-                nav_football: "Футбол", nav_basketball: "Баскетбол", nav_tennis: "Теннис", nav_f1: "Ф1", nav_motogp: "МотоГП", nav_olympics:"Милан-Кортина 2026",
-                nav_combat: "Бокс/ММА", nav_weightlifting: "Тяжелая атлетика", nav_wrc: "WRC", nav_nascar: "Nascar", nav_indycar: "Indycar",
-                nav_nfl: "NFL", nav_nhl: "NHL", hero_title: "Мир спорта", hero_subtitle: "Новости и рейтинги в реальном времени.",
-                btn_explore: "Узнать больше", latest_news: "Последние новости",  btn_read: "Читать далее",
-                btn_close: "Закрыть", footer_text: "Все права защищены © 2025", loading: "Загрузка..."
-            }
-        };
-
-        // --- ДАННИ ЗА СПОРТОВЕТЕ ---
         const sportsDB = {
-            football: {
+                   football: {
                 title: { bg: "Футбол", en: "Football", es: "Fútbol", it: "Calcio", pt: "Futebol", de: "Fußball", ru: "Футбол" },
                 news: [
                   {
@@ -24675,309 +24644,109 @@ nhl: {
   ]
 },
 
-
-
-
-
-
-
         };
-        
-  
 
+        const languages = ['bg', 'en', 'es', 'it', 'pt', 'de', 'ru'];
+        const ui = {
+            home: { bg: "Начало", en: "Home" },
+            copy: { bg: "Копирай линк", en: "Copy Link" },
+            copied: { bg: "Линкът е копиран!", en: "Link Copied!" }
+        };
 
-        // --- ЛОГИКА ---
         let currentLang = 'bg';
 
-        function changeLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
-            
-            // Превод на UI
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if(translations[lang][key]) el.textContent = translations[lang][key];
-            });
-
-            // Обновяване на съдържанието
-            handleRouting();
+        function init() {
+            renderLangBar();
+            // Handle initial load and back/forward buttons
+            window.addEventListener('hashchange', renderPage);
+            renderPage();
         }
 
-        function navigateTo(target) {
-            window.location.hash = target;
+        function renderLangBar() {
+            document.getElementById('langBar').innerHTML = languages.map(l => 
+                `<button class="btn-lang ${l === currentLang ? 'active' : ''}" onclick="setLang('${l}')">${l.toUpperCase()}</button>`
+            ).join('');
         }
 
-        function handleRouting() {
+        function setLang(l) { currentLang = l; renderLangBar(); renderPage(); }
+
+        function renderPage() {
             const hash = window.location.hash.replace('#', '') || 'home';
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            const container = document.getElementById('mainContent');
+            const hero = document.getElementById('heroSection');
+            
+            // Update Nav
+            document.getElementById('mainNav').innerHTML = `<div class="nav-item ${hash === 'home' ? 'active' : ''}" onclick="location.hash='home'">${ui.home[currentLang]}</div>` + 
+                Object.keys(sportsDB).map(key => `<div class="nav-item ${hash === key ? 'active' : ''}" onclick="location.hash='${key}'">${sportsDB[key].title[currentLang] || sportsDB[key].title.en}</div>`).join('');
 
+            container.innerHTML = '';
+            
             if (hash === 'home') {
-                document.getElementById('home').classList.add('active');
-                renderHomeNews();
-            } else if (sportsDB[hash]) {
-                renderSportPage(hash);
+                hero.style.display = 'flex';
+                Object.keys(sportsDB).forEach(key => renderSection(container, key, true));
             } else {
-                renderSportPage('football'); // По подразбиране
+                hero.style.display = 'none';
+                renderSection(container, hash, false);
             }
-            window.scrollTo(0, 0);
         }
 
-        function renderHomeNews() {
-            const grid = document.getElementById('news-grid');
-            grid.innerHTML = '';
-            
-            Object.keys(sportsDB).forEach(key => {
-                sportsDB[key].news.forEach(item => {
-                    grid.innerHTML += `
-                        <div class="bg-[#1e293b] rounded-2xl overflow-hidden hover-scale border border-slate-700">
-                            <img src="${item.img}" class="h-48 w-full object-cover">
-                            <div class="p-6">
-                                <span class="text-red-500 font-bold uppercase text-xs">${sportsDB[key].title[currentLang]}</span>
-                                <h3 class="text-xl font-bold mt-2 mb-3">${item.title[currentLang]}</h3>
-                                <p class="text-slate-400 text-sm mb-4">${item.text[currentLang].substring(0, 80)}...</p>
-                                <button onclick="openModal('${item.title[currentLang]}', '${item.text[currentLang]}', '${item.img}')" 
-                                        class="text-red-500 font-bold hover:underline">
-                                    ${translations[currentLang].btn_read} →
-                                </button>
+        function renderSection(container, key, isPreview) {
+            const sport = sportsDB[key];
+            if (!sport) return;
+
+            const section = document.createElement('div');
+            const newsItems = isPreview ? sport.news.slice(0, 3) : sport.news;
+
+            section.innerHTML = `
+                <div class="section-header">
+                    <h2 class="section-title">${sport.title[currentLang] || sport.title.en}</h2>
+                    <div class="action-btns">
+                        <button class="btn-copy" onclick="copyLink('${key}')">${ui.copy[currentLang] || ui.copy.en}</button>
+                    </div>
+                </div>
+                <div class="news-grid">
+                    ${newsItems.length ? newsItems.map(item => `
+                        <div class="card">
+                            <img src="${item.img}" class="card-img">
+                            <div class="card-body">
+                                <h3 class="card-title">${item.title[currentLang] || item.title.en}</h3>
+                                <button class="btn-read" onclick="openModal('${key}', ${item.id})">Read</button>
                             </div>
                         </div>
-                    `;
-                });
-            });
-        }
-
-        function renderSportPage(sportKey) {
-            const section = document.getElementById('sport-page');
-            section.classList.add('active');
-            
-            const data = sportsDB[sportKey];
-            document.getElementById('sport-title').textContent = data.title[currentLang];
-            
-            // Новини за спорта
-            const newsContainer = document.getElementById('sport-news');
-            newsContainer.innerHTML = '';
-            data.news.forEach(n => {
-                newsContainer.innerHTML += `
-                    <div class="bg-[#1e293b] flex flex-col md:flex-row rounded-2xl overflow-hidden border border-slate-700">
-                        <img src="${n.img}" class="w-full md:w-64 h-64 object-cover">
-                        <div class="p-8">
-                            <h3 class="text-2xl font-bold mb-4">${n.title[currentLang]}</h3>
-                            <p class="text-slate-300 mb-6">${n.text[currentLang]}</p>
-                            <button onclick="openModal('${n.title[currentLang]}', '${n.text[currentLang]}', '${n.img}')" 
-                                    class="bg-red-600 px-6 py-2 rounded-lg font-bold hover:bg-red-700 transition">
-                                ${translations[currentLang].btn_read}
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Класиране
-            const tableDiv = document.getElementById('standings-content');
-            let tableHTML = `
-                <table class="w-full text-left standings-table">
-                    <thead>
-                        <tr>
-                            <th class="p-3 text-xs uppercase">Pos</th>
-                            <th class="p-3 text-xs uppercase">Team/Player</th>
-                            <th class="p-3 text-xs uppercase">Pts/Rec</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
+                    `).join('') : '<p style="opacity:0.5">No news yet.</p>'}
+                </div>
             `;
-            data.standings.forEach((s, idx) => {
-                tableHTML += `
-                    <tr class="border-b border-slate-700">
-                        <td class="p-3 font-bold">${idx + 1}</td>
-                        <td class="p-3">${s.team}</td>
-                        <td class="p-3 text-red-500 font-bold">${s.pts}</td>
-                    </tr>
-                `;
-            });
-            tableHTML += `</tbody></table>`;
-            tableDiv.innerHTML = tableHTML;
+            container.appendChild(section);
         }
 
-        // Модал
-        function openModal(title, text, img) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-content').innerHTML = `<p>${text}</p><p>${text}</p>`; // Дълъг текст за скрол
-            document.getElementById('modal-img').src = img;
-            document.getElementById('article-modal').classList.remove('hidden');
+        function copyLink(key) {
+            const url = window.location.origin + window.location.pathname + '#' + key;
+            navigator.clipboard.writeText(url).then(() => {
+                const toast = document.getElementById('toast');
+                toast.innerText = ui.copied[currentLang] || ui.copied.en;
+                toast.style.display = 'block';
+                setTimeout(() => toast.style.display = 'none', 2000);
+            });
+        }
+
+        function openModal(key, id) {
+            const item = sportsDB[key].news.find(n => n.id === id);
+            document.getElementById('modalData').innerHTML = `
+                <img src="${item.img}" class="modal-img">
+                <div class="modal-body">
+                    <h2>${item.title[currentLang] || item.title.en}</h2>
+                    <p>${item.text[currentLang] || item.text.en}</p>
+                </div>`;
+            document.getElementById('modalOverlay').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            document.getElementById('article-modal').classList.add('hidden');
+            document.getElementById('modalOverlay').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Слушатели
-        window.addEventListener('hashchange', handleRouting);
-        window.addEventListener('load', handleRouting);
-
+        init();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
