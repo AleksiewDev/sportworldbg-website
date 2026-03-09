@@ -79,19 +79,36 @@
         
 
        /* --- Hero Section --- */
-        #heroSection {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
-                        url('https://scontent.fsof10-1.fna.fbcdn.net/v/t39.30808-6/649285784_122128769415059707_1835819447557208203_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=13d280&_nc_ohc=LvDSLxdaeHoQ7kNvwGRsU0k&_nc_oc=Adlvd8zEJUw3Dv9ZvQ9idrgmZKAu2hczxIypibQ5pX6EJUZyibYNfx_lzZcTH908ri4&_nc_zt=23&_nc_ht=scontent.fsof10-1.fna&_nc_gid=wnNO4lv9XnEh2aqotd4P3Q&_nc_ss=8&oh=00_AfxNHYt-hMgyW1pjdlcKwl80LsnEWDZCQeitGVtw5yO75Q&oe=69B36A9B');
-            background-size: cover;
-            background-position: center 20%;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-        }
+      #heroSection {
+    height: 100vh;
+    background-size: cover;
+    background-position: center 20%;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Slideshow layer */
+#heroSection::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    transition: opacity 1.5s ease-in-out;
+    z-index: -1;
+    opacity: 1;
+}
+
 
         #heroSection .hero-content {
             max-width: 900px;
@@ -227,12 +244,12 @@
     <nav id="mainNav"></nav>
 
     <section id="heroSection">
-        <div class="hero-content">
-            <p>Добре дошли в</p>
-            <h1>SPORTSWORLD BG</h1>
-            <a href="https://sportsworldss.com/#football" class="read-more-btn">Към новините</a>
-        </div>
-    </section>
+    <div class="hero-content">
+        <p>Добре дошли в</p>
+        <h1>SPORTSWORLD BG</h1>
+        <a href="https://sportsworldss.com/#football" class="read-more-btn">Към новините</a>
+    </div>
+</section>
 
     
 
@@ -30231,6 +30248,49 @@ nhl: {
                 closeModal();
             }
         }
+    
+const images = [
+    "https://i.guim.co.uk/img/media/bb11ea809dbdc904e86d00df590a7ca01f94e547/317_0_2230_1784/master/2230.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=ea724cf351a63f5ec076bb99cd087d18",
+    "https://ichef.bbci.co.uk/ace/standard/2560/cpsprodpb/dbab/live/2500df50-c814-11ef-af69-89422d3112f1.jpg",
+    "https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/EB60/production/_132865206_gettyimages-1944122633.jpg",
+    "https://cdn-2.motorsport.com/images/amp/2eZgbMPY/s1000/lando-norris-mclaren-2.jpg",
+    "https://cdn.crash.net/2026-02/gng_1292172_hires_1600x900.jpg?width=1600",
+    "https://fcdynamo.com/img/89d038b6-f992-4456-819b-94dfbd5bb439/oleksandr-usyk-def-tyson-fury-usyk-vs-fury-2-35.jpg?fm=jpg&q=80&fit=max&crop=1000%2C600%2C0%2C0",
+    "https://legacymedia.sportsplatform.io/image/upload/v1717305343/mqlgbixrer3mg2n2w6s5.jpg",
+    "https://cdn-cs-images.racer.com/v3/assets/blte77f57883ea46be1/blt52f6bbdc26611dc0/67d55743b910b113c5b80f85/Ogier01MC25cm449.jpg?environment=live",
+    "https://res.cloudinary.com/ybmedia/image/upload/c_crop,e_improve,h_951,w_1692,x_163,y_215/c_fill,f_auto,h_900,q_auto,w_1600/v1/m/c/e/cebe6f47c1e726248e5b856e50d4641a179ab80e/report-nascar-race-major-west-coast-city-2026.jpg",
+    "https://www.indycar.com/-/media/IndyCar/News/Standard/2026/03/03-01-Palou-Early.jpg",
+    "https://iwf.sport/wp-content/uploads/2025/05/120y_86-1024x705.jpg",
+    "https://statico.profootballnetwork.com/wp-content/uploads/2025/06/15103706/rams-projected-select-matthew-stafford-06-15-25-1920x1280.jpg",
+    "https://images2.minutemediacdn.com/image/upload/c_crop,x_0,y_146,w_3101,h_1744/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/ImagnImages/mmsport/breakaway_on_si/01jhgezhxcg631qcbmmn.jpg",
+    
+];
+
+let index = 0;
+const hero = document.querySelector("#heroSection::before");
+
+function changeBackground() {
+    const section = document.querySelector("#heroSection");
+    const layer = section.querySelector("::before");
+
+    // fallback for browsers — use styleSheets instead
+    section.style.setProperty("--bg", `url(${images[index]})`);
+
+    document.querySelector("#heroSection").style.setProperty(
+        "--bg-image",
+        `url(${images[index]})`
+    );
+
+    document.querySelector("#heroSection").style.backgroundImage =
+        `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(${images[index]})`;
+
+    index = (index + 1) % images.length;
+}
+
+setInterval(changeBackground, 3000);
+changeBackground();
+
+
 
         function renderSection(container, key, isPreview) {
             const sport = sportsDB[key];
