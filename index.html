@@ -408,43 +408,62 @@
     .btn-read:hover { background: var(--secondary); }
 
     /* MODAL */
-    .modal-overlay {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(43, 45, 66, 0.95);
-        backdrop-filter: blur(5px);
-        display: none; justify-content: center; align-items: center;
-        z-index: 2000;
-        padding: 20px;
-    }
+   .modal-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: var(--white); /* Background becomes white like a full page */
+    display: none; 
+    justify-content: center; 
+    align-items: flex-start;
+    z-index: 3000; 
+    padding: 0; /* Remove any padding around the edges */
+    overflow-y: auto; /* Enable scrolling for long articles */
+}
    .modal-content {
     background: var(--white);
-    max-width: 12000px; 
     width: 100%; 
-    max-height: 90vh;
-    border-radius: 15px; 
-    overflow-y: auto; 
+    min-height: 100vh; 
+    max-width: none !important; /* Force remove width limits */
+    max-height: none !important; /* Force remove height limits */
+    border-radius: 0 !important; /* Remove rounded corners */
     position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: none;
+    margin: 0;
 }
     .close-btn { 
-        position: absolute; 
-        top: 15px; right: 15px; 
-        font-size: 2rem; 
-        line-height: 1;
-        cursor: pointer; 
-        color: #fff; 
-        background: rgba(0,0,0,0.6);
-        width: 40px; height: 40px;
-        border-radius: 50%;
-        display: flex; justify-content: center; align-items: center;
-        z-index: 10; 
-        transition: 0.3s;
-    }
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    font-size: 2.5rem; 
+    cursor: pointer; 
+    color: white; 
+    background: rgba(0,0,0,0.6);
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 3100; 
+    transition: 0.3s;
+}
     .close-btn:hover { background: var(--primary); }
     
-    .modal-img { width: 100%; height: 400px; object-fit: cover; }
-    .modal-body { padding: 30px; }
+   * Adjust the article image and body for full screen layout */
+.modal-img { 
+    width: 100%; 
+    height: 60vh; /* Makes the image larger */
+    object-fit: cover; 
+}
+
+.modal-body { 
+    padding: 40px 5%; 
+    max-width: 900px; /* Limits text width for better readability on desktop */
+    margin: 0 auto; 
+}
     .modal-title { font-family: 'Oswald', sans-serif; font-size: 2.2rem; color: var(--secondary); margin-bottom: 15px; line-height: 1.2; }
     .modal-text { color: #444; font-size: 1.1rem; line-height: 1.8; text-align: justify; }
 
