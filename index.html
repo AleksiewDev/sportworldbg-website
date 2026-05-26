@@ -18199,6 +18199,140 @@ nhl: {
             navigateToHome();
             renderMainContent();
         }
+        function renderMasterLayoutEngine() {
+    let featuredArticle = null;
+    let trendingPool = [];
+
+    if (activeCategory === 'all') {
+        featuredArticle = sportsDB.football.news[0];
+        trendingPool = [
+            sportsDB.football.news[0],
+            sportsDB.basketball.news[0],
+            sportsDB.f1.news[0],
+            sportsDB.tennis.news[0]
+        ].filter(Boolean);
+    } else {
+        featuredArticle = sportsDB[activeCategory].news[0];
+        trendingPool = sportsDB[activeCategory].news;
+    }
+
+    // Render Hero Carousel
+    if (featuredArticle) {
+        const featKey = activeCategory === 'all' ? 'football' : activeCategory;
+        DOM.hero.innerHTML = `
+            <div class="carousel-slide" style="background-image: url('${featuredArticle.img}')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <span class="badge">${sportsDB[featKey].title[currentLanguage]}</span>
+                    <h2 class="carousel-title">${featuredArticle.title[currentLanguage]}</h2>
+                </div>
+            </div>
+        `;
+        DOM.hero.onclick = () => openArticle(featuredArticle._uid);
+    }
+
+    // Render Trending Sidebar
+    let trendingHtml = '';
+    trendingPool.forEach(item => {
+        if(!item) return;
+        trendingHtml += `
+            <div class="trending-item" onclick="openArticle('${item._uid}')">
+                <img src="${item.img}" alt="sports" loading="lazy">
+                <div>
+                    <h4>${item.title[currentLanguage]}</h4>
+                </div>
+            </div>
+        `;
+    });
+    DOM.trending.innerHTML = trendingHtml;
+
+    // Render All 12 Sports Grids (3 articles each)
+    let blocksHtml = '';
+    Object.keys(sportsDB).forEach(sportKey => {
+        if (activeCategory !== 'all' && activeCategory !== sportKey) return;
+        
+        const sportMeta = sportsDB[sportKey];
+        const displayNews = sportMeta.news.slice(0, 3);
+        if (displayNews.length === 0) return;
+
+        blocksHtml += `
+            <section class="sport-section">
+                <h3 class="sport-section-header">${sportMeta.title[currentLanguage]}</h3>
+                <div class="news-grid">
+        `;
+
+        displayNews.forEach((article) => {
+            blocksHtml += `
+                <div class="news-card" onclick="openArticle('${article._uid}')">
+                    <div class="card-img-wrapper">
+                        <img src="${article.img}" alt="SportsWorld" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">${article.title[currentLanguage]}</h4>
+                        <p class="card-excerpt">${article.text[currentLanguage]}</p>
+                        <div class="card-footer">
+                            <span>ID: ${article.id}</span>
+                            <span style="color:var(--primary); font-weight:700;">${UI_TRANSLATIONS[currentLanguage].read} →</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        blocksHtml += `</div></section>`;
+    });
+
+    DOM.sportsBlocks.innerHTML = blocksHtml;
+}
+
+function openArticle(uid, languageRefreshOnly = false) {
+    if (!languageRefreshOnly) {
+        mainPageScrollY = window.scrollY; // Saves exactly where you clicked
+    }
+
+    let targetArticle = null;
+    Object.keys(sportsDB).forEach(key => {
+        const match = sportsDB[key].news.find(n => n._uid === uid);
+        if (match) targetArticle = match;
+    });
+
+    if (!targetArticle) return;
+
+    DOM.articleTarget.setAttribute('data-active-uid', uid);
+    DOM.articleTarget.innerHTML = `
+        <h1 class="article-full-title">${targetArticle.title[currentLanguage]}</h1>
+        <img src="${targetArticle.img}" class="article-header-img" alt="Headline">
+        <div class="article-content-body">
+            <p>${targetArticle.text[currentLanguage]}</p>
+        </div>
+    `;
+
+    requestAnimationFrame(() => {
+        DOM.homeView.classList.remove('active');
+        DOM.articleView.classList.add('active');
+        window.scrollTo(0, 0);
+    });
+}
+
+function closeArticlePanel() {
+    if (DOM.articleView.classList.contains('active')) {
+        DOM.articleView.classList.remove('active');
+        DOM.homeView.classList.add('active');
+        
+        // Jumps directly back to your exact row/section instantly
+        window.scrollTo({
+            top: mainPageScrollY,
+            behavior: 'instant'
+        });
+    }
+}
+if(DOM.articleView.classList.contains('active')) {
+    const currentUid = DOM.articleTarget.getAttribute('data-active-uid');
+    if (currentUid) {
+        openArticle(currentUid, true);
+    }
+}
+
 
         // Compile and Agggregate Article Objects
         function fetchArticles() {
@@ -18277,135 +18411,49 @@ nhl: {
             });
             gridTarget.innerHTML = gridHtml || '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">No matches available.</p>';
         }
-        function renderMasterLayoutEngine() {
-    let featuredArticle = sportsDB.football.news[0];
-    let trendingPool = [
-        { key: 'football', idx: 0 },
-        { key: 'basketball', idx: 0 },
-        { key: 'f1', idx: 0 },
-        { key: 'tennis', idx: 0 }
-    ];
-
-    if (activeCategory !== 'all') {
-        featuredArticle = sportsDB[activeCategory].news[0];
-        trendingPool = sportsDB[activeCategory].news.map((_, i) => ({ key: activeCategory, idx: i }));
+        function openArticle(uid, languageRefreshOnly = false) {
+    if (!languageRefreshOnly) {
+        mainPageScrollY = window.scrollY; // Saves exactly where you clicked down to the pixel
     }
 
-    // Render Hero Carousel
-    if (featuredArticle) {
-        const featKey = activeCategory === 'all' ? 'football' : activeCategory;
-        DOM.hero.innerHTML = `
-            <div class="carousel-slide" style="background-image: url('${featuredArticle.img}')">
-                <div class="carousel-overlay"></div>
-                <div class="carousel-content">
-                    <span class="badge">${sportsDB[featKey].title[currentLanguage]}</span>
-                    <h2 class="carousel-title">${featuredArticle.title[currentLanguage]}</h2>
-                </div>
-            </div>
-        `;
-        DOM.hero.onclick = () => openArticle(featKey, 0);
-    }
-
-    // Render Trending Sidebar
-    let trendingHtml = '';
-    trendingPool.forEach(item => {
-        const article = sportsDB[item.key]?.news[item.idx];
-        if (!article) return;
-        trendingHtml += `
-            <div class="trending-item" onclick="openArticle('${item.key}', ${item.idx})">
-                <img src="${article.img}" alt="sports" loading="lazy">
-                <div>
-                    <h4>${article.title[currentLanguage]}</h4>
-                </div>
-            </div>
-        `;
-    });
-    DOM.trending.innerHTML = trendingHtml;
-
-    // Render 3 Articles For Every Single Sport Matrix
-    let blocksHtml = '';
-    Object.keys(sportsDB).forEach(sportKey => {
-        if (activeCategory !== 'all' && activeCategory !== sportKey) return;
-        
-        const sportMeta = sportsDB[sportKey];
-        const displayNews = sportMeta.news.slice(0, 3); // Ensures exactly 3 items
-        if (displayNews.length === 0) return;
-
-        blocksHtml += `
-            <section class="sport-section">
-                <h3 class="sport-section-header">${sportMeta.title[currentLanguage]}</h3>
-                <div class="news-grid">
-        `;
-
-        displayNews.forEach((article, index) => {
-            blocksHtml += `
-                <div class="news-card" onclick="openArticle('${sportKey}', ${index})">
-                    <div class="card-img-wrapper">
-                        <img src="${article.img}" alt="SportsWorld" loading="lazy">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">${article.title[currentLanguage]}</h4>
-                        <p class="card-excerpt">${article.text[currentLanguage]}</p>
-                        <div class="card-footer">
-                            <span>${sportMeta.title[currentLanguage]} #${index + 1}</span>
-                            <span style="color:var(--primary); font-weight:700;">${UI_TRANSLATIONS[currentLanguage].read} →</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-
-        blocksHtml += `</div></section>`;
+    let targetArticle = null;
+    Object.keys(sportsDB).forEach(key => {
+        const match = sportsDB[key].news.find(n => n._uid === uid);
+        if (match) targetArticle = match;
     });
 
-    DOM.sportsBlocks.innerHTML = blocksHtml;
-}
-
-function openArticle(sportKey, index) {
-    const targetArticle = sportsDB[sportKey]?.news[index];
     if (!targetArticle) return;
 
-    // Cache exact scroll coordinates before swapping views
-    mainPageScrollY = window.scrollY; 
-
-    DOM.articleTarget.setAttribute('data-active-key', sportKey);
-    DOM.articleTarget.setAttribute('data-active-idx', index);
+    DOM.articleTarget.setAttribute('data-active-uid', uid);
     
+    // Injects explicit close buttons directly into the render stack
     DOM.articleTarget.innerHTML = `
+        <div style="margin-bottom: 25px;">
+            <button onclick="closeArticlePanel()" style="background: var(--primary); color: #ffffff; border: none; padding: 10px 22px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; border-radius: 25px; cursor: pointer; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px var(--primary-glow);">
+                ← ${currentLanguage === 'bg' ? 'Назад към секцията' : 'Back to Section'}
+            </button>
+        </div>
+
         <h1 class="article-full-title">${targetArticle.title[currentLanguage]}</h1>
         <img src="${targetArticle.img}" class="article-header-img" alt="Headline">
         <div class="article-content-body">
             <p>${targetArticle.text[currentLanguage]}</p>
         </div>
+
+        <div style="margin-top: 40px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+            <button onclick="closeArticlePanel()" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; border-radius: 10px; cursor: pointer; text-transform: uppercase; width: 100%; display: block; text-align: center; transition: var(--transition-fast);">
+                ← ${currentLanguage === 'bg' ? 'Връщане към прочетената секция' : 'Return to Previous Section'}
+            </button>
+        </div>
     `;
 
-    // Instant view switch using requestAnimationFrame for zero-lag UI
     requestAnimationFrame(() => {
         DOM.homeView.classList.remove('active');
         DOM.articleView.classList.add('active');
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0); // Reset to top of the article view
     });
 }
 
-function closeArticlePanel() {
-    if (DOM.articleView.classList.contains('active')) {
-        DOM.articleView.classList.remove('active');
-        DOM.homeView.classList.add('active');
-        
-        // Instantly bounce back to exactly where you left off
-        window.scrollTo({
-            top: mainPageScrollY,
-            behavior: 'instant'
-        });
-    }
-}
-if(DOM.articleView.classList.contains('active')) {
-    const currentKey = DOM.articleTarget.getAttribute('data-active-key');
-    const currentIdx = DOM.articleTarget.getAttribute('data-active-idx');
-    if (currentKey && currentIdx !== null) {
-        openArticle(currentKey, parseInt(currentIdx), true);
-    }
-}
 
         // Open Individual Focused Views via Dynamic ID Mapping Lookups
         function openArticle(id) {
