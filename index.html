@@ -18453,6 +18453,149 @@ if(DOM.articleView.classList.contains('active')) {
         window.scrollTo(0, 0); // Reset to top of the article view
     });
 }
+// Looks up any article object directly in memory to find its exact category and index position
+function findArticleCoords(targetArticle) {
+    if (!targetArticle) return null;
+    for (const sportKey of Object.keys(sportsDB)) {
+        const idx = sportsDB[sportKey].news.indexOf(targetArticle);
+        if (idx !== -1) return { sportKey, idx };
+    }
+    return null;
+}
+
+function openArticle(sportKey, index, languageRefreshOnly = false) {
+    const targetArticle = sportsDB[sportKey]?.news[index];
+    if (!targetArticle) return;
+
+    if (!languageRefreshOnly) {
+        mainPageScrollY = window.scrollY; // Perfectly remembers your main page scroll row
+    }
+
+    DOM.articleTarget.setAttribute('data-active-key', sportKey);
+    DOM.articleTarget.setAttribute('data-active-idx', index);
+    
+    // Injects highly responsive "Back to section" buttons at both top and bottom
+    DOM.articleTarget.innerHTML = `
+        <div style="margin-bottom: 25px;">
+            <button onclick="closeArticlePanel()" style="background: var(--primary); color: #ffffff; border: none; padding: 10px 22px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; border-radius: 25px; cursor: pointer; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px var(--primary-glow);">
+                ← ${currentLanguage === 'bg' ? 'Назад към секцията' : 'Back to Section'}
+            </button>
+        </div>
+
+        <h1 class="article-full-title">${targetArticle.title[currentLanguage]}</h1>
+        <img src="${targetArticle.img}" class="article-header-img" alt="Headline">
+        <div class="article-content-body">
+            <p>${targetArticle.text[currentLanguage]}</p>
+        </div>
+
+        <div style="margin-top: 40px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+            <button onclick="closeArticlePanel()" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; border-radius: 10px; cursor: pointer; text-transform: uppercase; width: 100%; display: block; text-align: center; transition: var(--transition-fast);">
+                ← ${currentLanguage === 'bg' ? 'Връщане към прочетената секция' : 'Return to Previous Section'}
+            </button>
+        </div>
+    `;
+
+    requestAnimationFrame(() => {
+        DOM.homeView.classList.remove('active');
+        DOM.articleView.classList.add('active');
+        window.scrollTo(0, 0);
+    });
+}
+function renderMasterLayoutEngine() {
+    let featuredArticle = null;
+    let trendingPool = [];
+
+    if (activeCategory === 'all') {
+        featuredArticle = sportsDB.football.news[0];
+        trendingPool = [
+            sportsDB.football.news[0],
+            sportsDB.basketball.news[0],
+            sportsDB.f1.news[0],
+            sportsDB.tennis.news[0]
+        ].filter(Boolean);
+    } else {
+        featuredArticle = sportsDB[activeCategory].news[0];
+        trendingPool = sportsDB[activeCategory].news;
+    }
+
+    // Render Hero Carousel
+    if (featuredArticle) {
+        const coords = findArticleCoords(featuredArticle);
+        if (coords) {
+            DOM.hero.innerHTML = `
+                <div class="carousel-slide" style="background-image: url('${featuredArticle.img}')">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-content">
+                        <span class="badge">${sportsDB[coords.sportKey].title[currentLanguage]}</span>
+                        <h2 class="carousel-title">${featuredArticle.title[currentLanguage]}</h2>
+                    </div>
+                </div>
+            `;
+            DOM.hero.onclick = () => openArticle(coords.sportKey, coords.idx);
+        }
+    }
+
+    // Render Trending Sidebar
+    let trendingHtml = '';
+    trendingPool.forEach(item => {
+        const coords = findArticleCoords(item);
+        if (!coords) return;
+        trendingHtml += `
+            <div class="trending-item" onclick="openArticle('${coords.sportKey}', ${coords.idx})">
+                <img src="${item.img}" alt="sports" loading="lazy">
+                <div>
+                    <h4>${item.title[currentLanguage]}</h4>
+                </div>
+            </div>
+        `;
+    });
+    DOM.trending.innerHTML = trendingHtml;
+
+    // Render All 12 Sports Grids (Exactly 3 articles per sport row)
+    let blocksHtml = '';
+    Object.keys(sportsDB).forEach(sportKey => {
+        if (activeCategory !== 'all' && activeCategory !== sportKey) return;
+        
+        const sportMeta = sportsDB[sportKey];
+        const displayNews = sportMeta.news.slice(0, 3);
+        if (displayNews.length === 0) return;
+
+        blocksHtml += `
+            <section class="sport-section">
+                <h3 class="sport-section-header">${sportMeta.title[currentLanguage]}</h3>
+                <div class="news-grid">
+        `;
+
+        displayNews.forEach((article, index) => {
+            blocksHtml += `
+                <div class="news-card" onclick="openArticle('${sportKey}', ${index})">
+                    <div class="card-img-wrapper">
+                        <img src="${article.img}" alt="SportsWorld" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">${article.title[currentLanguage]}</h4>
+                        <p class="card-excerpt">${article.text[currentLanguage]}</p>
+                        <div class="card-footer">
+                            <span>ID: ${article.id}</span>
+                            <span style="color:var(--primary); font-weight:700;">${UI_TRANSLATIONS[currentLanguage].read} →</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        blocksHtml += `</div></section>`;
+    });
+
+    DOM.sportsBlocks.innerHTML = blocksHtml;
+}
+if(DOM.articleView.classList.contains('active')) {
+    const currentKey = DOM.articleTarget.getAttribute('data-active-key');
+    const currentIdx = DOM.articleTarget.getAttribute('data-active-idx');
+    if (currentKey && currentIdx !== null) {
+        openArticle(currentKey, parseInt(currentIdx), true);
+    }
+}
 
 
         // Open Individual Focused Views via Dynamic ID Mapping Lookups
