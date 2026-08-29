@@ -1,67 +1,70 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTSWORLD BG | Премиум Спортни Новини</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>SportsWorld BG – Всички спортове на едно място</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
     
     <style>
-    
+        /* ==========================================
+           COLOR PALETTE & CSS VARIABLES (NO PURE BLACK)
+           ========================================== */
         :root {
-            --primary-red: #E11D48;
-            --primary-red-hover: #BE123C;
-            --bg-dark: #0F172A; 
-            --card-dark: #1E293B;
-            --text-dark: #F8FAFC;
-            --text-muted-dark: #94A3B8;
-            --border-dark: #334155;
+            --primary-navy: #0b192c;
+            --primary-blue: #1e3e62;
+            --royal-blue: #2563eb;
+            --accent-red: #ff204e;
+            --accent-orange: #ff6b00;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
             
-            --bg-light: #F8FAFC;
-            --card-light: #FFFFFF;
-            --text-light: #0F172A;
-            --text-muted-light: #64748B;
-            --border-light: #E2E8F0;
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --bg-glass-dark: rgba(15, 23, 42, 0.92);
             
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            --font-main: 'Outfit', sans-serif;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --text-light: #f8fafc;
+            
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+            --shadow-lg: 0 20px 30px -10px rgba(37, 99, 235, 0.2);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Theme Application mapping */
-        body.theme-dark {
-            --bg: var(--bg-dark);
-            --card: var(--card-dark);
-            --text: var(--text-dark);
-            --text-muted: var(--text-muted-dark);
-            --border: var(--border-dark);
-            color-scheme: dark;
-        }
-
-        body.theme-light {
-            --bg: var(--bg-light);
-            --card: var(--card-light);
-            --text: var(--text-light);
-            --text-muted: var(--text-muted-light);
-            --border: var(--border-light);
-            color-scheme: light;
-        }
-
-        /* --- CSS RESET & BASE STYLES --- */
+        /* ==========================================
+           RESET & GLOBAL STYLES
+           ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: var(--font-main);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            transition: var(--transition-smooth);
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: var(--primary-navy);
         }
 
         a {
@@ -69,495 +72,1395 @@
             color: inherit;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-red);
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        header {
-            background-color: var(--card);
-            border-bottom: 2px solid var(--border);
+        /* ==========================================
+           BREAKING NEWS TICKER (TOP HEADER BAR)
+           ========================================== */
+        .top-ticker-bar {
+            background: linear-gradient(90deg, var(--primary-navy), var(--primary-blue));
+            color: var(--text-light);
+            padding: 8px 0;
+            font-size: 0.85rem;
+            border-bottom: 2px solid var(--royal-blue);
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ticker-badge {
+            background: var(--accent-red);
+            color: #fff;
+            padding: 2px 10px;
+            font-weight: 800;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            animation: pulse-red 2s infinite;
+        }
+
+        .ticker-content {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .ticker-content:hover {
+            text-decoration: underline;
+            color: #60a5fa;
+        }
+
+        /* ==========================================
+           MAIN HEADER & NAVIGATION
+           ========================================== */
+        .main-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            transition: var(--transition-smooth);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
         }
 
-        .header-top {
+        .header-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            border-bottom: 1px solid var(--border);
+            justify-content: space-between;
+            height: 75px;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--text);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: var(--primary-navy);
+            animation: logoIntro 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .logo span {
-            color: var(--primary-red);
+            color: var(--accent-red);
         }
 
-        .header-actions {
+        .nav-menu {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-        }
-
-        .lang-selector {
-            background: var(--bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-            transition: var(--transition-smooth);
-        }
-
-        .lang-selector:focus {
-            border-color: var(--primary-red);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .theme-toggle:hover {
-            color: var(--primary-red);
-            transform: scale(1.1);
-        }
-
-        /* Nav menu */
-        nav {
-            background: var(--card);
-            padding: 0 5%;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
+            gap: 25px;
             list-style: none;
         }
 
-        .nav-links li a {
-            display: inline-block;
-            padding: 1.2rem 1.5rem;
+        .nav-link {
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition-smooth);
+            font-size: 0.95rem;
+            color: var(--primary-blue);
+            transition: var(--transition);
+            position: relative;
         }
 
-        .nav-links li a:hover, .nav-links li a.active {
-            color: var(--primary-red);
-            border-bottom-color: var(--primary-red);
-            background: rgba(225, 29, 72, 0.04);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-red);
+            transition: var(--transition);
+            border-radius: 2px;
         }
 
-        /* Container View System */
-        .view-section {
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-red);
+        }
+
+        .lang-selector {
+            position: relative;
+        }
+
+        .lang-select-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            transition: var(--transition);
+        }
+
+        .lang-select-btn:hover {
+            border-color: var(--royal-blue);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            min-width: 150px;
             display: none;
-            padding: 2rem 5%;
-            animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            overflow: hidden;
+            z-index: 1001;
         }
 
-        .view-section.active {
+        .lang-dropdown.show {
             display: block;
+            animation: fadeInUp 0.2s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 600;
+
         }
 
-        /* --- HERO BANNER & CAROUSEL --- */
+        .lang-option:hover {
+            background: var(--bg-main);
+            color: var(--royal-blue);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-navy);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+        .hero-section {
+            position: relative;
+            padding: 90px 0 70px 0;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(255, 32, 78, 0.08), transparent 40%);
+            overflow: hidden;
+        }
+
         .hero-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
         }
 
-        @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; }
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--primary-navy);
         }
 
-        .main-carousel {
+        .hero-title span {
+            background: linear-gradient(135deg, var(--royal-blue), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--royal-blue), #1d4ed8);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--primary-navy);
+            border: 2px solid var(--border-color);
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--royal-blue);
+            color: var(--royal-blue);
+            transform: translateY(-2px);
+        }
+
+        .hero-media {
             position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            height: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .carousel-slide {
+        .hero-media-card {
+            width: 100%;
+            height: 380px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .hero-media-card img {
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .carousel-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 10%, rgba(15, 23, 42, 0.4) 60%, transparent 100%);
-        }
-
-        .carousel-content {
-            position: relative;
-            z-index: 2;
-            padding: 3rem;
-            color: #F8FAFC !important;
-        }
-
-        .badge {
-            background: var(--primary-red);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-        }
-
-        .carousel-content h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .mini-trending-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 1.2rem;
-            border: 1px solid var(--border);
-            display: flex;
-            gap: 1rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .mini-trending-card:hover {
-            transform: translateX(-5px);
-            border-color: var(--primary-red);
-        }
-
-        .mini-trending-card img {
-            width: 90px;
-            height: 90px;
             object-fit: cover;
-            border-radius: 8px;
+            transition: transform 0.8s ease;
         }
 
-        /* --- SPORTS SECTIONAL BLOCKS --- */
+        .hero-media-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-media-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(11, 25, 44, 0.95), transparent);
+            color: #fff;
+        }
+
+        /* ==========================================
+           FEATURED SLIDER CAROUSEL
+           ========================================== */
+        .featured-section {
+            padding: 50px 0;
+        }
+
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--primary-red);
-            padding-left: 1rem;
+            align-items: flex-end;
+            margin-bottom: 30px;
         }
 
-        .section-header h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
+        .section-title {
+            font-size: 2rem;
+            position: relative;
+            padding-left: 15px;
         }
 
-        .view-all-btn {
-            color: var(--primary-red);
-            font-weight: 600;
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 5px;
+            background: var(--accent-red);
+            border-radius: 4px;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            height: 450px;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 30px;
+            background: linear-gradient(to top, rgba(11, 25, 44, 0.95), rgba(11, 25, 44, 0.2), transparent);
+            color: #fff;
+        }
+
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            transition: var(--transition-smooth);
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+            transition: var(--transition);
+            z-index: 10;
         }
 
-        .view-all-btn:hover {
-            transform: translateX(5px);
+        .carousel-nav-btn:hover {
+            background: #fff;
+            color: var(--accent-red);
+            box-shadow: var(--shadow-sm);
         }
 
-        .news-grid {
+        .carousel-prev { left: 20px; }
+        .carousel-next { right: 20px; }
+
+        /* ==========================================
+           SPORTS CATEGORIES GRID
+           ========================================== */
+        .categories-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .sport-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 25px 15px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--royal-blue);
+            box-shadow: var(--shadow-md);
+            background: #fff;
+        }
+
+        .sport-icon {
+            font-size: 2.2rem;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--royal-blue);
+            transition: var(--transition);
+        }
+
+        .sport-card:hover .sport-icon {
+            background: var(--royal-blue);
+            color: #fff;
+        }
+
+        .sport-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        /* ==========================================
+           MAIN DYNAMIC NEWS SECTION
+           ========================================== */
+        .news-section {
+            padding: 70px 0;
+        }
+
+        .news-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 35px;
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            max-width: 100%;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--bg-main);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--royal-blue);
+            color: #fff;
+        }
+
+        .search-box input {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            font-size: 0.9rem;
+            width: 220px;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--royal-blue);
+            width: 260px;
+        }
+
+        .news-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            gap: 30px;
         }
 
-        /* PREMIUM NEWS CARD */
         .news-card {
-            background: var(--card);
-            border-radius: 16px;
+            background: #fff;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            border: 1px solid var(--border);
-            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .news-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(225, 29, 72, 0.1);
-            border-color: var(--primary-red);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(37, 99, 235, 0.4);
         }
 
-        .card-img-wrapper {
-            position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        .news-card-img-wrap {
+            height: 200px;
+            width: 100%;
             overflow: hidden;
+            position: relative;
         }
 
-        .card-img-wrapper img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        .news-card-img-wrap img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transition: var(--transition-smooth);
+            transition: transform 0.5s ease;
         }
 
-        .news-card:hover .card-img-wrapper img {
+        .news-card:hover .news-card-img-wrap img {
             transform: scale(1.08);
         }
 
-        .card-body {
-            padding: 1.5rem;
+        .news-card-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--royal-blue);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .news-card-body {
+            padding: 20px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 1rem;
+        .news-card-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .news-card-title {
+            font-size: 1.1rem;
+            line-height: 1.35;
+            margin-bottom: 12px;
+            color: var(--primary-navy);
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            transition: var(--transition-smooth);
         }
 
-        .news-card:hover .card-title {
-            color: var(--primary-red);
-        }
-
-        .card-excerpt {
-            font-size: 0.95rem;
+        .news-card-desc {
+            font-size: 0.9rem;
             color: var(--text-muted);
+            margin-bottom: 15px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
-        .card-footer {
-            margin-top: auto;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
+        .news-card-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--royal-blue);
         }
 
-        /* --- ARTICLE INDIVIDUAL VIEW --- */
-        .article-container {
-            max-width: 900px;
-            margin: 0 auto;
+        /* Tag Cloud */
+        .tag-cloud-section {
+            margin-top: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
         }
 
-        .article-hero {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        .article-hero img {
-            width: 100%;
-            max-height: 550px;
-            object-fit: cover;
-        }
-
-        .article-meta {
+        .tag-cloud {
             display: flex;
-            gap: 1.5rem;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .tag-item {
+            background: var(--bg-main);
             color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .article-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 2rem;
+        .tag-item:hover {
+            background: var(--accent-orange);
+            color: #fff;
         }
 
-        .article-content {
+        /* ==========================================
+           FULL ARTICLE MODAL & READER VIEW
+           ========================================== */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 25, 44, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .article-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-close-btn {
+            position: sticky;
+            top: 20px;
+            right: 20px;
+            float: right;
+            background: var(--primary-navy);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             font-size: 1.2rem;
-            line-height: 1.8;
-            color: var(--text);
-            text-align: justify;
+            cursor: pointer;
+            z-index: 100;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .article-content p {
-            margin-bottom: 1.5rem;
+        .modal-close-btn:hover {
+            background: var(--accent-red);
+            transform: rotate(90deg);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: var(--card);
-            border-top: 2px solid var(--border);
-            padding: 3rem 5%;
-            text-align: center;
-            margin-top: 5rem;
+        .modal-content-inner {
+            padding: 40px;
+        }
+
+        .article-category-badge {
+            display: inline-block;
+            background: var(--royal-blue);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .article-full-title {
+            font-size: 2rem;
+            line-height: 1.25;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+        .article-meta-bar {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        footer span {
-            color: var(--primary-red);
+        .article-main-img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 25px;
+        }
+
+        .article-body-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            white-space: pre-line;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* ==========================================
+           ABOUT & FOOTER SECTIONS
+           ========================================== */
+        .about-section {
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
+            color: #fff;
+            padding: 80px 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .site-footer {
+            background: #070f1e;
+            color: #94a3b8;
+            padding: 60px 0 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand p {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-title {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--royal-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================
+           COOKIE BANNER & PRIVACY POLICY MODAL
+           ========================================== */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 500px;
+            background: var(--bg-glass-dark);
+            color: #fff;
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .cookie-banner p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* ==========================================
+           ANIMATIONS & RESPONSIVE DESIGN
+           ========================================== */
+        @keyframes logoIntro {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 32, 78, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 32, 78, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 32, 78, 0); }
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 25px;
+                box-shadow: var(--shadow-md);
+                display: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
         }
     </style>
 </head>
-<body class="theme-dark">
+<body>
 
-    <!-- HEADER NAVIGATION SYSTEM -->
-    <header>
-        <div class="header-top">
-            <div class="logo" onclick="window.location.hash = ''">
-                <i class="fa-solid degrad-icon fa-bolt"></i> SPORTSWORLD <span>BG</span>
-            </div>
-            <div class="header-actions">
-                <select class="lang-selector" id="langSelect" onchange="App.changeLanguage(this.value)">
-                    <option value="bg">Български (BG)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="es">Español (ES)</option>
-                    <option value="fr">Français (FR)</option>
-                    <option value="it">Italiano (IT)</option>
-                    <option value="pt">Português (PT)</option>
-                    <option value="de">Deutsch (DE)</option>
-                    <option value="ru">Русский (RU)</option>
-                </select>
-                <button class="theme-toggle" onclick="App.toggleTheme()">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
-                </button>
+ 
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                 SportsWorld<span>1</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#" class="nav-link active" id="nav-home">Начало</a></li>
+                    <li><a href="#news" class="nav-link" id="nav-news">Новини</a></li>
+                    <li><a href="#categories" class="nav-link" id="nav-sports">Спортове</a></li>
+                    <li><a href="#about" class="nav-link" id="nav-about">За нас</a></li>
+                    <li><a href="#footer" class="nav-link" id="nav-contact">Контакти</a></li>
+                </ul>
+            </nav>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="lang-selector">
+                    <button class="lang-select-btn" onclick="toggleLangDropdown()">
+                        🌐 <span id="current-lang-code">BG</span>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" onclick="changeLanguage('bg')">🇧🇬 Български</div>
+                        <div class="lang-option" onclick="changeLanguage('en')">🇬🇧 English</div>
+                        <div class="lang-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+                        <div class="lang-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+                        <div class="lang-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+                        <div class="lang-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+                        <div class="lang-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('ru')">🇷🇺 Русский</div>
+                    </div>
+                </div>
+
+                <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </div>
-        <nav>
-            <ul class="nav-links" id="navLinks">
-                <!-- Dynamically populated via code -->
-            </ul>
-        </nav>
     </header>
 
-    <!-- MAIN VIEW CONTAINER -->
-    <main id="appContent">
-        
-        <!-- HOMEPAGE VIEW -->
-        <section id="view-home" class="view-section">
-            <div class="hero-grid">
-                <!-- Large Highlight Hero Carousel Item -->
-                <div class="main-carousel" id="featuredHero" onclick="">
-                    <!-- Loaded dynamically -->
-                </div>
-                <!-- Mini Trending Stack -->
-                <div class="hero-sidebar" id="trendingStack">
-                    <!-- Loaded dynamically -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1 class="hero-title" id="hero-title-text">
+                    SportsWorld 1 – <span>Всички спортове</span> на едно място
+                </h1>
+                <p class="hero-subtitle" id="hero-sub-text">
+                    Вашият водещ източник за най-актуалните спортни новини, анализи и репортажи от световните и българските терени.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#news" class="btn-primary" id="btn-latest">Последни Новини</a>
+                    <a href="#categories" class="btn-secondary" id="btn-choose-sport">Изберете Спорт</a>
                 </div>
             </div>
-            
-            <div id="homeSportSections">
-                <!-- Native sections for every sport auto-rendered here -->
+            <div class="hero-media">
+                <div class="hero-media-card" onclick="openArticle(2034)">
+                    <img src="https://i.pinimg.com/736x/98/d3/f7/98d3f7bb7570716f300c7a011554ce5c.jpg" alt="Featured News Image">
+                    <div class="hero-media-overlay">
+                        <span style="background: var(--accent-red); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800;">ПЪРВА ЛИГА</span>
+                        <h3 style="color: #fff; font-size: 1.2rem; margin-top: 8px;" id="hero-card-headline">
+                          Страсбург приема Ланс на Стад дьо ла Мено в ранен и показателен сблъсък между два тима в преход в Лига 1
+                        </h3>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SPORTS CATEGORY VIEW -->
-        <section id="view-category" class="view-section">
+    <section class="featured-section container">
+        <div class="section-header">
+            <h2 class="section-title" id="sec-top-stories">Топ Сюжети</h2>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-nav-btn carousel-prev" onclick="moveCarousel(-1)">❮</button>
+            <button class="carousel-nav-btn carousel-next" onclick="moveCarousel(1)">❯</button>
+
+            <div class="carousel-track" id="carousel-track">
+                </div>
+        </div>
+    </section>
+
+    <section class="categories-section" id="categories">
+        <div class="container">
             <div class="section-header">
-                <h2 id="categoryViewTitle">Category Name</h2>
+                <h2 class="section-title" id="sec-categories">Спортни Категории</h2>
             </div>
-            <div class="news-grid" id="categoryNewsGrid">
-                <!-- Category Specific Feed Items -->
-            </div>
-        </section>
 
-        <!-- SINGLE ARTICLE DISPLAY ENGINE -->
-        <section id="view-article" class="view-section">
-            <div class="article-container" id="articleViewer">
-                <!-- Populated natively on call -->
-            </div>
-        </section>
-        
-    </main>
+            <div class="sports-grid" id="sports-grid">
+                </div>
+        </div>
+    </section>
 
-    <!-- GLOBAL FOOTER -->
-    <footer>
-        <p>&copy; 2026 SPORTSWORLD <span>BG</span>. Всички права запазени. | Premium Multilingual Architecture Engine.</p>
+    <section class="news-section container" id="news">
+        <div class="section-header">
+            <h2 class="section-title" id="sec-news-header">Всички Новини</h2>
+        </div>
+
+        <div class="news-filter-bar">
+            <div class="filter-buttons" id="filter-buttons">
+                </div>
+            
+        </div>
+
+        <div class="news-cards-grid" id="news-grid">
+            </div>
+
+       
+
+    <section class="about-section" id="about">
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2 id="about-title">За SportsWorld BG</h2>
+                <p id="about-desc">
+                    SportsWorld BG е иновативна спортна медийна платформа, предназначена да предоставя бързи, надеждни и качествени спортни анализи. Нашата мисия е да обединим феновете на всички видове спортове с детайлни репортажи в реално време.
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">12+</div>
+                    <div style="font-size: 0.85rem;" id="stat-sports">Вида Спорт</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div style="font-size: 0.85rem;" id="stat-coverage">Отразяване</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer" id="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo" style="color:#fff;">⚡ SportsWorld<span style="color:var(--accent-red);">BG</span></div>
+                <p id="footer-mission">Всички спортни новини на едно място. Професионализъм, динамика и обективност.</p>
+            </div>
+            <div>
+                <h4 class="footer-title" id="footer-quick-links">Бързи връзки</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Начало</a></li>
+                    <li><a href="#news">Новини</a></li>
+                    <li><a href="#categories">Категории</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title" id="footer-legal">Правна информация</h4>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" onclick="openPrivacyModal()">Политика за поверителност</a></li>
+                    <li><a href="javascript:void(0)" onclick="openCookieModal()">Бисквитки (Cookies)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title" id="footer-socials">Социални мрежи</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.facebook.com/profile.php?id=61583966417649">Facebook</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div>© 2026 SportsWorld BG. Всички права запазени.</div>
+            <div style="color: #64748b;">Designed with precision without pure black</div>
+        </div>
     </footer>
-    
 
-    <!-- RUNTIME PLATFORM SCRIPT -->
+    <div class="modal-backdrop" id="article-modal">
+        <div class="article-modal">
+            <button class="modal-close-btn" onclick="closeArticleModal()">✕</button>
+            <div class="modal-content-inner" id="modal-article-body">
+                </div>
+        </div>
+    </div>
+
+    <div class="cookie-banner" id="cookie-banner">
+        <p id="cookie-text">
+            Ние използваме бисквитки (cookies), за да гарантираме най-доброто изживяване на нашия уебсайт.
+        </p>
+        <div class="cookie-actions">
+            <button class="btn-primary btn-sm" onclick="acceptCookies()" id="btn-accept-cookies">Приемам</button>
+        </div>
+    </div>
+
     <script>
-        /* --- INTEGRATED MULTILINGUAL SPORTS DATA REPOSITORY --- */
+        /* UI TRANSLATION DICTIONARY FOR 8 LANGUAGES */
+        const uiTranslations = {
+            bg: {
+                breaking: "ПОСЛЕДНО",
+                navHome: "Начало",
+                navNews: "Новини",
+                navSports: "Спортове",
+                navAbout: "За нас",
+                navContact: "Контакти",
+                heroTitle: "SportsWorld BG – <span>Всички спортове</span> на едно място",
+                heroSub: "Вашият водещ източник за най-актуалните спортни новини, анализи и репортажи от световните и българските терени.",
+                btnLatest: "Последни Новини",
+                btnChooseSport: "Изберете Спорт",
+                secTopStories: "Топ Сюжети",
+                secCategories: "Спортни Категории",
+                secNewsHeader: "Всички Новини",
+                allSports: "Всички",
+                readMore: "Прочети още →",
+                popularTags: "ПОПУЛЯРНИ ТЕГИ:",
+                aboutTitle: "За SportsWorld BG",
+                aboutDesc: "SportsWorld BG е иновативна спортна медийна платформа, предназначена да предоставя бързи, надеждни и качествени спортни анализи.",
+                statSports: "Вида Спорт",
+                statCoverage: "Отразяване",
+                footerMission: "Всички спортни новини на едно място. Професионализъм, динамика и обективност.",
+                footerQuickLinks: "Бързи връзки",
+                footerLegal: "Правна информация",
+                footerSocials: "Социални мрежи",
+                cookieText: "Ние използваме бисквитки (cookies), за да гарантираме най-доброто изживяване на нашия уебсайт.",
+                accept: "Приемам"
+            },
+            en: {
+                breaking: "BREAKING",
+                navHome: "Home",
+                navNews: "News",
+                navSports: "Sports",
+                navAbout: "About Us",
+                navContact: "Contact",
+                heroTitle: "SportsWorld BG – <span>All Sports</span> in One Place",
+                heroSub: "Your leading source for the latest sports news, structural analysis, and coverage from global and Bulgarian arenas.",
+                btnLatest: "Latest News",
+                btnChooseSport: "Choose Sport",
+                secTopStories: "Top Stories",
+                secCategories: "Sports Categories",
+                secNewsHeader: "All News",
+                allSports: "All",
+                readMore: "Read More →",
+                popularTags: "POPULAR TAGS:",
+                aboutTitle: "About SportsWorld BG",
+                aboutDesc: "SportsWorld BG is an innovative sports media platform providing reliable, fast, and high-quality coverage.",
+                statSports: "Sports Covered",
+                statCoverage: "Coverage",
+                footerMission: "All sports news in one place. Professionalism, dynamic pace, and objectivity.",
+                footerQuickLinks: "Quick Links",
+                footerLegal: "Legal",
+                footerSocials: "Social Media",
+                cookieText: "We use cookies to ensure you get the best experience on our website.",
+                accept: "Accept"
+            },
+            es: {
+                breaking: "ÚLTIMA HORA",
+                navHome: "Inicio",
+                navNews: "Noticias",
+                navSports: "Deportes",
+                navAbout: "Nosotros",
+                navContact: "Contacto",
+                heroTitle: "SportsWorld BG – <span>Todos los deportes</span> en un solo lugar",
+                heroSub: "Su fuente principal de noticias deportivas, análisis y cobertura en vivo.",
+                btnLatest: "Últimas Noticias",
+                btnChooseSport: "Elegir Deporte",
+                secTopStories: "Historias Destacadas",
+                secCategories: "Categorías Deportivas",
+                secNewsHeader: "Todas las Noticias",
+                allSports: "Todos",
+                readMore: "Leer Más →",
+                popularTags: "ETIQUETAS POPULARES:",
+                aboutTitle: "Sobre SportsWorld BG",
+                aboutDesc: "Plataforma deportiva innovadora para ofrecer análisis rápidos y fiables.",
+                statSports: "Deportes",
+                statCoverage: "Cobertura",
+                footerMission: "Todas las noticias deportivas en un solo lugar.",
+                footerQuickLinks: "Enlaces Rápidos",
+                footerLegal: "Legal",
+                footerSocials: "Redes Sociales",
+                cookieText: "Utilizamos cookies para garantizar la mejor experiencia.",
+                accept: "Aceptar"
+            },
+            fr: {
+                breaking: "EN DIRECT",
+                navHome: "Accueil",
+                navNews: "Actualités",
+                navSports: "Sports",
+                navAbout: "À propos",
+                navContact: "Contact",
+                heroTitle: "SportsWorld BG – <span>Tous les sports</span> en un seul endroit",
+                heroSub: "Votre source numéro un pour les dernières nouvelles et analyses sportives.",
+                btnLatest: "Dernières Infos",
+                btnChooseSport: "Choisir un Sport",
+                secTopStories: "À la Une",
+                secCategories: "Catégories Sportives",
+                secNewsHeader: "Toutes les Actualités",
+                allSports: "Tous",
+                readMore: "Lire la suite →",
+                popularTags: "TAGS POPULAIRES:",
+                aboutTitle: "À propos de SportsWorld BG",
+                aboutDesc: "Plateforme média sportive innovante offrant des rapports précis en temps réel.",
+                statSports: "Disciplines",
+                statCoverage: "Couverture",
+                footerMission: "Toute l'actualité sportive réunie sur une seule plateforme.",
+                footerQuickLinks: "Liens Rapides",
+                footerLegal: "Mentions Légales",
+                footerSocials: "Réseaux Sociaux",
+                cookieText: "Nous utilisons des cookies pour vous offrir la meilleure expérience.",
+                accept: "Accepter"
+            },
+            it: {
+                breaking: "ULTIMA ORA",
+                navHome: "Home",
+                navNews: "Notizie",
+                navSports: "Sport",
+                navAbout: "Chi Siamo",
+                navContact: "Contatti",
+                heroTitle: "SportsWorld BG – <span>Tutti gli sport</span> in un unico posto",
+                heroSub: "La tua fonte principale per le ultime notizie e analisi sportive.",
+                btnLatest: "Ultime Notizie",
+                btnChooseSport: "Scegli Sport",
+                secTopStories: "Storie In Evidenza",
+                secCategories: "Categorie Sportive",
+                secNewsHeader: "Tutte le Notizie",
+                allSports: "Tutti",
+                readMore: "Leggi Tutto →",
+                popularTags: "TAG POPOLARI:",
+                aboutTitle: "Su SportsWorld BG",
+                aboutDesc: "Piattaforma sportiva innovativa che offre analisi veloci e affidabili.",
+                statSports: "Discipline",
+                statCoverage: "Copertura",
+                footerMission: "Tutte le notizie sportive in un unico luogo.",
+                footerQuickLinks: "Link Rapidi",
+                footerLegal: "Note Legali",
+                footerSocials: "Social Media",
+                cookieText: "Utilizziamo i cookie per offrire la migliore esperienza sul sito.",
+                accept: "Accetta"
+            },
+            pt: {
+                breaking: "ÚLTIMA HORA",
+                navHome: "Início",
+                navNews: "Notícias",
+                navSports: "Esportes",
+                navAbout: "Sobre Nós",
+                navContact: "Contato",
+                heroTitle: "SportsWorld BG – <span>Todos os esportes</span> num só lugar",
+                heroSub: "Sua principal fonte de notícias e análises esportivas atualizadas.",
+                btnLatest: "Últimas Notícias",
+                btnChooseSport: "Escolher Esporte",
+                secTopStories: "Destaques",
+                secCategories: "Categorias Esportivas",
+                secNewsHeader: "Todas as Notícias",
+                allSports: "Todos",
+                readMore: "Ler Mais →",
+                popularTags: "TAGS POPULARES:",
+                aboutTitle: "Sobre SportsWorld BG",
+                aboutDesc: "Plataforma inovadora focada em análises e relatórios esportivos de alto nível.",
+                statSports: "Esportes",
+                statCoverage: "Cobertura",
+                footerMission: "Todas as notícias esportivas reunidas num só espaço.",
+                footerQuickLinks: "Links Rápidos",
+                footerLegal: "Legal",
+                footerSocials: "Redes Sociais",
+                cookieText: "Usamos cookies para garantir a melhor experiência em nosso site.",
+                accept: "Aceitar"
+            },
+            de: {
+                breaking: "EILMELDUNG",
+                navHome: "Startseite",
+                navNews: "News",
+                navSports: "Sportarten",
+                navAbout: "Über Uns",
+                navContact: "Kontakt",
+                heroTitle: "SportsWorld BG – <span>Alle Sportarten</span> an einem Ort",
+                heroSub: "Ihre führende Quelle für aktuelle Sportnachrichten, Analysen und Spielberichte.",
+                btnLatest: "Neueste News",
+                btnChooseSport: "Sportart Wählen",
+                secTopStories: "Top-Themen",
+                secCategories: "Sportkategorien",
+                secNewsHeader: "Alle Nachrichten",
+                allSports: "Alle",
+                readMore: "Mehr lesen →",
+                popularTags: "BELIEBTE TAGS:",
+                aboutTitle: "Über SportsWorld BG",
+                aboutDesc: "Innovatives Sportmedienportal für schnelle und zuverlässige Berichterstattung.",
+                statSports: "Sportarten",
+                statCoverage: "Abdeckung",
+                footerMission: "Alle Sportnachrichten an einem Ort. Professionell und dynamisch.",
+                footerQuickLinks: "Direktlinks",
+                footerLegal: "Rechtliches",
+                footerSocials: "Social Media",
+                cookieText: "Wir verwenden Cookies, um Ihnen das beste Erlebnis zu bieten.",
+                accept: "Akzeptieren"
+            },
+            ru: {
+                breaking: "ПОСЛЕДНИЕ",
+                navHome: "Главная",
+                navNews: "Новости",
+                navSports: "Спорт",
+                navAbout: "О нас",
+                navContact: "Контакты",
+                heroTitle: "SportsWorld BG – <span>Весь спорт</span> в одном месте",
+                heroSub: "Ваш главный источник свежих спортивных новостей, аналитики и репортажей.",
+                btnLatest: "Свежие Новости",
+                btnChooseSport: "Выбрать Спорт",
+                secTopStories: "Главные Сюжеты",
+                secCategories: "Спортивные Категории",
+                secNewsHeader: "Все Новости",
+                allSports: "Все",
+                readMore: "Читать далее →",
+                popularTags: "ПОПУЛЯРНЫЕ ТЕГИ:",
+                aboutTitle: "О SportsWorld BG",
+                aboutDesc: "Инновационная спортивная медиа-платформа для оперативной аналитики.",
+                statSports: "Видов Спорта",
+                statCoverage: "Освещение",
+                footerMission: "Все спортивные новости в одном месте. Профессионализм и объективность.",
+                footerQuickLinks: "Быстрые Ссылки",
+                footerLegal: "Информация",
+                footerSocials: "Соцсети",
+                cookieText: "Мы используем cookies для обеспечения лучшего опыта на сайте.",
+                accept: "Принять"
+            }
+        };
+          
+
+
+
+
+
+        /* SPORTS DATABASE INCLUDING EXACT USER JSON OBJECT */
         const sportsDB = {
-            football: {
+                football: {
+                    icon: "⚽",
  
                     
                 title: { bg: "Футбол", en: "Football", es: "Fútbol", it: "Calcio", pt: "Futebol", de: "Fußball", ru: "Футбол",  "fr": "Football" },
@@ -708,7 +1611,7 @@
   },
   "img": "https://i.pinimg.com/736x/dd/6a/da/dd6adacf992b7cb4218dec0bf44cd4e2.jpg"
 },
-                  {
+           {
   "id": 2034,
   "title": {
     "bg": "Лил посреща ПСЖ в ранен сблъсък от втория кръг на Лига 1 на Декатлон Арена – Пиер Мороа",
@@ -3511,6 +4414,7 @@
                 ]
             },
             f1: {
+                icon: "🏎️",
                 title: { bg: "Формула 1", en: "Formula 1", es: "F1", it: "F1", pt: "F1", de: "Formel 1", ru: "Формула 1", "fr": "Formule 1"  },
                 standings: [
                 ],
@@ -4754,6 +5658,7 @@
 
             
   "motorsport": {
+    icon: "🚗",
     "title": {
       "bg": "Моторни спортове",
       "en": "Motorsport",
@@ -5141,10 +6046,12 @@
             },
 
             basketball: {
+                icon: "🏀",
                 title: { bg: "NBA Баскетбол", en: "NBA Basketball", es: "NBA", it: "NBA", pt: "NBA", de: "NBA Basketball", ru: "НБА Баскетбол", "fr": "NBA Basketball" },
                
 
                 news: [
+                    
                
                   {
   "id": 2034,
@@ -5663,6 +6570,7 @@
                 ]
             },
             tennis: {
+                icon: "🎾",
   title: { bg: "Тенис", en: "Tennis",es: "Tenis",it: "Tennis",pt: "Ténis", de: "Tennis",ru: "Теннис", "fr": "Tennis"},
   standings: [
 
@@ -6758,6 +7666,7 @@
 
 
 motogp: {
+    icon: "🏍️",
   title: {
     bg: "MotoGP",
     en: "MotoGP",
@@ -8274,6 +9183,7 @@ motogp: {
 
 
 combat: {
+    icon: "🥊",
   title: {
     bg: "Бокс / MMA",
     en: "Boxing / MMA",
@@ -9514,6 +10424,7 @@ combat: {
 
 
 wrc: {
+    icon: "🚗",
    title: {
     bg: "WRC",
     en: "WRC",
@@ -10109,6 +11020,7 @@ weightlifting: {
         ]
 },
 weightlifting: {
+    icon: "🏋️",
         title: { 
             bg: "Вдигане на тежести", 
             en: "Weightlifting", 
@@ -10444,6 +11356,7 @@ weightlifting: {
   
   
 nfl: {
+    icon: "🏈",
    title: {
     bg: "НФЛ",
     en: "NFL",
@@ -10816,6 +11729,7 @@ nfl: {
   ]
 },
 nhl: {
+    icon: "🏒",
    title: {
     bg: "НХЛ",
     en: "NHL",
@@ -11224,245 +12138,300 @@ nhl: {
 ]
 
 },
-
-
         };
 
-        /* --- THE CORE ROUTING ENGINE & CONTROLLER --- */
-        const App = {
-            lang: 'bg',
-            theme: 'dark',
+        /* STATE MANAGEMENT */
+        let currentLang = 'bg';
+        let activeCategoryFilter = 'all';
+        let searchQuery = '';
+        let carouselIndex = 0;
 
-            init: function() {
-                this.renderNavigation();
-                
-                // Track dynamic route changes without reloading pages
-                window.addEventListener('hashchange', () => this.route());
-                this.route();
-            },
+        /* INITIALIZATION */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCategoriesGrid();
+            renderFilterButtons();
+            renderNewsCards();
+            renderCarousel();
+            updateUIStrings();
+            handleHashRouting();
+        });
 
-            toggleTheme: function() {
-                this.theme = this.theme === 'dark' ? 'light' : 'dark';
-                document.body.className = `theme-${this.theme}`;
-                document.getElementById('themeIcon').className = this.theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            },
+        window.addEventListener('hashchange', handleHashRouting);
 
-            changeLanguage: function(newLang) {
-                this.lang = newLang;
-                document.documentElement.lang = newLang;
-                this.renderNavigation();
-                this.route(); // Trigger dynamic data re-render in the targeted view instantly
-            },
+        /* LANGUAGE SWITCHING LOGIC */
+        function toggleLangDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('show');
+        }
 
-            // Safely extracts specific object translations falling back smoothly
-            getTranslation: function(fieldObj) {
-                if (!fieldObj) return "";
-                return fieldObj[this.lang] || fieldObj['en'] || fieldObj['bg'] || "";
-            },
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('current-lang-code').innerText = lang.toUpperCase();
+            document.getElementById('lang-dropdown').classList.remove('show');
+            
+            updateUIStrings();
+            renderCategoriesGrid();
+            renderFilterButtons();
+            renderNewsCards();
+            renderCarousel();
+        }
 
-            renderNavigation: function() {
-                const navLinks = document.getElementById('navLinks');
-                let html = `<li><a href="#" class="${!window.location.hash ? 'active' : ''}"><i class="fa-solid fa-house"></i></a></li>`;
-                
-                for (const [key, category] of Object.entries(sportsDB)) {
-                    const currentHash = window.location.hash;
-                    const isActive = currentHash === `#category/${key}` ? 'active' : '';
-                    html += `<li><a href="#category/${key}" class="${isActive}">${this.getTranslation(category.title)}</a></li>`;
+        function updateUIStrings() {
+            const t = uiTranslations[currentLang] || uiTranslations['bg'];
+            document.getElementById('lbl-breaking').innerText = t.breaking;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-news').innerText = t.navNews;
+            document.getElementById('nav-sports').innerText = t.navSports;
+            document.getElementById('nav-about').innerText = t.navAbout;
+            document.getElementById('nav-contact').innerText = t.navContact;
+            
+            document.getElementById('hero-title-text').innerHTML = t.heroTitle;
+            document.getElementById('hero-sub-text').innerText = t.heroSub;
+            document.getElementById('btn-latest').innerText = t.btnLatest;
+            document.getElementById('btn-choose-sport').innerText = t.btnChooseSport;
+            
+            document.getElementById('sec-top-stories').innerText = t.secTopStories;
+            document.getElementById('sec-categories').innerText = t.secCategories;
+            document.getElementById('sec-news-header').innerText = t.secNewsHeader;
+            
+            document.getElementById('lbl-popular-tags').innerText = t.popularTags;
+            document.getElementById('about-title').innerText = t.aboutTitle;
+            document.getElementById('about-desc').innerText = t.aboutDesc;
+            document.getElementById('stat-sports').innerText = t.statSports;
+            document.getElementById('stat-coverage').innerText = t.statCoverage;
+            
+            document.getElementById('footer-mission').innerText = t.footerMission;
+            document.getElementById('footer-quick-links').innerText = t.footerQuickLinks;
+            document.getElementById('footer-legal').innerText = t.footerLegal;
+            document.getElementById('footer-socials').innerText = t.footerSocials;
+            document.getElementById('cookie-text').innerText = t.cookieText;
+            document.getElementById('btn-accept-cookies').innerText = t.accept;
+        }
+
+        /* HASH ROUTING SYSTEM (#category/football or #article/2034) */
+        function handleHashRouting() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#category/')) {
+                const cat = hash.replace('#category/', '');
+                if (sportsDB[cat]) {
+                    filterByCategory(cat);
+                    document.getElementById('news').scrollIntoView({ behavior: 'smooth' });
                 }
-                navLinks.innerHTML = html;
-            },
-
-            route: function() {
-                const hash = window.location.hash;
-                
-                // Reset styling positions across dynamic routing switches
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-                
-                // Parse dynamic semantic URLs without requiring unique ID indexing counters
-                if (!hash || hash === '#') {
-                    this.renderHomePage();
-                    document.getElementById('view-home').classList.add('active');
-                } else if (hash.startsWith('#category/')) {
-                    const categoryKey = hash.split('/')[1];
-                    this.renderCategoryPage(categoryKey);
-                    document.getElementById('view-category').classList.add('active');
-                } else if (hash.startsWith('#article/')) {
-                    // Syntax format parsed: #article/categoryKey/indexLocation
-                    const parts = hash.split('/');
-                    const categoryKey = parts[1];
-                    const index = parseInt(parts[2]);
-                    this.renderArticlePage(categoryKey, index);
-                    document.getElementById('view-article').classList.add('active');
-                }
-                this.renderNavigation();
-            },
-
-            /* --- VIEW 1: HOME PAGE BUILDER ENGINE --- */
-            renderHomePage: function() {
-                // Feature the very first item inside Football pool as Main Dynamic Hero Banner Hero
-                const heroCategory = 'football';
-                const heroArticle = sportsDB.football.news[0];
-                
-                const heroContainer = document.getElementById('featuredHero');
-                heroContainer.setAttribute('onclick', `window.location.hash = '#article/${heroCategory}/0'`);
-                heroContainer.innerHTML = `
-                    <div class="carousel-slide" style="background-image: url('${heroArticle.img}')">
-                        <div class="carousel-overlay"></div>
-                        <div class="carousel-content">
-                            <span class="badge">${this.getTranslation(sportsDB[heroCategory].title)}</span>
-                            <h2>${this.getTranslation(heroArticle.title)}</h2>
-                        </div>
-                    </div>
-                `;
-
-                // Render Sidebar Trending items stacking other unique sports
-                const trendingStack = document.getElementById('trendingStack');
-                let trendingHtml = '';
-                const categories = Object.keys(sportsDB);
-                
-                for(let i = 1; i <= 3; i++) {
-                    const catKey = categories[i % categories.length];
-                    const art = sportsDB[catKey].news[0];
-                    if(art) {
-                        trendingHtml += `
-                            <div class="mini-trending-card" onclick="window.location.hash = '#article/${catKey}/0'">
-                                <img src="${art.img}" alt="Thumb">
-                                <div>
-                                    <span class="badge" style="padding: 0.2rem 0.5rem; font-size:0.65rem;">${this.getTranslation(sportsDB[catKey].title)}</span>
-                                    <h4 style="font-size:0.95rem; font-weight:700; line-height:1.3;">${this.getTranslation(art.title)}</h4>
-                                </div>
-                            </div>
-                        `;
-                    }
-                }
-                trendingStack.innerHTML = trendingHtml;
-
-                // Render Latest exactly 3 articles for every single sports block automatically 
-                const blockContainer = document.getElementById('homeSportSections');
-                blockContainer.innerHTML = '';
-                
-                for (const [key, category] of Object.entries(sportsDB)) {
-                    // Loop up to the latest 3 items natively
-                    const slicedNews = category.news.slice(0, 3);
-                    if(slicedNews.length === 0) continue;
-
-                    let gridCardsHtml = '';
-                    slicedNews.forEach((article, idx) => {
-                        gridCardsHtml += `
-                            <div class="news-card" onclick="window.location.hash = '#article/${key}/${idx}'">
-                                <div class="card-img-wrapper">
-                                    <img src="${article.img}" alt="News Image">
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">${this.getTranslation(article.title)}</h3>
-                                    <p class="card-excerpt">${this.getTranslation(article.text)}</p>
-                                    <div class="card-footer">
-                                        <span>2026-05-26</span>
-                                        <span style="color: var(--primary-red);"><i class="fa-solid fa-arrow-right"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    blockContainer.innerHTML += `
-                        <div class="section-header">
-                            <h2>${this.getTranslation(category.title)}</h2>
-                            <a href="#category/${key}" class="view-all-btn">
-                                ${this.lang === 'bg' ? 'Виж Всички' : 'View All'} <i class="fa-solid fa-angles-right"></i>
-                            </a>
-                        </div>
-                        <div class="news-grid">
-                            ${gridCardsHtml}
-                        </div>
-                    `;
-                }
-            },
-
-            /* --- VIEW 2: INDEPENDENT SPORTS PAGES RECTOR --- */
-            renderCategoryPage: function(categoryKey) {
-                const category = sportsDB[categoryKey];
-                if (!category) return;
-
-                document.getElementById('categoryViewTitle').innerText = this.getTranslation(category.title);
-                const grid = document.getElementById('categoryNewsGrid');
-                grid.innerHTML = '';
-
-                category.news.forEach((article, idx) => {
-                    grid.innerHTML += `
-                        <div class="news-card" onclick="window.location.hash = '#article/${categoryKey}/${idx}'">
-                            <div class="card-img-wrapper">
-                                <img src="${article.img}" alt="News Image">
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title">${this.getTranslation(article.title)}</h3>
-                                <p class="card-excerpt">${this.getTranslation(article.text)}</p>
-                                <div class="card-footer">
-                                    <span>2026-05-26</span>
-                                    <span style="color: var(--primary-red);"><i class="fa-solid fa-arrow-right"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            },
-
-            /* --- VIEW 3: MULTILINGUAL ARTICLE ENGINE --- */
-            renderArticlePage: function(categoryKey, index) {
-                const category = sportsDB[categoryKey];
-                if(!category) return;
-                const article = category.news[index];
-                if(!article) return;
-
-                const viewer = document.getElementById('articleViewer');
-                viewer.innerHTML = `
-                    <div class="article-hero">
-                        <img src="${article.img}" alt="Article Hero Image">
-                    </div>
-                    <div class="article-meta">
-                        <span><i class="fa-solid fa-circle-user"></i> Editorial Team</span>
-                        <span><i class="fa-solid fa-calendar-days"></i> May 26, 2026</span>
-                        <span style="color: var(--primary-red); text-transform: uppercase;"><i class="fa-solid fa-tags"></i> ${this.getTranslation(category.title)}</span>
-                    </div>
-                    <h1 class="article-title">${this.getTranslation(article.title)}</h1>
-                    <div class="article-content">
-                        <p>${this.getTranslation(article.text)}</p>
-                    </div>
-                `;
+            } else if (hash.startsWith('#article/')) {
+                const articleId = parseInt(hash.replace('#article/', ''));
+                if (articleId) openArticle(articleId);
             }
-        };
+        }
 
-        // Fire-up application instance once HTML loads fully
-        document.addEventListener("DOMContentLoaded", () => App.init());
+        /* SPORTS CATEGORIES GRID GENERATOR */
+        function renderCategoriesGrid() {
+            const container = document.getElementById('sports-grid');
+            container.innerHTML = '';
+
+            Object.keys(sportsDB).forEach(key => {
+                const sport = sportsDB[key];
+                const title = sport.title[currentLang] || sport.title['bg'];
+                
+                const card = document.createElement('a');
+                card.href = `#category/${key}`;
+                card.className = 'sport-card';
+                card.innerHTML = `
+                    <div class="sport-icon">${sport.icon}</div>
+                    <div class="sport-title">${title}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        /* FILTER BUTTONS RENDERING */
+        function renderFilterButtons() {
+            const container = document.getElementById('filter-buttons');
+            const t = uiTranslations[currentLang] || uiTranslations['bg'];
+            
+            let html = `<button class="filter-btn ${activeCategoryFilter === 'all' ? 'active' : ''}" onclick="filterByCategory('all')">${t.allSports}</button>`;
+            
+            Object.keys(sportsDB).forEach(key => {
+                const title = sportsDB[key].title[currentLang] || sportsDB[key].title['bg'];
+                html += `<button class="filter-btn ${activeCategoryFilter === key ? 'active' : ''}" onclick="filterByCategory('${key}')">${title}</button>`;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function filterByCategory(catKey) {
+            activeCategoryFilter = catKey;
+            renderFilterButtons();
+            renderNewsCards();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.toLowerCase();
+            renderNewsCards();
+        }
+
+        function filterByTag(tag) {
+            searchQuery = tag.toLowerCase();
+            document.getElementById('search-input').value = tag;
+            renderNewsCards();
+        }
+
+        /* ALL ARTICLES HELPER */
+        function getAllArticles() {
+            let list = [];
+            Object.keys(sportsDB).forEach(catKey => {
+                const sport = sportsDB[catKey];
+                sport.news.forEach(item => {
+                    list.push({ ...item, categoryKey: catKey });
+                });
+            });
+            return list;
+        }
+
+        /* NEWS CARDS DYNAMIC RENDERER */
+        function renderNewsCards() {
+            const container = document.getElementById('news-grid');
+            container.innerHTML = '';
+            const t = uiTranslations[currentLang] || uiTranslations['bg'];
+
+            let articles = getAllArticles();
+
+            if (activeCategoryFilter !== 'all') {
+                articles = articles.filter(a => a.categoryKey === activeCategoryFilter);
+            }
+
+            if (searchQuery.trim() !== '') {
+                articles = articles.filter(a => {
+                    const title = (a.title[currentLang] || a.title['bg']).toLowerCase();
+                    const text = (a.text[currentLang] || a.text['bg']).toLowerCase();
+                    const tags = a.tags ? a.tags.join(' ').toLowerCase() : '';
+                    return title.includes(searchQuery) || text.includes(searchQuery) || tags.includes(searchQuery);
+                });
+            }
+
+            if (articles.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Няма намерени новини в тази категория.</div>`;
+                return;
+            }
+
+            articles.forEach((item, idx) => {
+                const catTitle = sportsDB[item.categoryKey].title[currentLang] || sportsDB[item.categoryKey].title['bg'];
+                const title = item.title[currentLang] || item.title['bg'];
+                const text = item.text[currentLang] || item.text['bg'];
+
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.onclick = () => openArticle(item.id);
+                card.innerHTML = `
+                    <div class="news-card-img-wrap">
+                        <img src="${item.img}" alt="${title}">
+                        <span class="news-card-category">${catTitle}</span>
+                    </div>
+                    <div class="news-card-body">
+                        <div class="news-card-date">📅 ${item.date} • ${item.author}</div>
+                        <h3 class="news-card-title">${title}</h3>
+                        <p class="news-card-desc">${text}</p>
+                        <div class="news-card-footer">
+                            <span>${t.readMore}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+
+                // Staggered Entrance Animation
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, idx * 100);
+            });
+        }
+
+        /* CAROUSEL SLIDER */
+        function renderCarousel() {
+            const track = document.getElementById('carousel-track');
+            track.innerHTML = '';
+            const articles = getAllArticles();
+
+            articles.forEach(item => {
+                const title = item.title[currentLang] || item.title['bg'];
+                const catTitle = sportsDB[item.categoryKey].title[currentLang] || sportsDB[item.categoryKey].title['bg'];
+
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.onclick = () => openArticle(item.id);
+                slide.innerHTML = `
+                    <img src="${item.img}" alt="${title}">
+                    <div class="carousel-caption">
+                        <span style="background: var(--royal-blue); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; color: #fff;">${catTitle}</span>
+                        <h2 style="color: #fff; font-size: 1.6rem; margin-top: 10px;">${title}</h2>
+                    </div>
+                `;
+                track.appendChild(slide);
+            });
+        }
+
+        function moveCarousel(direction) {
+            const track = document.getElementById('carousel-track');
+            const total = track.children.length;
+            if (total === 0) return;
+            carouselIndex = (carouselIndex + direction + total) % total;
+            track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+        }
+
+        /* ARTICLE MODAL SYSTEM */
+        function openArticle(id) {
+            const articles = getAllArticles();
+            const item = articles.find(a => a.id === id);
+            if (!item) return;
+
+            const modal = document.getElementById('article-modal');
+            const body = document.getElementById('modal-article-body');
+
+            const catTitle = sportsDB[item.categoryKey].title[currentLang] || sportsDB[item.categoryKey].title['bg'];
+            const title = item.title[currentLang] || item.title['bg'];
+            const text = item.text[currentLang] || item.text['bg'];
+
+            let tagsHtml = '';
+            if (item.tags) {
+                item.tags.forEach(t => {
+                    tagsHtml += `<span class="tag-item">#${t}</span>`;
+                });
+            }
+
+            body.innerHTML = `
+                <span class="article-category-badge">${catTitle}</span>
+                <h1 class="article-full-title">${title}</h1>
+                <div class="article-meta-bar">
+                    <span>✍️ ${item.author}</span>
+                    <span>📅 ${item.date}</span>
+                </div>
+                <img src="${item.img}" class="article-main-img" alt="${title}">
+                <div class="article-body-text">${text}</div>
+                <div class="article-tags">${tagsHtml}</div>
+            `;
+
+            modal.classList.add('open');
+            window.location.hash = `#article/${id}`;
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.remove('open');
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
+
+        /* COOKIES & PRIVACY MODALS */
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        function openPrivacyModal() {
+            alert("SportsWorld BG - Политика за поверителност: Ние пазим вашите лични данни и спазваме стриктно Общия регламент за защита на данните (GDPR).");
+        }
+
+        function openCookieModal() {
+            alert("Информация за бисквитките: Използваме бисквитки за запазване на избрания от вас език и предпочитания.");
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
     </script>
-       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1687295341904309"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-1687295341904309"
-     data-ad-slot="4673550865"></ins>
-
-
-
-
-     
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="2017b85d-aab7-4af2-9956-a1425dc8f217" data-blockingmode="auto" type="text/javascript"></script>
-
-    <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-1687295341904309">
-</amp-auto-ads>
-<script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'oe1lj9wx6a',
-    });
-</script>
-
 </body>
 </html>
