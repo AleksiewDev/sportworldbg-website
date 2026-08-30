@@ -39,9 +39,6 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ==========================================
-           RESET & GLOBAL STYLES
-           ========================================== */
         * {
             margin: 0;
             padding: 0;
@@ -85,9 +82,7 @@
             padding: 0 20px;
         }
 
-        /* ==========================================
-           MAIN HEADER & NAVIGATION
-           ========================================== */
+        /* HEADER & NAVIGATION */
         .main-header {
             position: sticky;
             top: 0;
@@ -228,9 +223,7 @@
             transition: var(--transition);
         }
 
-        /* ==========================================
-           HERO SECTION
-           ========================================== */
+        /* HERO SECTION */
         .hero-section {
             position: relative;
             padding: 90px 0 70px 0;
@@ -300,16 +293,14 @@
             font-weight: 700;
             font-size: 1rem;
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
         }
 
         .btn-secondary:hover {
             border-color: var(--royal-blue);
             color: var(--royal-blue);
             transform: translateY(-2px);
-        }
-
-        .hero-media {
-            position: relative;
         }
 
         .hero-media-card {
@@ -343,9 +334,7 @@
             color: #fff;
         }
 
-        /* ==========================================
-           FEATURED SLIDER CAROUSEL
-           ========================================== */
+        /* CAROUSEL */
         .featured-section {
             padding: 50px 0;
         }
@@ -405,7 +394,7 @@
             left: 0;
             right: 0;
             padding: 40px 30px;
-            background: linear-gradient(to top, rgba(11, 25, 44, 0.95), rgba(11, 25, 44, 0.4), transparent);
+            background: linear-gradient(to top, rgba(11, 25, 44, 0.95), rgba(11, 25, 44, 0.2), transparent);
             color: #fff;
         }
 
@@ -413,7 +402,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.8);
             border: none;
             width: 45px;
             height: 45px;
@@ -436,9 +425,7 @@
         .carousel-prev { left: 20px; }
         .carousel-next { right: 20px; }
 
-        /* ==========================================
-           SPORTS CATEGORIES GRID
-           ========================================== */
+        /* CATEGORIES */
         .categories-section {
             padding: 60px 0;
             background: #fff;
@@ -462,6 +449,8 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            text-decoration: none;
+            color: inherit;
         }
 
         .sport-card:hover {
@@ -494,9 +483,7 @@
             font-weight: 700;
         }
 
-        /* ==========================================
-           MAIN DYNAMIC NEWS SECTION
-           ========================================== */
+        /* NEWS SECTION */
         .news-section {
             padding: 70px 0;
         }
@@ -531,6 +518,8 @@
             font-size: 0.85rem;
             transition: var(--transition);
             white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .filter-btn:hover, .filter-btn.active {
@@ -554,7 +543,6 @@
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            opacity: 1;
         }
 
         .news-card:hover {
@@ -601,6 +589,12 @@
             flex-grow: 1;
         }
 
+        .news-card-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
         .news-card-title {
             font-size: 1.1rem;
             line-height: 1.35;
@@ -636,9 +630,7 @@
             color: var(--royal-blue);
         }
 
-        /* ==========================================
-           FULL ARTICLE MODAL & READER VIEW
-           ========================================== */
+        /* MODAL */
         .modal-backdrop {
             position: fixed;
             top: 0;
@@ -714,10 +706,20 @@
         }
 
         .article-full-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             line-height: 1.25;
             margin-bottom: 15px;
             color: var(--primary-navy);
+        }
+
+        .article-meta-bar {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .article-main-img {
@@ -736,9 +738,7 @@
             white-space: pre-line;
         }
 
-        /* ==========================================
-           ABOUT & FOOTER SECTIONS
-           ========================================== */
+        /* ABOUT & FOOTER */
         .about-section {
             background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
             color: #fff;
@@ -826,9 +826,6 @@
             font-size: 0.85rem;
         }
 
-        /* ==========================================
-           ANIMATIONS & RESPONSIVE DESIGN
-           ========================================== */
         @keyframes logoIntro {
             from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
@@ -877,7 +874,7 @@
     <header class="main-header">
         <div class="container header-container">
             <a href="#" class="logo">
-                 SportsWorld<span>1</span>
+                 SportsWorld<span>BG</span>
             </a>
 
             <nav>
@@ -918,7 +915,7 @@
         <div class="container hero-grid">
             <div class="hero-text">
                 <h1 class="hero-title" id="hero-title-text">
-                    SportsWorld 1 – <span>Всички спортове</span> на едно място
+                    SportsWorld BG – <span>Всички спортове</span> на едно място
                 </h1>
                 <p class="hero-subtitle" id="hero-sub-text">
                     Вашият водещ източник за най-актуалните спортни новини, анализи и репортажи от световните и българските терени.
@@ -950,6 +947,7 @@
         <div class="carousel-container">
             <button class="carousel-nav-btn carousel-prev" onclick="moveCarousel(-1)">❮</button>
             <button class="carousel-nav-btn carousel-next" onclick="moveCarousel(1)">❯</button>
+
             <div class="carousel-track" id="carousel-track"></div>
         </div>
     </section>
@@ -959,6 +957,7 @@
             <div class="section-header">
                 <h2 class="section-title" id="sec-categories">Спортни Категории</h2>
             </div>
+
             <div class="sports-grid" id="sports-grid"></div>
         </div>
     </section>
@@ -1013,13 +1012,13 @@
             <div>
                 <h4 class="footer-title" id="footer-legal">Правна информация</h4>
                 <ul class="footer-links">
-                    <li><a href="privacypolicy.html">Политика за поверителност</a></li>
+                    <li><a href="#">Политика за поверителност</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="footer-title" id="footer-socials">Социални мрежи</h4>
                 <ul class="footer-links">
-                    <li><a href="https://www.facebook.com/profile.php?id=61583966417649" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=61583966417649" target="_blank">Facebook</a></li>
                 </ul>
             </div>
         </div>
@@ -1029,7 +1028,7 @@
         </div>
     </footer>
 
-    <div class="modal-backdrop" id="article-modal" onclick="handleBackdropClick(event)">
+    <div class="modal-backdrop" id="article-modal">
         <div class="article-modal">
             <button class="modal-close-btn" onclick="closeArticleModal()">✕</button>
             <div class="modal-content-inner" id="modal-article-body"></div>
@@ -1037,7 +1036,10 @@
     </div>
 
     <script>
-        /* UI TRANSLATION DICTIONARY FOR 8 LANGUAGES */
+        let currentLang = 'bg';
+        let currentCategory = 'all';
+        let currentSlide = 0;
+
         const uiTranslations = {
             bg: {
                 breaking: "ПОСЛЕДНО",
@@ -1046,7 +1048,7 @@
                 navSports: "Спортове",
                 navAbout: "За нас",
                 navContact: "Контакти",
-                heroTitle: "SportsWorld 1 – <span>Всички спортове</span> на едно място",
+                heroTitle: "SportsWorld BG – <span>Всички спортове</span> на едно място",
                 heroSub: "Вашият водещ източник за най-актуалните спортни новини, анализи и репортажи от световните и българските терени.",
                 btnLatest: "Последни Новини",
                 btnChooseSport: "Изберете Спорт",
@@ -1055,6 +1057,7 @@
                 secNewsHeader: "Всички Новини",
                 allSports: "Всички",
                 readMore: "Прочети още →",
+                popularTags: "ПОПУЛЯРНИ ТЕГИ:",
                 aboutTitle: "За SportsWorld BG",
                 aboutDesc: "SportsWorld BG е иновативна спортна медийна платформа, предназначена да предоставя бързи, надеждни и качествени спортни анализи.",
                 statSports: "Вида Спорт",
@@ -1071,7 +1074,7 @@
                 navSports: "Sports",
                 navAbout: "About Us",
                 navContact: "Contact",
-                heroTitle: "SportsWorld 1 – <span>All Sports</span> in One Place",
+                heroTitle: "SportsWorld BG – <span>All Sports</span> in One Place",
                 heroSub: "Your leading source for the latest sports news, structural analysis, and coverage from global and Bulgarian arenas.",
                 btnLatest: "Latest News",
                 btnChooseSport: "Choose Sport",
@@ -1080,6 +1083,7 @@
                 secNewsHeader: "All News",
                 allSports: "All",
                 readMore: "Read More →",
+                popularTags: "POPULAR TAGS:",
                 aboutTitle: "About SportsWorld BG",
                 aboutDesc: "SportsWorld BG is an innovative sports media platform providing reliable, fast, and high-quality coverage.",
                 statSports: "Sports Covered",
@@ -1096,7 +1100,7 @@
                 navSports: "Deportes",
                 navAbout: "Nosotros",
                 navContact: "Contacto",
-                heroTitle: "SportsWorld 1 – <span>Todos los deportes</span> en un solo lugar",
+                heroTitle: "SportsWorld BG – <span>Todos los deportes</span> en un solo lugar",
                 heroSub: "Su fuente principal de noticias deportivas, análisis y cobertura en vivo.",
                 btnLatest: "Últimas Noticias",
                 btnChooseSport: "Elegir Deporte",
@@ -1105,6 +1109,7 @@
                 secNewsHeader: "Todas las Noticias",
                 allSports: "Todos",
                 readMore: "Leer Más →",
+                popularTags: "ETIQUETAS POPULARES:",
                 aboutTitle: "Sobre SportsWorld BG",
                 aboutDesc: "Plataforma deportiva innovadora para ofrecer análisis rápidos y fiables.",
                 statSports: "Deportes",
@@ -1121,7 +1126,7 @@
                 navSports: "Sports",
                 navAbout: "À propos",
                 navContact: "Contact",
-                heroTitle: "SportsWorld 1 – <span>Tous les sports</span> en un seul endroit",
+                heroTitle: "SportsWorld BG – <span>Tous les sports</span> en un seul endroit",
                 heroSub: "Votre source numéro un pour les dernières nouvelles et analyses sportives.",
                 btnLatest: "Dernières Infos",
                 btnChooseSport: "Choisir un Sport",
@@ -1130,6 +1135,7 @@
                 secNewsHeader: "Toutes les Actualités",
                 allSports: "Tous",
                 readMore: "Lire la suite →",
+                popularTags: "TAGS POPULAIRES:",
                 aboutTitle: "À propos de SportsWorld BG",
                 aboutDesc: "Plateforme média sportive innovante offrant des rapports précis en temps réel.",
                 statSports: "Disciplines",
@@ -1146,7 +1152,7 @@
                 navSports: "Sport",
                 navAbout: "Chi Siamo",
                 navContact: "Contatti",
-                heroTitle: "SportsWorld 1 – <span>Tutti gli sport</span> in un unico posto",
+                heroTitle: "SportsWorld BG – <span>Tutti gli sport</span> in un unico posto",
                 heroSub: "La tua fonte principale per le ultime notizie e analisi sportive.",
                 btnLatest: "Ultime Notizie",
                 btnChooseSport: "Scegli Sport",
@@ -1155,6 +1161,7 @@
                 secNewsHeader: "Tutte le Notizie",
                 allSports: "Tutti",
                 readMore: "Leggi Tutto →",
+                popularTags: "TAG POPOLARI:",
                 aboutTitle: "Su SportsWorld BG",
                 aboutDesc: "Piattaforma sportiva innovativa che offre analisi veloci e affidabili.",
                 statSports: "Discipline",
@@ -1171,7 +1178,7 @@
                 navSports: "Esportes",
                 navAbout: "Sobre Nós",
                 navContact: "Contato",
-                heroTitle: "SportsWorld 1 – <span>Todos os esportes</span> num só lugar",
+                heroTitle: "SportsWorld BG – <span>Todos os esportes</span> num só lugar",
                 heroSub: "Sua principal fonte de notícias e análises esportivas atualizadas.",
                 btnLatest: "Últimas Notícias",
                 btnChooseSport: "Escolher Esporte",
@@ -1180,6 +1187,7 @@
                 secNewsHeader: "Todas as Notícias",
                 allSports: "Todos",
                 readMore: "Ler Mais →",
+                popularTags: "TAGS POPULARES:",
                 aboutTitle: "Sobre SportsWorld BG",
                 aboutDesc: "Plataforma inovadora focada em análises e relatórios esportivos de alto nível.",
                 statSports: "Esportes",
@@ -1196,7 +1204,7 @@
                 navSports: "Sportarten",
                 navAbout: "Über Uns",
                 navContact: "Kontakt",
-                heroTitle: "SportsWorld 1 – <span>Alle Sportarten</span> an einem Ort",
+                heroTitle: "SportsWorld BG – <span>Alle Sportarten</span> an einem Ort",
                 heroSub: "Ihre führende Quelle für aktuelle Sportnachrichten, Analysen und Spielberichte.",
                 btnLatest: "Neueste News",
                 btnChooseSport: "Sportart Wählen",
@@ -1205,6 +1213,7 @@
                 secNewsHeader: "Alle Nachrichten",
                 allSports: "Alle",
                 readMore: "Mehr lesen →",
+                popularTags: "BELIEBTE TAGS:",
                 aboutTitle: "Über SportsWorld BG",
                 aboutDesc: "Innovatives Sportmedienportal für schnelle und zuverlässige Berichterstattung.",
                 statSports: "Sportarten",
@@ -1221,7 +1230,7 @@
                 navSports: "Спорт",
                 navAbout: "О нас",
                 navContact: "Контакты",
-                heroTitle: "SportsWorld 1 – <span>Весь спорт</span> в одном месте",
+                heroTitle: "SportsWorld BG – <span>Весь спорт</span> в одном месте",
                 heroSub: "Ваш главный источник свежих спортивных новостей, аналитики и репортажей.",
                 btnLatest: "Свежие Новости",
                 btnChooseSport: "Выбрать Спорт",
@@ -1230,6 +1239,7 @@
                 secNewsHeader: "Все Новости",
                 allSports: "Все",
                 readMore: "Читать далее →",
+                popularTags: "ПОПУЛЯРНЫЕ ТЕГИ:",
                 aboutTitle: "О SportsWorld BG",
                 aboutDesc: "Инновационная спортивная медиа-платформа для оперативной аналитики.",
                 statSports: "Видов Спорта",
@@ -1241,9 +1251,8 @@
             }
         };
 
-        /* SPORTS DATABASE (IDs KEPT UNCHANGED) */
         const sportsDB = {
-                   football: {
+                 football: {
                     icon: "⚽",
  
                     
@@ -1285,7 +1294,7 @@
     "de": "Manchester United empfängt Ipswich Town im Old Trafford zum frühen Premier-League-Test mit großer Bedeutung für den Rhythmus der Saison",
     "ru": "Манчестер Юнайтед принимает Ипсвич Таун на Олд Траффорд в раннем матче Премьер-лиги с большим значением для динамики сезона"
   },
-            "text": {
+  "text": {
     "bg": "Олд Трафорд се подготвя да приеме двубой от Висшата лига, който носи много повече контекст от обикновена среща в началото на сезона, тъй като Манчестър Юнайтед се изправя срещу новака Ипсуич Таун в неделя, 30 август 2026 година, от 18:30 часа източноевропейско лятно време, което съответства на 15:30 UTC, в мач пренасрочен от събота за неделя и който ще бъде първи домакински шампионатен мач за Юнайтед през кампанията 2026/27 след гостуването на Хъл Сити на МКМ Стейдиъм в първия кръг. Фонът при домакините е белязан от приемственост и нова глава под ръководството на Майкъл Карик, който пое отбора като временен треньор през януари 2026 година след раздялата с Рубен Аморим и беше утвърден с постоянен договор до лятото на 2028 година след трето място през миналия сезон и ясно подобрение в контрола на топката, циркулацията и организацията без топка. Карик работи с щаб, в който влизат Стив Холанд, Джонатан Уудгейт, Джони Евънс и Травис Биниън, като акцентът е върху контрол през центъра, използване на широчината и вертикални подавания след спечелване на владението, както и намаляване на лесните загуби в собствената половина. Загубата от Хъл Сити на старта, определена от Карик като отделен мач, който не трябва да определя посоката, повиши необходимостта от реакция пред очаквани близо 76000 зрители на стадион с размери 105 на 68 метра, изцяло обновен през лятото. За Ипсуич Таун историята е различна и също толкова интересна. Клубът си осигури директно завръщане във Висшата лига след победа с 3:0 над Куинс Парк Рейнджърс в последния ден на Чемпиъншип в началото на май 2026 година, завършвайки втори и постигайки трета промоция за четири години под ръководството на Киърън Маккена. На 10 юни 2026 година Маккена обяви, че се оттегля след пет сезона на Портман Роуд, за да отдели време за семейството си, а на 23 юни 2026 година ръководството назначи Гари О'Нийл, треньор с опит във Висшата лига с Борнемут и Уулвърхемптън, със задача да добави прагматизъм и структура към състав, изграден върху атакуваща свързаност и висок пресинг. През лятото Ипсуич привлече осем нови футболисти, включително сръбския полузащитник Саша Лукич от Фулъм с договор до 2030 година, който носи опит и задържане на топката в централната зона. Тактически мачът противопоставя два различни модела. Манчестър Юнайтед се очаква да оперира в базово 4-2-3-1, което в атака се трансформира в 3-2-5, с Бруно Фернандеш като връзка между линиите, Коби Мейну като регулатор на темпото и крила, атакуващи пространството зад напред изнесените бекове на Ипсуич. Ипсуич под ръководството на О'Нийл показа в предсезонната подготовка и в първите кръгове стремеж да се защитава в компактен 4-4-2 среден блок и след това да излиза бързо през Омари Хътчинсън и каналите, отваряни от припокриващи се бекове, като статичните положения остават основно оръжие заради физическото присъствие в двете наказателни полета. Историческият баланс на Олд Трафорд е в полза на домакините, като Юнайтед беше без загуба в девет поредни домакински мача преди подновената среща през миналия сезон, когато двата отбора си размениха минимални победи и Ипсуич доказа, че може да създава положения чрез бързи преходи, покривайки колективно между 110 и 115 километра на мач. От спортен ъгъл точките имат еднаква стойност за два отбора с различни цели. Юнайтед трябва да стабилизира траекторията си и да покаже, че проектът на Карик може да превърне териториалното превъзходство в чисти положения и ефективна реализация, докато Ипсуич трябва да демонстрира, че може да се конкурира далеч от Портман Роуд срещу съперник с по-голяма дълбочина, използвайки организация, втори топки и бързо изпълнение на аутове и фаулове. Подготовката през седмицата беше фокусирана върху възстановяването, като Ипсуич имаше и мач за Карабао Къп срещу Лестър Сити на 26 август. Очакват се около 3000 гостуващи привърженици, изминали около 350 километра от Съфолк до Манчестър, а интерпретацията на съдийството и ВАР според насоките за сезон 2026/27, които позволяват повече физически контакт при въздушни дуели и изискват по-бързи решения от видео стаята, може да повлияе на ритъма. Срещата ще бъде тест за два модела на изграждане на клуб, единият базиран на интеграция на академията и възстановяване на конкурентни стандарти, другият на бързо изкачване, приемственост и нов глас за утвърждаване в елита.",
     "en": "Old Trafford is set to host a Premier League fixture that carries far more context than a routine early season meeting, as Manchester United face newly promoted Ipswich Town on Sunday, 30 August 2026 at 18:30 Eastern European Summer Time, 15:30 UTC, in a game rescheduled from Saturday to Sunday and confirmed as United's first home league match of the 2026/27 campaign after opening away at Hull City at the MKM Stadium. The backdrop for the hosts is defined by continuity and a new chapter under Michael Carrick, who was first appointed interim head coach in January 2026 after the departure of Ruben Amorim and was then confirmed on a permanent deal until the summer of 2028 following a third place finish last season and a clear improvement in structure, ball circulation and defensive organisation. Carrick, supported by Steve Holland, Jonathan Woodgate, Jonny Evans and academy link Travis Binnion, has emphasised control through midfield, use of width to stretch opponents and vertical passes immediately after regaining possession, while trying to reduce high turnovers that marked the previous autumn. The opening defeat to Hull City, described by Carrick as one game that should not define direction, has increased attention on a response in front of an expected crowd close to 76000 inside a stadium measuring 105 by 68 meters that was renovated over the summer. For Ipswich Town the narrative is different and equally compelling. The club secured an immediate return to the Premier League after a 3-0 victory over Queens Park Rangers on the final day of the Championship in early May 2026, finishing second and completing a third promotion in four years under Kieran McKenna, who announced on 10 June 2026 that he would step down after five seasons at Portman Road to take a break. The board acted quickly and appointed Gary O'Neil on 23 June 2026, a coach with extensive Premier League experience at Bournemouth and Wolverhampton Wanderers, with the brief to add pragmatic structure and survival know-how to a squad built on attacking cohesion and aggressive pressing. During the summer Ipswich added eight new players, including Serbian midfielder Sasa Lukic from Fulham on a contract until 2030, bringing experience and retention in central areas. Tactically the contest offers a contrast of intentions. Manchester United are expected to start in a 4-2-3-1 that becomes a 3-2-5 in possession, with Bruno Fernandes linking between lines, Kobbie Mainoo setting tempo and wide players attacking the space behind Ipswich's advanced full backs. Ipswich under O'Neil have shown in pre-season and the opening weeks a compact 4-4-2 mid-block, aiming to defend the centre and then break through Omari Hutchinson and channels created by overlapping full backs, with set pieces remaining a major weapon given their physical profile in both boxes. The historical balance at Old Trafford heavily favours the hosts, with United unbeaten in nine consecutive home league meetings before last season's reunion, when both sides exchanged narrow wins and Ipswich proved they could create chances through quick transitions while collectively covering 110 to 115 kilometers per match. From a sporting perspective the points carry equal weight despite different objectives. United need to stabilise their league trajectory and show that Carrick's project can turn territorial dominance into clear chances and efficient finishing, while Ipswich need to demonstrate they can compete away from Portman Road against superior depth by using organisation, second ball recovery and fast restarts. The preparation week has focused on recovery protocols, with Ipswich also facing Leicester City in the Carabao Cup on 26 August. Around 3000 travelling supporters are expected to make the roughly 350 kilometers journey from Suffolk to Manchester. Refereeing and VAR interpretation under the 2026/27 guidelines, which allow more physical contact in aerial duels and demand quicker decisions from the video room, could also influence flow. With kick off approaching, the game represents a meeting of two different club building models, one based on academy integration and restoration of competitive standards, the other on rapid ascent, continuity and now a new voice to consolidate Premier League status.",
     "es": "Old Trafford se prepara para acoger un partido de Premier League que contiene mucho más contexto que un encuentro habitual de inicio de curso, ya que Manchester United se mide al recién ascendido Ipswich Town el domingo 30 de agosto de 2026 a las 18:30 en horario de verano de Europa del Este, 15:30 UTC, en un choque reprogramado del sábado al domingo y que supone el primer partido de liga en casa del United en la campaña 2026/27 tras el estreno a domicilio ante Hull City en el MKM Stadium. El contexto de los locales está marcado por la continuidad y por un nuevo capítulo con Michael Carrick, nombrado inicialmente entrenador interino en enero de 2026 tras la salida de Ruben Amorim y confirmado de forma permanente hasta el verano de 2028 después de un tercer puesto la pasada temporada y una mejora clara en estructura, circulación de balón y organización defensiva. Carrick, apoyado por Steve Holland, Jonathan Woodgate, Jonny Evans y Travis Binnion como enlace con la academia, ha insistido en el control a través del centro del campo, el uso de la amplitud para estirar al rival y los pases verticales inmediatamente después de recuperar la posesión, intentando reducir las pérdidas altas que marcaron el otoño anterior. La derrota inicial ante Hull City, definida por Carrick como un solo partido que no debe marcar la dirección, ha aumentado la atención sobre la reacción ante un aforo cercano a 76000 espectadores en un estadio de 105 por 68 metros renovado durante el verano. Para Ipswich Town la narrativa es distinta e igualmente atractiva. El club selló el regreso inmediato a la Premier League tras vencer 3-0 a Queens Park Rangers en la última jornada del Championship a principios de mayo de 2026, finalizando segundo y logrando una tercera promoción en cuatro años con Kieran McKenna, quien anunció el 10 de junio de 2026 que dejaba el cargo tras cinco temporadas en Portman Road para tomarse un descanso. La directiva reaccionó con rapidez y nombró el 23 de junio de 2026 a Gary O'Neil, técnico con amplia experiencia en la Premier League en Bournemouth y Wolverhampton Wanderers, con el encargo de añadir estructura pragmática y conocimiento de la permanencia a una plantilla construida sobre cohesión ofensiva y presión alta. En verano Ipswich incorporó ocho caras nuevas, entre ellas el centrocampista serbio Sasa Lukic procedente del Fulham con contrato hasta 2030, que aporta experiencia y capacidad de retención en zonas interiores. En lo táctico el partido ofrece un contraste de intenciones. Se espera que Manchester United arranque en 4-2-3-1 que se transforma en 3-2-5 en posesión, con Bruno Fernandes como enlace entre líneas, Kobbie Mainoo marcando el ritmo y extremos atacando el espacio a la espalda de los laterales adelantados de Ipswich. Ipswich con O'Neil ha mostrado en pretemporada y en las primeras semanas un bloque medio compacto en 4-4-2, con la idea de cerrar el carril central y salir rápido a través de Omari Hutchinson y los pasillos que generan los laterales en proyección, manteniendo las acciones a balón parado como arma importante por su perfil físico en ambas áreas. El balance histórico en Old Trafford favorece claramente a los locales, con United invicto en nueve duelos ligueros consecutivos en casa antes de la reunión de la pasada temporada, cuando ambos intercambiaron victorias ajustadas e Ipswich demostró que puede generar ocasiones en transiciones rápidas cubriendo colectivamente entre 110 y 115 kilómetros por partido. Desde el punto de vista deportivo los puntos tienen el mismo valor pese a objetivos diferentes. United necesita estabilizar su trayectoria liguera y mostrar que el proyecto de Carrick puede convertir el dominio territorial en ocasiones claras y finalización eficaz, mientras Ipswich necesita demostrar que puede competir lejos de Portman Road ante una plantilla con mayor profundidad mediante organización, segundas jugadas y reanudaciones rápidas. La semana de preparación ha estado centrada en protocolos de recuperación, con Ipswich afrontando además el compromiso de Carabao Cup ante Leicester City el 26 de agosto. Se esperan cerca de 3000 seguidores visitantes que recorrerán unos 350 kilómetros desde Suffolk hasta Manchester. El arbitraje y la interpretación del VAR bajo las directrices 2026/27, que permiten más contacto físico en duelos aéreos y exigen decisiones más rápidas desde la sala de vídeo, también pueden influir en el ritmo. Con el inicio cerca, el partido representa el encuentro de dos modelos distintos de construcción de club, uno basado en la integración de la academia y la restauración de estándares competitivos, y otro en el ascenso rápido, la continuidad y ahora una nueva voz para consolidar el estatus en la Premier League.",
@@ -1708,7 +1717,7 @@
   },
   "img": "https://i.pinimg.com/736x/2d/c4/07/2dc4075acda12be190bb54c50909b188.jpg"
 },
-                  {
+                        {
   "id": 2034,
   "title": {
     "bg": "Рапид Виена приема Хеартс в решителен реванш от плейофа на Лигата на конференциите на Алианц Щадион във Виена след зрелищно 2:2 в Единбург",
@@ -11910,224 +11919,39 @@ nhl: {
 },
         };
 
-        let currentLang = 'bg';
-        let currentFilter = 'all';
-        let currentSlideIndex = 0;
-
-        /* INITIALIZATION */
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCategories();
-            renderFilterButtons();
-            renderCarousel();
-            renderNews(currentFilter);
-            applyTranslations();
-        });
-
-        /* LANGUAGE HANDLING */
-        function toggleLangDropdown() {
-            document.getElementById('lang-dropdown').classList.toggle('show');
+        function getLocalized(obj, lang = currentLang) {
+            if (!obj) return '';
+            return obj[lang] || obj['en'] || obj['bg'] || '';
         }
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('current-lang-code').innerText = lang.toUpperCase();
-            document.getElementById('lang-dropdown').classList.remove('show');
-            applyTranslations();
-            renderCategories();
-            renderFilterButtons();
-            renderCarousel();
-            renderNews(currentFilter);
-        }
-
-        function applyTranslations() {
-            const t = uiTranslations[currentLang] || uiTranslations.bg;
-            
-            // Header
-            if (document.getElementById('nav-home')) document.getElementById('nav-home').innerText = t.navHome;
-            if (document.getElementById('nav-news')) document.getElementById('nav-news').innerText = t.navNews;
-            if (document.getElementById('nav-sports')) document.getElementById('nav-sports').innerText = t.navSports;
-            if (document.getElementById('nav-about')) document.getElementById('nav-about').innerText = t.navAbout;
-            if (document.getElementById('nav-contact')) document.getElementById('nav-contact').innerText = t.navContact;
-            
-            // Hero
-            if (document.getElementById('hero-title-text')) document.getElementById('hero-title-text').innerHTML = t.heroTitle;
-            if (document.getElementById('hero-sub-text')) document.getElementById('hero-sub-text').innerText = t.heroSub;
-            if (document.getElementById('btn-latest')) document.getElementById('btn-latest').innerText = t.btnLatest;
-            if (document.getElementById('btn-choose-sport')) document.getElementById('btn-choose-sport').innerText = t.btnChooseSport;
-            
-            // Section Headers
-            if (document.getElementById('sec-top-stories')) document.getElementById('sec-top-stories').innerText = t.secTopStories;
-            if (document.getElementById('sec-categories')) document.getElementById('sec-categories').innerText = t.secCategories;
-            if (document.getElementById('sec-news-header')) document.getElementById('sec-news-header').innerText = t.secNewsHeader;
-
-            // About & Footer
-            if (document.getElementById('about-title')) document.getElementById('about-title').innerText = t.aboutTitle;
-            if (document.getElementById('about-desc')) document.getElementById('about-desc').innerText = t.aboutDesc;
-            if (document.getElementById('stat-sports')) document.getElementById('stat-sports').innerText = t.statSports;
-            if (document.getElementById('stat-coverage')) document.getElementById('stat-coverage').innerText = t.statCoverage;
-            if (document.getElementById('footer-mission')) document.getElementById('footer-mission').innerText = t.footerMission;
-            if (document.getElementById('footer-quick-links')) document.getElementById('footer-quick-links').innerText = t.footerQuickLinks;
-            if (document.getElementById('footer-legal')) document.getElementById('footer-legal').innerText = t.footerLegal;
-            if (document.getElementById('footer-socials')) document.getElementById('footer-socials').innerText = t.footerSocials;
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('nav-menu').classList.toggle('active');
-        }
-
-        /* SPORTS CATEGORIES */
-        function renderCategories() {
-            const container = document.getElementById('sports-grid');
-            if (!container) return;
-            container.innerHTML = '';
-
-            for (const key in sportsDB) {
-                const sport = sportsDB[key];
-                const card = document.createElement('div');
-                card.className = 'sport-card';
-                card.onclick = () => {
-                    filterNews(key);
-                    window.location.href = '#news';
-                };
-                card.innerHTML = `
-                    <div class="sport-icon">${sport.icon}</div>
-                    <div class="sport-title">${sport.title[currentLang] || sport.title.bg}</div>
-                `;
-                container.appendChild(card);
-            }
-        }
-
-        /* FILTER BUTTONS */
-        function renderFilterButtons() {
-            const container = document.getElementById('filter-buttons');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const t = uiTranslations[currentLang] || uiTranslations.bg;
-
-            // "All" button
-            const allBtn = document.createElement('button');
-            allBtn.className = `filter-btn ${currentFilter === 'all' ? 'active' : ''}`;
-            allBtn.innerText = t.allSports;
-            allBtn.onclick = () => filterNews('all');
-            container.appendChild(allBtn);
-
-            // Category buttons
-            for (const key in sportsDB) {
-                const sport = sportsDB[key];
-                const btn = document.createElement('button');
-                btn.className = `filter-btn ${currentFilter === key ? 'active' : ''}`;
-                btn.innerText = sport.title[currentLang] || sport.title.bg;
-                btn.onclick = () => filterNews(key);
-                container.appendChild(btn);
-            }
-        }
-
-        function filterNews(categoryKey) {
-            currentFilter = categoryKey;
-            renderFilterButtons();
-            renderNews(currentFilter);
-        }
-
-        /* FEATURED CAROUSEL */
-        function renderCarousel() {
-            const track = document.getElementById('carousel-track');
-            if (!track) return;
-            track.innerHTML = '';
-
-            const slides = [];
-            for (const catKey in sportsDB) {
-                sportsDB[catKey].news.forEach((item, index) => {
-                    slides.push({ ...item, categoryKey: catKey, index: index });
-                });
-            }
-
-            slides.slice(0, 4).forEach((slide) => {
-                const slideElem = document.createElement('div');
-                slideElem.className = 'carousel-slide';
-                slideElem.onclick = () => openArticle(slide.categoryKey, slide.index);
-
-                const titleText = slide.title[currentLang] || slide.title.bg || slide.title.en;
-                const catName = sportsDB[slide.categoryKey]?.title[currentLang] || slide.categoryKey.toUpperCase();
-
-                slideElem.innerHTML = `
-                    <img src="${slide.img}" alt="Featured Story">
-                    <div class="carousel-caption">
-                        <span style="background:var(--accent-red); padding:4px 10px; border-radius:4px; font-size:0.75rem; font-weight:800;">${catName}</span>
-                        <h3 style="color:#fff; font-size:1.5rem; margin-top:10px;">${titleText}</h3>
-                    </div>
-                `;
-                track.appendChild(slideElem);
-            });
-        }
-
-        function moveCarousel(dir) {
-            const track = document.getElementById('carousel-track');
-            const totalSlides = track.children.length;
-            if (totalSlides === 0) return;
-
-            currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides;
-            track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-        }
-
-        /* NEWS GRID */
-        function renderNews(filter) {
-            const grid = document.getElementById('news-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            const list = [];
-            for (const catKey in sportsDB) {
-                if (filter === 'all' || filter === catKey) {
-                    sportsDB[catKey].news.forEach((item, index) => {
-                        list.push({ ...item, categoryKey: catKey, index: index });
-                    });
-                }
-            }
-
-            const t = uiTranslations[currentLang] || uiTranslations.bg;
-
-            list.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                card.onclick = () => openArticle(item.categoryKey, item.index);
-
-                const titleText = item.title[currentLang] || item.title.bg || item.title.en;
-                const bodyText = item.text[currentLang] || item.text.bg || item.text.en || '';
-                const catName = sportsDB[item.categoryKey]?.title[currentLang] || item.categoryKey.toUpperCase();
-
-                card.innerHTML = `
-                    <div class="news-card-img-wrap">
-                        <img src="${item.img}" alt="${titleText}">
-                        <span class="news-card-category">${catName}</span>
-                    </div>
-                    <div class="news-card-body">
-                        <h3 class="news-card-title">${titleText}</h3>
-                        <p class="news-card-desc">${bodyText}</p>
-                        <div class="news-card-footer">
-                            <span>${t.readMore}</span>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        /* ARTICLE MODAL LOGIC (LOOKUP BY CATEGORY + INDEX) */
+        /* ARTICLE MODAL LOGIC */
         function openArticle(categoryKey, index) {
-            const article = sportsDB[categoryKey]?.news[index];
+            let article = null;
+            let catKey = categoryKey;
+
+            if (typeof categoryKey === 'string' && sportsDB[categoryKey] && sportsDB[categoryKey].news[index]) {
+                article = sportsDB[categoryKey].news[index];
+            } else if (typeof categoryKey === 'number') {
+                catKey = 'football';
+                article = sportsDB.football.news[categoryKey] || sportsDB.football.news[0];
+            }
+
             if (!article) return;
 
-            const modalBody = document.getElementById('modal-article-body');
-            const catName = sportsDB[categoryKey]?.title[currentLang] || categoryKey.toUpperCase();
-            const titleText = article.title[currentLang] || article.title.bg || article.title.en;
-            const fullText = article.text[currentLang] || article.text.bg || article.text.en || '';
+            const categoryTitle = sportsDB[catKey] ? getLocalized(sportsDB[catKey].title) : 'Спорт';
+            const title = getLocalized(article.title);
+            const text = getLocalized(article.text);
 
+            const modalBody = document.getElementById('modal-article-body');
             modalBody.innerHTML = `
-                <span class="article-category-badge">${catName}</span>
-                <h1 class="article-full-title">${titleText}</h1>
-                <img src="${article.img}" alt="${titleText}" class="article-main-img">
-                <div class="article-body-text">${fullText}</div>
+                <span class="article-category-badge">${categoryTitle}</span>
+                <h1 class="article-full-title">${title}</h1>
+                <div class="article-meta-bar">
+                    <span>📅 29.08.2026</span>
+                    <span>✍️ SportsWorld BG</span>
+                </div>
+                <img src="${article.img}" class="article-main-img" alt="${title}">
+                <div class="article-body-text">${text}</div>
             `;
 
             const modal = document.getElementById('article-modal');
@@ -12136,24 +11960,193 @@ nhl: {
         }
 
         function closeArticleModal() {
-            const modal = document.getElementById('article-modal');
-            modal.classList.remove('open');
+            document.getElementById('article-modal').classList.remove('open');
             document.body.style.overflow = '';
         }
 
-        function handleBackdropClick(event) {
-            if (event.target.id === 'article-modal') {
+        document.getElementById('article-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
                 closeArticleModal();
+            }
+        });
+
+        /* RENDER NEWS GRID */
+        function renderNews() {
+            const grid = document.getElementById('news-grid');
+            grid.innerHTML = '';
+
+            Object.keys(sportsDB).forEach(catKey => {
+                if (currentCategory !== 'all' && currentCategory !== catKey) return;
+
+                const categoryData = sportsDB[catKey];
+                categoryData.news.forEach((article, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+                    card.onclick = () => openArticle(catKey, index);
+
+                    const title = getLocalized(article.title);
+                    const text = getLocalized(article.text);
+                    const catTitle = getLocalized(categoryData.title);
+
+                    card.innerHTML = `
+                        <div class="news-card-img-wrap">
+                            <img src="${article.img}" alt="${title}">
+                            <span class="news-card-category">${catTitle}</span>
+                        </div>
+                        <div class="news-card-body">
+                            <span class="news-card-date">29.08.2026</span>
+                            <h3 class="news-card-title">${title}</h3>
+                            <p class="news-card-desc">${text}</p>
+                            <div class="news-card-footer">
+                                <span>${uiTranslations[currentLang].readMore}</span>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            });
+        }
+
+        /* RENDER CAROUSEL */
+        function renderCarousel() {
+            const track = document.getElementById('carousel-track');
+            track.innerHTML = '';
+            
+            const footballArticles = sportsDB.football ? sportsDB.football.news : [];
+            footballArticles.forEach((article, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.onclick = () => openArticle('football', index);
+
+                const title = getLocalized(article.title);
+                slide.innerHTML = `
+                    <img src="${article.img}" alt="${title}">
+                    <div class="carousel-caption">
+                        <span style="background: var(--royal-blue); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800;">ТОП НОВИНА</span>
+                        <h2 style="color: #fff; font-size: 1.5rem; margin-top: 10px;">${title}</h2>
+                    </div>
+                `;
+                track.appendChild(slide);
+            });
+        }
+
+        function moveCarousel(dir) {
+            const track = document.getElementById('carousel-track');
+            const totalSlides = track.children.length;
+            if (totalSlides === 0) return;
+
+            currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        /* RENDER CATEGORIES & GENERATE EXPLICIT LINKS */
+        function renderCategories() {
+            const grid = document.getElementById('sports-grid');
+            const filters = document.getElementById('filter-buttons');
+            grid.innerHTML = '';
+            filters.innerHTML = '';
+
+            const allBtn = document.createElement('a');
+            allBtn.href = '#sport-all';
+            allBtn.className = `filter-btn ${currentCategory === 'all' ? 'active' : ''}`;
+            allBtn.textContent = uiTranslations[currentLang].allSports;
+            filters.appendChild(allBtn);
+
+            Object.keys(sportsDB).forEach(catKey => {
+                const cat = sportsDB[catKey];
+                const catTitle = getLocalized(cat.title);
+
+                const btn = document.createElement('a');
+                btn.href = `#sport-${catKey}`;
+                btn.className = `filter-btn ${currentCategory === catKey ? 'active' : ''}`;
+                btn.textContent = catTitle;
+                filters.appendChild(btn);
+
+                const card = document.createElement('a');
+                card.href = `#sport-${catKey}`;
+                card.className = 'sport-card';
+                card.innerHTML = `
+                    <div class="sport-icon">${cat.icon}</div>
+                    <div class="sport-title">${catTitle}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /* HANDLE URL HASH ROUTING FOR INDIVIDUAL SPORT LINKS */
+        function handleHashRouting() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#sport-')) {
+                const sport = hash.replace('#sport-', '');
+                if (sportsDB[sport]) {
+                    currentCategory = sport;
+                } else if (sport === 'all') {
+                    currentCategory = 'all';
+                }
+                renderCategories();
+                renderNews();
+                const newsSection = document.getElementById('news');
+                if (newsSection) {
+                    newsSection.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }
 
-        // Close language dropdown on external click
-        window.addEventListener('click', (e) => {
+        window.addEventListener('hashchange', handleHashRouting);
+
+        /* UI TRANSLATIONS APPLY */
+        function applyTranslations() {
+            const t = uiTranslations[currentLang];
+            document.getElementById('current-lang-code').textContent = currentLang.toUpperCase();
+            document.getElementById('nav-home').textContent = t.navHome;
+            document.getElementById('nav-news').textContent = t.navNews;
+            document.getElementById('nav-sports').textContent = t.navSports;
+            document.getElementById('nav-about').textContent = t.navAbout;
+            document.getElementById('nav-contact').textContent = t.navContact;
+            document.getElementById('hero-title-text').innerHTML = t.heroTitle;
+            document.getElementById('hero-sub-text').textContent = t.heroSub;
+            document.getElementById('btn-latest').textContent = t.btnLatest;
+            document.getElementById('btn-choose-sport').textContent = t.btnChooseSport;
+            document.getElementById('sec-top-stories').textContent = t.secTopStories;
+            document.getElementById('sec-categories').textContent = t.secCategories;
+            document.getElementById('sec-news-header').textContent = t.secNewsHeader;
+            document.getElementById('about-title').textContent = t.aboutTitle;
+            document.getElementById('about-desc').textContent = t.aboutDesc;
+            document.getElementById('stat-sports').textContent = t.statSports;
+            document.getElementById('stat-coverage').textContent = t.statCoverage;
+            document.getElementById('footer-mission').textContent = t.footerMission;
+            document.getElementById('footer-quick-links').textContent = t.footerQuickLinks;
+            document.getElementById('footer-legal').textContent = t.footerLegal;
+            document.getElementById('footer-socials').textContent = t.footerSocials;
+
+            renderCategories();
+            renderCarousel();
+            renderNews();
+            handleHashRouting();
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('lang-dropdown').classList.remove('show');
+            applyTranslations();
+        }
+
+        function toggleLangDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('show');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+
+        window.onclick = function(e) {
             if (!e.target.closest('.lang-selector')) {
-                const dd = document.getElementById('lang-dropdown');
-                if (dd) dd.classList.remove('show');
+                document.getElementById('lang-dropdown').classList.remove('show');
             }
-        });
+        };
+
+        // Initialize on load
+        applyTranslations();
     </script>
 </body>
 </html>
