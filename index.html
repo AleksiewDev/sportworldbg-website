@@ -224,13 +224,17 @@
         }
 
         /* HERO SECTION */
-        .hero-section {
-            position: relative;
-            padding: 90px 0 70px 0;
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(255, 32, 78, 0.08), transparent 40%);
-            overflow: hidden;
-        }
+      .hero-title {
+    font-size: 3rem;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--primary-navy);
+    
+    /* FIX FOR CUT-OFF TEXT ON MOBILE */
+    word-break: break-word;       /* Allows words to break if necessary */
+    overflow-wrap: break-word;   /* Prevents overflow beyond container width */
+    hyphens: auto;                /* Helps with clean word hyphenation */
+}
 
         .hero-grid {
             display: grid;
@@ -842,9 +846,17 @@
         }
 
   /* Change 1600px to 1000px so banners show on laptops */
-@media (max-width: 1000px) {
-    .side-banner {
-        display: none;
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;          /* Reduces text size so long words fit comfortably */
+        line-height: 1.2;
+        padding-right: 5px;       /* Adds breathing room on the right side */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.75rem;       /* Scaled specifically for smaller smartphones */
     }
 }
 
