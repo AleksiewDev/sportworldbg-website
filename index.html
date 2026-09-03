@@ -906,25 +906,28 @@
         display: none;
     }
 }
-
-.rotated-banner {
+.side-banner {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    width: 420px;
-    height: 130px;
+    top: 0;
+    width: 140px;      /* banner width */
+    height: 100vh;     /* full height */
     overflow: hidden;
-    border-radius: 10px;
-    z-index: 9999;
+    z-index: 9999;     /* always on top */
 }
 
-.rotated-banner.left { left: 0; }
-.rotated-banner.right { right: 0; }
+.side-banner.left {
+    left: 0;           /* FULL LEFT */
+}
 
-.rotated-banner img {
+.side-banner.right {
+    right: 0;          /* FULL RIGHT */
+}
+
+.side-banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* perfect crop */
+    display: block;
 }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1687295341904309"
@@ -1025,11 +1028,12 @@
         </div>
     </section>
     <!-- Left Side Banner Ad -->
-<a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="rotated-banner left">
+<a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="side-banner left">
     <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="">
 </a>
 
-<a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="rotated-banner right">
+<!-- RIGHT SIDE BANNER -->
+<a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="side-banner right">
     <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="">
 </a>
 
