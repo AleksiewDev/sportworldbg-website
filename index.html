@@ -847,10 +847,13 @@
 
   /* Change 1600px to 1000px so banners show on laptops */
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;          /* Reduces text size so long words fit comfortably */
-        line-height: 1.2;
-        padding-right: 5px;       /* Adds breathing room on the right side */
+    .hero-grid {
+        grid-template-columns: 1fr; /* Stacks grid items into a single column */
+        gap: 25px;                   /* Reduces spacing between text and the media card */
+    }
+
+    .hero-media-card {
+        height: 280px;               /* Adjusts card height to fit mobile screens better */
     }
 }
 
