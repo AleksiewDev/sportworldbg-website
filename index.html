@@ -906,28 +906,42 @@
         display: none;
     }
 }
+/* ==========================================
+   SIDE BANNERS (FLUSH LEFT & RIGHT)
+   ========================================== */
 .side-banner {
     position: fixed;
-    top: 0;
-    width: 140px;      /* banner width */
-    height: 100vh;     /* full height */
-    overflow: hidden;
-    z-index: 9999;     /* always on top */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px; /* Adjust banner width as needed */
+    z-index: 9999;
+    display: block;
+    transition: transform 0.2s ease-in-out;
 }
 
 .side-banner.left {
-    left: 0;           /* FULL LEFT */
+    left: 0; /* Flush to extreme left */
 }
 
 .side-banner.right {
-    right: 0;          /* FULL RIGHT */
+    right: 0; /* Flush to extreme right */
 }
 
 .side-banner img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* perfect crop */
+    height: auto; /* Keeps full original image aspect ratio without cropping */
     display: block;
+}
+
+.side-banner:hover {
+    transform: translateY(-50%) scale(1.03);
+}
+
+/* Hides banners on screens where they would overlap main content */
+@media (max-width: 1600px) {
+    .side-banner {
+        display: none;
+    }
 }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1687295341904309"
@@ -1028,13 +1042,14 @@
         </div>
     </section>
     <!-- Left Side Banner Ad -->
+     <!-- LEFT SIDE BANNER -->
 <a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="side-banner left">
-    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="">
+    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="Left Ad Banner">
 </a>
 
 <!-- RIGHT SIDE BANNER -->
 <a href="https://www.dubby.gg/?srsltid=AfmBOoqWOnLamHfL0Erdc5HMmmgtK2NrV2GkpmwDaItTTM_5ndc0w4O1" target="_blank" class="side-banner right">
-    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="">
+    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="Right Ad Banner">
 </a>
 
     <section class="news-section container" id="news">
