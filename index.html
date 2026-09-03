@@ -867,6 +867,45 @@
                 display: flex;
             }
         }
+        /* ==========================================
+   SIDE BANNERS (LEFT & RIGHT)
+   ========================================== */
+.side-banner {
+    position: fixed;
+    top: 120px; /* Adjust distance from the top of the page */
+    width: 140px; /* Set desired banner width */
+    z-index: 900; /* Keeps them below modals/headers, above normal content */
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.side-banner:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+
+.side-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.side-banner-left {
+    left: 15px; /* Distance from the left edge of the screen */
+}
+
+.side-banner-right {
+    right: 15px; /* Distance from the right edge of the screen */
+}
+
+/* Hide side banners automatically on smaller screens / tablets / mobile */
+@media (max-width: 1550px) {
+    .side-banner {
+        display: none;
+    }
+}
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1687295341904309"
      crossorigin="anonymous"></script>
@@ -965,6 +1004,15 @@
             <div class="sports-grid" id="sports-grid"></div>
         </div>
     </section>
+    <!-- Left Side Banner Ad -->
+<a href="YOUR_LINK_HERE_LEFT" target="_blank" class="side-banner side-banner-left">
+    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="Left Sponsor">
+</a>
+
+<!-- Right Side Banner Ad -->
+<a href="YOUR_LINK_HERE_RIGHT" target="_blank" class="side-banner side-banner-right">
+    <img src="https://i.pinimg.com/736x/98/1c/a1/981ca1e22dd2ad4594024d77b85f13e3.jpg" alt="Right Sponsor">
+</a>
 
     <section class="news-section container" id="news">
         <div class="section-header">
