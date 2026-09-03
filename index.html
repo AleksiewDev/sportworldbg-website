@@ -847,10 +847,22 @@
 
   /* Change 1600px to 1000px so banners show on laptops */
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;          /* Reduces text size so long words fit comfortably */
-        line-height: 1.2;
-        padding-right: 5px;       /* Adds breathing room on the right side */
+    .hero-grid {
+        display: flex;
+        flex-direction: column;      /* Stacks elements vertically */
+        align-items: center;          /* Centers the items nicely on mobile */
+        gap: 25px;                   /* Adds clean spacing between text and card */
+    }
+
+    .hero-text {
+        width: 100%;
+    }
+
+    .hero-media-card {
+        width: 100%;
+        max-width: 100% !important;   /* Allows the card to scale nicely on phones */
+        height: auto;                /* Prevents fixed-height distortion on small screens */
+        order: 2;                    /* Guarantees the card stays BELOW the hero text */
     }
 }
 
