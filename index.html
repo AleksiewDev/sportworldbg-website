@@ -969,6 +969,138 @@
         width: 100%;
     width: 100%;
     }
+    /* ==========================================
+   QUIZ SECTION STYLES
+   ========================================== */
+.quiz-section {
+    padding: 60px 0;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin: 40px auto;
+    border: 1px solid var(--border-color);
+}
+
+.quiz-sports-select {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.quiz-sport-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: var(--bg-main);
+    color: var(--primary-navy);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 2px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.quiz-sport-btn:hover, .quiz-sport-btn.active {
+    background: linear-gradient(135deg, var(--royal-blue), #1d4ed8);
+    color: #fff;
+    border-color: var(--royal-blue);
+    box-shadow: var(--shadow-sm);
+}
+
+.quiz-card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-main);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.quiz-progress {
+    height: 6px;
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.quiz-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-red);
+    transition: width 0.3s ease;
+}
+
+.quiz-question-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-option-btn {
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px solid var(--border-color);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-option-btn:hover:not([disabled]) {
+    border-color: var(--royal-blue);
+    background: #f8fafc;
+    transform: translateX(5px);
+}
+
+.quiz-option-btn.correct {
+    background: #d1fae5 !important;
+    border-color: var(--accent-green) !important;
+    color: #065f46 !important;
+}
+
+.quiz-option-btn.wrong {
+    background: #ffe4e6 !important;
+    border-color: var(--accent-red) !important;
+    color: #991b1b !important;
+}
+
+.quiz-score-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.quiz-score-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--royal-blue);
+    margin: 15px 0;
+}
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1687295341904309"
      crossorigin="anonymous"></script>
@@ -987,6 +1119,9 @@
                     
                     <li><a href="#news" class="nav-link" id="nav-news">Новини</a></li>
                     <li><a href="#categories" class="nav-link" id="nav-sports">Спортове</a></li>
+
+                    <!-- ДОБАВИ ТОВА В МЕНЮТО (между Новини/Спортове или където прецениш) -->
+<li><a href="#quizzes" class="nav-link" id="nav-quizzes">Куизове 🧠</a></li>
                     
                     <li><a href="#about" class="nav-link" id="nav-about">За нас</a></li>
                     <li><a href="#footer" class="nav-link" id="nav-contact">Контакти</a></li>
@@ -1085,6 +1220,46 @@
 
         <div class="news-cards-grid" id="news-grid"></div>
     </section>
+
+    <!-- ДОБАВИ ТОЗИ HTML КОД ЗА СЕКЦИЯТА С КУИЗОВЕ -->
+<section class="quiz-section container" id="quizzes">
+    <div class="section-header" style="justify-content: center; text-align: center;">
+        <h2 class="section-title" id="sec-quiz-header">Мини Спортен Куиз 🎯</h2>
+    </div>
+
+    <!-- Избор на спорт -->
+    <div class="quiz-sports-select">
+        <button class="quiz-sport-btn active" onclick="selectQuizCategory('football')">⚽ Футбол</button>
+        <button class="quiz-sport-btn" onclick="selectQuizCategory('f1')">🏎️ Формула 1</button>
+        <button class="quiz-sport-btn" onclick="selectQuizCategory('basketball')">🏀 Баскетбол</button>
+        <button class="quiz-sport-btn" onclick="selectQuizCategory('tennis')">🎾 Тенис</button>
+    </div>
+
+    <!-- Карта за куиз -->
+    <div class="quiz-card" id="quiz-card">
+        <div class="quiz-header">
+            <span id="quiz-category-label">Футбол</span>
+            <span id="quiz-counter">Въпрос 1 от 3</span>
+        </div>
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+        </div>
+
+        <div id="quiz-content">
+            <div class="quiz-question-text" id="quiz-question">Зареждане на въпрос...</div>
+            <div class="quiz-options" id="quiz-options">
+                <!-- Опциите се зареждат динамично от JavaScript -->
+            </div>
+        </div>
+
+        <div class="quiz-score-box" id="quiz-score-box" style="display: none;">
+            <h3>Резултат</h3>
+            <div class="quiz-score-number" id="quiz-score-text">0 / 3</div>
+            <p id="quiz-feedback-msg" style="margin-bottom: 20px; color: var(--text-muted);"></p>
+            <button class="btn-primary" onclick="restartCurrentQuiz()">Опитай пак 🔄</button>
+        </div>
+    </div>
+</section>
 
     <section class="about-section" id="about">
         <div class="container about-grid">
@@ -12190,6 +12365,166 @@ nhl: {
   gtag('js', new Date());
 
   gtag('config', 'G-0YDNS2T834');
+  /* ==========================================
+   QUIZ SYSTEM (2026/2025 Up-to-date Trivia)
+   ========================================== */
+const quizDB = {
+    football: [
+        {
+            q: "Кой бразилски нападател премина в Барселона през септември 2026 г. от отбора на Арсенал?",
+            options: ["Габриел Жезус", "Винисиус Жжуниор", "Родриго", "Ричарлисон"],
+            correct: 0
+        },
+        {
+            q: "Кой клуб спечели Шампионската лига в най-скорошното си издание?",
+            options: ["Реал Мадрид", "Манчестър Сити", "Пари Сен Жермен", "Байерн Мюнхен"],
+            correct: 0
+        },
+        {
+            q: "Кой български футболист премина в Сасуоло и дебютира през сезон 2025/2026?",
+            options: ["Якуб Пьотровски", "Кирил Десподов", "Илия Груев", "Филип Кръстев"],
+            correct: 0
+        }
+    ],
+    f1: [
+        {
+            q: "За кой легендарен отбор се състезава Люис Хамилтън през сезон 2025/2026?",
+            options: ["Mercedes", "Ferrari", "Red Bull", "McLaren"],
+            correct: 1
+        },
+        {
+            q: "Кой отбор направи невероятен скок в представянето си и се бори за титлата при конструкторите през 2025/2026?",
+            options: ["McLaren", "Alpine", "Haas", "Williams"],
+            correct: 0
+        }
+    ],
+    basketball: [
+        {
+            q: "Кой европейски център продължава да доминира НБА и спечели МVP отличия през последните години?",
+            options: ["Никола Йокич", "Янис Адетокунбо", "Лука Дончич", "Руди Гобер"],
+            correct: 0
+        },
+        {
+            q: "Кой френски феномен се превърна в основна звезда на Сан Антонио Спърс?",
+            options: ["Виктор Уембаняма", "Руди Гобер", "Еван Фурние", "Никола Батум"],
+            correct: 0
+        }
+    ],
+    tennis: [
+        {
+            q: "Кои двама млади тенисисти си оспорват 1-вото място в ранглистата на ATP през 2025/2026?",
+            options: ["Яник Синер и Карлос Алкарас", "Новак Джокович и Рафаел Надал", "Даниил Медведев и Стефанос Циципас", "Александър Зверев и Григор Димитров"],
+            correct: 0
+        },
+        {
+            q: "Коя е водещата българска ракета в мъжкия тенис през последните години?",
+            options: ["Григор Димитров", "Димитър Кузманов", "Адриан Андреев", "Пьотр Нестеров"],
+            correct: 0
+        }
+    ]
+};
+
+let currentQuizCategory = 'football';
+let currentQuestionIndex = 0;
+let quizScore = 0;
+let canAnswer = true;
+
+function selectQuizCategory(category) {
+    currentQuizCategory = category;
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    canAnswer = true;
+
+    // Актуализиране на бутоните за избор
+    document.querySelectorAll('.quiz-sport-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Скриване на резултата и показване на въпросите
+    document.getElementById('quiz-score-box').style.display = 'none';
+    document.getElementById('quiz-content').style.display = 'block';
+
+    loadQuizQuestion();
+}
+
+function loadQuizQuestion() {
+    canAnswer = true;
+    const questions = quizDB[currentQuizCategory];
+    const qData = questions[currentQuestionIndex];
+
+    // Прогрес бар и брояч
+    const total = questions.length;
+    document.getElementById('quiz-counter').innerText = `Въпрос ${currentQuestionIndex + 1} от ${total}`;
+    document.getElementById('quiz-progress-bar').style.width = `${((currentQuestionIndex) / total) * 100}%`;
+
+    // Въпрос и опции
+    document.getElementById('quiz-question').innerText = qData.q;
+    
+    const optionsContainer = document.getElementById('quiz-options');
+    optionsContainer.innerHTML = '';
+
+    qData.options.forEach((optText, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.innerHTML = `<span>${optText}</span> <span>➔</span>`;
+        btn.onclick = () => handleAnswerSelect(index, btn);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function handleAnswerSelect(selectedIndex, btnElement) {
+    if (!canAnswer) return;
+    canAnswer = false;
+
+    const questions = quizDB[currentQuizCategory];
+    const qData = questions[currentQuestionIndex];
+    const allOptionBtns = document.querySelectorAll('.quiz-option-btn');
+
+    if (selectedIndex === qData.correct) {
+        btnElement.classList.add('correct');
+        quizScore++;
+    } else {
+        btnElement.classList.add('wrong');
+        allOptionBtns[qData.correct].classList.add('correct');
+    }
+
+    // Изчакване 1.2 секунди за следващия въпрос
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuizQuestion();
+        } else {
+            showQuizEndResults();
+        }
+    }, 1200);
+}
+
+function showQuizEndResults() {
+    const total = quizDB[currentQuizCategory].length;
+    document.getElementById('quiz-progress-bar').style.width = `100%`;
+    document.getElementById('quiz-content').style.display = 'none';
+    document.getElementById('quiz-score-box').style.display = 'block';
+    
+    document.getElementById('quiz-score-text').innerText = `${quizScore} / ${total}`;
+
+    let msg = "Отличен резултат! Ти си истински спортен експерт! 🏆";
+    if (quizScore < total / 2) {
+        msg = "Не е зле! Можеш да прочетеш новините ни и да опиташ пак! 📰";
+    }
+    document.getElementById('quiz-feedback-msg').innerText = msg;
+}
+
+function restartCurrentQuiz() {
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    document.getElementById('quiz-score-box').style.display = 'none';
+    document.getElementById('quiz-content').style.display = 'block';
+    loadQuizQuestion();
+}
+
+// Инициализиране на куиза при зареждане на страницата
+document.addEventListener('DOMContentLoaded', () => {
+    loadQuizQuestion();
+});
 </script>
   
 
